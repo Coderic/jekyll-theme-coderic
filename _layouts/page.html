@@ -3,8 +3,14 @@ layout: default
 ---
 <div id="page-title">
     <div class="container clearfix">
-        <h1>Acerca de nosotros
-            <span> / Todo lo que necesitas saber acerca de nosotros</span>
+        <h1>{{ page.title | escape }}
+            {%- if page.subtitle -%}
+            <span>{{ page.subtitle | escape }}
+                {%- if page.number -%}
+                : <strong>{{ page.number | escape }}</strong>
+                {%- endif -%}
+            </span>
+            {%- endif -%}
         </h1>
         <!--div id="top-search">
                 <form id="top-search-form" action="search-results.php" method="get">

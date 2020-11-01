@@ -1,5 +1,26 @@
 ---
 layout: default
 ---
-
-{{ content }}
+<div id="page-title">
+    <div class="container clearfix">
+        <h1>{{ page.title | escape }}
+            {%- if page.subtitle -%}
+            <span>{{ page.subtitle | escape }}
+                {%- if page.number -%}
+                : <strong>{{ page.number | escape }}</strong>
+                {%- endif -%}
+            </span>
+            {%- endif -%}
+        </h1>
+        <!--div id="top-search">
+                <form id="top-search-form" action="search-results.php" method="get">
+                <input type="text" id="top-search-input" name="q" value="" placeholder="Escriba y presione enter">
+                </form>
+                </div-->
+    </div>
+</div>
+<div class="content-wrap">
+    <div class="container clearfix">
+        {{ content }}
+    </div>
+</div>
