@@ -3,12 +3,12 @@ require "json"
 package_json = JSON.parse(File.read("package.json"))
 
 Gem::Specification.new do |spec|
-  spec.name                    = "minimal-mistakes-jekyll"
+  spec.name                    = "coderic-jekyll"
   spec.version                 = package_json["version"]
-  spec.authors                 = ["Michael Rose", "iBug"]
+  spec.authors                 = ["Neftali Yagua", "Coderic"]
 
   spec.summary                 = %q{A flexible two-column Jekyll theme.}
-  spec.homepage                = "https://github.com/mmistakes/minimal-mistakes"
+  spec.homepage                = "https://github.com/Coderic/jekyll-theme-coderic"
   spec.license                 = "MIT"
 
   spec.metadata["plugin_type"] = "theme"
