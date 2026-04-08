@@ -30,6 +30,7 @@ products:
 header:
   toggle_theme: "Toggle Theme"
   open_menu: "Open Menu"
+  signin: "Sign In"
 
 # ── Language Switcher ─────────────────────────────────────────────────────────
 lang_switcher:

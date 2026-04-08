@@ -30,6 +30,7 @@ products:
 header:
   toggle_theme: "Alterar Tema"
   open_menu: "Abrir Menu"
+  signin: "Entrar"
   console: "Console"
   panel: "Painel"
 

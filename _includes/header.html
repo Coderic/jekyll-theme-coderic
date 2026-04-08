@@ -114,6 +114,11 @@
                 <i class="ph ph-gauge text-xl"></i>
             </a>
 
+            <!-- Sign In Button -->
+            <a href="/oauth2" id="link-signin" class="ml-2 hidden lg:flex px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors items-center gap-2">
+                <i class="ph-bold ph-user"></i> {{ t.header.signin | default: 'Sign In' }}
+            </a>
+
             <!-- Mobile Menu Button -->
             <button class="lg:hidden text-muted hover:text-white" id="btn-mobile-menu" aria-label="{{ t.header.open_menu | default: 'Open Menu' }}">
                 <i class="ph ph-list text-2xl"></i>

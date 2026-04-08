@@ -30,6 +30,7 @@ products:
 header:
   toggle_theme: "Changer de Thème"
   open_menu: "Ouvrir Menu"
+  signin: "Connexion"
   console: "Console"
   panel: "Tableau"
 
