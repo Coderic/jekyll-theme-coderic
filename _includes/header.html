@@ -115,7 +115,7 @@
             </a>
 
             <!-- Sign In Button -->
-            <a href="/oauth2" id="link-signin" class="ml-2 hidden lg:flex px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors items-center gap-2">
+            <a href="#" onclick="startCodericLogin(event)" id="link-signin" class="ml-2 hidden lg:flex px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors items-center gap-2">
                 <i class="ph-bold ph-user"></i> {{ t.header.signin | default: 'Sign In' }}
             </a>
 
@@ -126,3 +126,36 @@
         </div>
     </div>
 </header>
+
+<!-- Coderic Single Sign-On PKCE Orchestrator -->
+<script>
+async function generateCodeChallenge(codeVerifier) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(codeVerifier);
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+async function startCodericLogin(e) {
+    if (e) e.preventDefault();
+    
+    // 1. Core PKCE Security Generation
+    const array = new Uint32Array(28);
+    window.crypto.getRandomValues(array);
+    const verifier = Array.from(array, dec => ('0' + dec.toString(16)).substr(-2)).join('');
+    
+    sessionStorage.setItem('coderic_oauth_verifier', verifier);
+    const challenge = await generateCodeChallenge(verifier);
+    
+    // 2. Hub Registration Details
+    const clientId = 'coderic-fintech-app';
+    const redirectUri = 'https://financial.coderic.com/api/auth/callback'; // Destination after correct login
+    const state = btoa(window.location.href); // Remember where they clicked Login
+    
+    // 3. Delegation Redirect
+    const hubUrl = `https://coderic.com/oauth2/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
+    
+    window.location.href = hubUrl;
+}
+</script>
