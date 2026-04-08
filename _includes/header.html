@@ -53,56 +53,6 @@
 
         <!-- Actions -->
         <div class="flex items-center justify-end w-max lg:w-[320px] lg:flex-shrink-0 gap-2">
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()" id="btn-toggle-theme" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border" title="{{ t.header.toggle_theme | default: 'Toggle Theme' }}">
-                <i class="ph ph-sun-dim dark:hidden text-xl text-gray-600"></i>
-                <i class="ph ph-moon-stars hidden dark:block text-xl text-yellow-400"></i>
-            </button>
-
-            <!-- Language Switcher -->
-            <div class="relative group" id="lang-switcher">
-                <button id="btn-lang-switcher" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border" title="{{ t.lang_switcher.label | default: 'Language' }}" aria-haspopup="true" aria-expanded="false">
-                    <i class="ph ph-globe text-xl text-muted group-hover:text-coderic-500 transition-colors"></i>
-                </button>
-                <ul id="lang-switcher-menu" class="absolute right-0 top-full w-40 bg-surface border border-surface-border shadow-2xl py-1 hidden group-hover:block z-[200] before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4" role="menu">
-                    {% assign url_parts = page.url | split: '/' %}
-                    {% assign first_part = url_parts[1] %}
-                    {% assign is_lang_prefixed = false %}
-                    {% for lang in site.languages %}
-                        {% if lang == first_part and lang != site.default_lang %}
-                            {% assign is_lang_prefixed = true %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if is_lang_prefixed %}
-                        {% assign clean_path = page.url | remove_first: '/' | remove_first: first_part %}
-                    {% else %}
-                        {% assign clean_path = page.url %}
-                    {% endif %}
-                    {% assign clean_page_url = clean_path | default: '/' %}
-
-                    {% for lang in site.languages %}
-                        {% assign lang_label = site.data[lang].ui.lang_switcher[lang] | default: lang %}
-                        {% if lang == active_lang %}
-                        <li role="menuitem" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-coderic-500 uppercase tracking-wider cursor-default">
-                            <i class="ph-fill ph-check-circle text-sm"></i> {{ lang_label }}
-                        </li>
-                        {% else %}
-                        <li role="menuitem">
-                            {% if lang == site.default_lang %}
-                            <a href="{{ clean_page_url | relative_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
-                                <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
-                            </a>
-                            {% else %}
-                            <a href="{{ clean_page_url | prepend: lang | prepend: '/' | relative_url | replace: '//', '/' }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
-                                <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
-                            </a>
-                            {% endif %}
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
 
             <!-- Auth Dynamic Interface Wrapper -->
             <div id="auth-state-wrapper" class="flex items-center gap-2">

@@ -24,9 +24,59 @@
         
         <div class="flex-grow"></div>
 
-        <div class="flex items-center justify-end w-1/4 lg:w-[320px] gap-4">
-            <a href="{{ '/console/' | relative_url }}" class="text-xs font-bold text-muted hover:text-coderic-500 uppercase tracking-widest flex items-center gap-1.5"><i class="ph-bold ph-terminal"></i> {{ t_ui.subnav.console | default: 'Console' }}</a>
-            <a href="{{ '/dashboard/' | relative_url }}" class="text-xs font-bold text-coderic-500 hover:text-coderic-400 uppercase tracking-widest flex items-center gap-1.5"><i class="ph-bold ph-user"></i> {{ t_ui.subnav.panel | default: 'Panel' }}</a>
+        <div class="flex items-center justify-end w-1/4 lg:w-[320px] gap-2">
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" id="btn-toggle-theme" class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-surface-panel transition-colors text-muted" title="{{ t_ui.header.toggle_theme | default: 'Toggle Theme' }}">
+                <i class="ph ph-sun-dim dark:hidden text-lg text-gray-500 hover:text-gray-700"></i>
+                <i class="ph ph-moon-stars hidden dark:block text-lg text-yellow-500 hover:text-yellow-400"></i>
+            </button>
+
+            <!-- Language Switcher -->
+            <div class="relative group" id="lang-switcher">
+                <button id="btn-lang-switcher" class="flex items-center justify-center hover:bg-surface-panel transition-colors px-2 py-1.5 rounded-md gap-1" title="{{ t_ui.lang_switcher.label | default: 'Language' }}" aria-haspopup="true" aria-expanded="false">
+                    <i class="ph ph-translate text-lg text-muted group-hover:text-coderic-500 transition-colors"></i>
+                    <span class="text-xs font-bold text-muted uppercase tracking-widest">{{ active_lang | default: site.default_lang }}</span>
+                    <i class="ph-bold ph-caret-down text-[10px] text-muted opacity-50 ml-0.5"></i>
+                </button>
+                <ul id="lang-switcher-menu" class="absolute right-0 top-full mt-1 w-40 bg-surface border border-surface-border shadow-2xl py-1 hidden group-hover:block z-[200]" role="menu">
+                    {% assign url_parts = page.url | split: '/' %}
+                    {% assign first_part = url_parts[1] %}
+                    {% assign is_lang_prefixed = false %}
+                    {% for lang in site.languages %}
+                        {% if lang == first_part and lang != site.default_lang %}
+                            {% assign is_lang_prefixed = true %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if is_lang_prefixed %}
+                        {% assign clean_path = page.url | remove_first: '/' | remove_first: first_part %}
+                    {% else %}
+                        {% assign clean_path = page.url %}
+                    {% endif %}
+                    {% assign clean_page_url = clean_path | default: '/' %}
+
+                    {% for lang in site.languages %}
+                        {% assign lang_label = site.data[lang].ui.lang_switcher[lang] | default: lang %}
+                        {% if lang == active_lang %}
+                        <li role="menuitem" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-coderic-500 uppercase tracking-wider cursor-default bg-coderic-50 dark:bg-coderic-900/20">
+                            <i class="ph-fill ph-check-circle text-sm"></i> {{ lang_label }}
+                        </li>
+                        {% else %}
+                        <li role="menuitem">
+                            {% if lang == site.default_lang %}
+                            <a href="{{ clean_page_url | relative_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                                <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
+                            </a>
+                            {% else %}
+                            <a href="{{ clean_page_url | prepend: lang | prepend: '/' | relative_url | replace: '//', '/' }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                                <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
+                            </a>
+                            {% endif %}
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 
