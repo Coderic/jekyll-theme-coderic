@@ -104,20 +104,33 @@
                 </ul>
             </div>
 
-            <!-- Console Link -->
-            <a href="/console/" id="link-console" class="w-10 h-10 rounded-full hidden sm:flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border text-muted hover:text-coderic-500" title="{{ t.header.console | default: 'Console' }}">
-                <i class="ph ph-terminal-window text-xl"></i>
-            </a>
+            <!-- Auth Dynamic Interface Wrapper -->
+            <div id="auth-state-wrapper" class="flex items-center gap-2">
+                <!-- Logged In State (Hidden by default until proven authenticated) -->
+                <div id="auth-authenticated" class="hidden items-center gap-2">
+                    <!-- Console Link -->
+                    <a href="/console/" id="link-console" class="w-10 h-10 rounded-full hidden sm:flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border text-muted hover:text-coderic-500" title="{{ t.header.console | default: 'Console' }}">
+                        <i class="ph ph-terminal-window text-xl"></i>
+                    </a>
 
-            <!-- Dashboard/Panel Link -->
-            <a href="/dashboard/" id="link-dashboard" class="w-10 h-10 rounded-full hidden sm:flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border text-muted hover:text-coderic-500" title="{{ t.header.panel | default: 'Dashboard' }}">
-                <i class="ph ph-gauge text-xl"></i>
-            </a>
+                    <!-- Dashboard/Panel Link -->
+                    <a href="/dashboard/" id="link-dashboard" class="w-10 h-10 rounded-full hidden sm:flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border text-muted hover:text-coderic-500" title="{{ t.header.panel | default: 'Dashboard' }}">
+                        <i class="ph ph-gauge text-xl"></i>
+                    </a>
+                </div>
 
-            <!-- Sign In Button -->
-            <a href="#" onclick="startCodericLogin(event)" id="link-signin" class="ml-2 hidden lg:flex px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors items-center gap-2">
-                <i class="ph-bold ph-user"></i> {{ t.header.signin | default: 'Sign In' }}
-            </a>
+                <!-- Logged Out State (Visible by default) -->
+                <div id="auth-unauthenticated" class="flex items-center gap-2">
+                    <!-- Sign In Button -->
+                    <a href="#" onclick="startCodericLogin(event)" id="link-signin" class="hidden lg:flex px-5 py-2 rounded-full border border-surface-border hover:bg-surface-panel text-muted hover:text-[var(--text-base)] font-medium text-sm transition-colors items-center gap-2">
+                        {{ t.header.signin | default: 'Sign In' }}
+                    </a>
+                    <!-- Register Button -->
+                    <a href="#" onclick="startCodericLogin(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors items-center gap-2">
+                        <i class="ph-bold ph-user-plus"></i> {{ t.header.register | default: 'Register' }}
+                    </a>
+                </div>
+            </div>
 
             <!-- Mobile Menu Button -->
             <button class="lg:hidden text-muted hover:text-white" id="btn-mobile-menu" aria-label="{{ t.header.open_menu | default: 'Open Menu' }}">
@@ -158,4 +171,19 @@ async function startCodericLogin(e) {
     
     window.location.href = hubUrl;
 }
+
+// Check real-time authentication state
+document.addEventListener('DOMContentLoaded', () => {
+    // Real frontend implementation would verify JWT validity here.
+    // For now we check if an active session key exists in local storage.
+    const isAuthenticated = localStorage.getItem('coderic_access_token') !== null;
+    
+    if (isAuthenticated) {
+        document.getElementById('auth-unauthenticated')?.classList.add('hidden');
+        document.getElementById('auth-unauthenticated')?.classList.remove('flex');
+        
+        document.getElementById('auth-authenticated')?.classList.remove('hidden');
+        document.getElementById('auth-authenticated')?.classList.add('flex');
+    }
+});
 </script>
