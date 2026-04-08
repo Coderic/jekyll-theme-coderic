@@ -1,0 +1,23 @@
+# _data/fr/subnav.yml — Navigation secondaire (Français)
+
+- title: "ERP et Gestion"
+  url: "#erp"
+  children:
+    - title: "Opérations"
+      url: "#"
+    - title: "Capital Humain (RH)"
+      url: "#"
+- title: "Moteur Cloud"
+  url: "#cloud"
+  children:
+    - title: "Machines Virtuelles"
+      url: "#"
+    - title: "Bases de Données Gérées"
+      url: "#"
+- title: "Entreprise"
+  url: "#corp"
+  children:
+    - title: "Notre Histoire"
+      url: "https://coderic.org/history"
+    - title: "Politiques SLA"
+      url: "https://coderic.org/legal"

@@ -1,0 +1,17 @@
+---
+layout: default
+title: Soluciones Empresariales
+lang: es
+permalink: /es/productos.html
+---
+
+{% assign t = site.data[site.active_lang].ui %}
+
+<section class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">{{ t.products.title | default: 'Soluciones Empresariales' }}</h1>
+        <p class="text-xl text-muted max-w-3xl leading-relaxed">
+            {{ t.products.description | default: 'Infraestructura escalable y recursos digitales para su negocio.' }}
+        </p>
+    </div>
+</section>

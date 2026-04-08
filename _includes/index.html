@@ -1,0 +1,28 @@
+{% assign t = site.data[site.active_lang].ui %}
+
+<!-- Enterprise Hero (Standardized Component) -->
+<section class="relative pb-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-4xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(240,65,0,0.2)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-coderic-500 animate-pulse"></span>
+                {{ t.hero.badge | default: 'Theme Preview' }}
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight mb-8">
+                {{ t.hero.title_part1 | default: 'Uncompromising' }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-coderic-400 to-coderic-600">{{ t.hero.title_part2 | default: 'Enterprise' }}</span> {{ t.hero.title_part3 | default: 'Scale.' }}
+            </h1>
+            <p class="text-lg md:text-2xl text-muted mb-12 max-w-3xl leading-relaxed font-normal">
+                {{ t.hero.description | default: 'This is the local scaffolding environment running directly from the theme folder. The menu and layouts are loading correctly via site.data.subnav and the _layouts/default.html structure.' }}
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5">
+                <a href="https://coderic.com/erp/operations.html" class="px-8 py-4 rounded-full bg-coderic-600 text-base font-bold hover:bg-coderic-500 transition-colors flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(240,65,0,0.4)] text-lg">
+                    {{ t.hero.cta_deploy | default: 'Deploy Architecture' }} <i class="ph-bold ph-arrow-right"></i>
+                </a>
+                <a href="https://coderic.org/expansion/contact.html" class="px-8 py-4 rounded-full border border-surface-border bg-surface-panel hover:bg-surface-border text-base transition-colors flex items-center justify-center font-bold gap-2 text-lg">
+                    {{ t.hero.cta_contact | default: 'Contact Partners' }} <i class="ph-bold ph-handshake"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

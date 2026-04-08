@@ -1,0 +1,74 @@
+# _data/es/ui.yml — Cadenas de la interfaz (Español)
+
+# ── Navegación del Cabezal ───────────────────────────────────────────────────
+nav:
+  business: "Negocios"
+  financial: "Financiero"
+  cloud: "Nube"
+  network: "Red"
+  io: "Hub"
+  development: "Desarrollo"
+  organization: "Organización"
+  store: "Tienda"
+
+# ── Sección Hero ─────────────────────────────────────────────────────────────
+hero:
+  badge: "Vista Previa del Tema"
+  title_part1: "Escalabilidad"
+  title_part2: "Empresarial"
+  title_part3: "Sin Preocupaciones."
+  description: "Este es el entorno de andamiaje local que se ejecuta directamente desde la carpeta del tema. El menú y los diseños se cargan correctamente a través de site.data.subnav y la estructura _layouts/default.html."
+  cta_deploy: "Desplegar Arquitectura"
+  cta_contact: "Contactar Socios"
+
+# ── Página de Productos ──────────────────────────────────────────────────────
+products:
+  title: "Soluciones Empresariales"
+  description: "Infraestructura escalable y recursos digitales para su negocio."
+
+# ── Acciones del Cabezal ──────────────────────────────────────────────────────
+header:
+  toggle_theme: "Cambiar Tema"
+  open_menu: "Abrir Menú"
+  console: "Consola"
+  panel: "Tablero"
+
+# ── Selector de Idioma ────────────────────────────────────────────────────────
+lang_switcher:
+  label: "Idioma"
+  en: "English"
+  es: "Español"
+  pt: "Português"
+  fr: "Français"
+
+# ── Acciones de Subnavegación ──────────────────────────────────────────────────
+subnav:
+  console: "Consola"
+  panel: "Tablero"
+
+# ── Pie de Página ─────────────────────────────────────────────────────────────
+footer:
+  company_description: >
+    Corporación Orientada al Desarrollo de Recursos de Ingeniería e
+    Información para el Comercio, el futuro de la Ingeniería de Software en LATAM desde 2004.
+  col_organization: "Organización"
+  col_legal: "Marco Legal"
+  col_ecosystem: "Ecosistema"
+  link_about: "Sobre Nosotros"
+  link_history: "Historia"
+  link_team: "Equipo"
+  link_join: "Únete a Coderic"
+  link_policies: "Políticas"
+  link_docs: "Documentación"
+  link_privacy: "Política de Privacidad"
+  link_legal: "Información Legal"
+  link_tos: "Términos y Condiciones"
+  link_business: "Coderic Negocios"
+  link_network: "Coderic Red Central"
+  link_org: "Coderic Organización"
+  link_financial: "Coderic Financiero"
+  link_cloud: "Coderic Nube"
+  link_store: "Coderic Tienda"
+  link_dev: "Coderic Desarrollo"
+items:
+  explore: "Explorar"

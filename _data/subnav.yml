@@ -1,0 +1,21 @@
+- title: "ERP & Management"
+  url: "#erp"
+  children:
+    - title: "Operations"
+      url: "#"
+    - title: "Human Capital (HRM)"
+      url: "#"
+- title: "Cloud Engine"
+  url: "#cloud"
+  children:
+    - title: "Virtual Machines"
+      url: "#"
+    - title: "Managed Databases"
+      url: "#"
+- title: "Corporate"
+  url: "#corp"
+  children:
+    - title: "Our History"
+      url: "https://coderic.org/history"
+    - title: "SLA Policies"
+      url: "https://coderic.org/legal"

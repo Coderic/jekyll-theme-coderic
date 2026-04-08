@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ site.active_lang }}" class="dark">
+{% include head.html %}
+<body class="bg-surface text-base font-sans antialiased overflow-x-hidden selection:bg-coderic-600 selection:text-base relative">
+
+    <!-- Ambient Background Glow -->
+    <div class="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-coderic-600/20 blur-[150px] rounded-full pointer-events-none z-0 animate-glow-pulse"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-coderic-900/30 blur-[130px] rounded-full pointer-events-none z-0"></div>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+        {% include header.html %}
+        {% include subnav.html %}
+
+        <main class="flex-grow pt-52" id="main-content">
+            {{ content }}
+        </main>
+
+        {% include footer.html %}
+    </div>
+
+</body>
+</html>

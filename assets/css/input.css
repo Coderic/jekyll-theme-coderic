@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        color: var(--text-base);
+    }
+}
+
+@layer utilities {
+    .glass-panel {
+        @apply bg-surface-panel backdrop-blur-xl border border-surface-border rounded-2xl;
+    }
+    .text-muted {
+        color: var(--text-muted);
+    }
+}

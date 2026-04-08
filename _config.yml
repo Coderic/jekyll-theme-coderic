@@ -1,0 +1,30 @@
+title: Coderic Demo Theme
+email: demo@coderic.org
+description: Scaffolding local environment to test the Jekyll theme.
+url: "http://localhost:4000"
+baseurl: ""
+
+# Coderic Portal Variables
+portal_name: "Coderic UI"
+portal_id: "business"
+cta_url: "#"
+cta_text: "Deploy Architecture"
+
+# Avoid loading plugins or themes that conflict with local testing
+# (Empty theme variable causes Gem::MissingSpecError, so we omit it entirely)
+
+# ─── Internationalization (jekyll-polyglot) ───────────────────────────────────
+plugins:
+  - jekyll-polyglot
+
+languages: ["en", "es", "pt", "fr"]
+default_lang: "en"
+exclude_from_localization:
+  - "assets"
+  - "javascript"
+  - "css"
+  - "404.html"
+  - "robots.txt"
+  - "sitemap.xml"
+parallel_localization: false  # Required on Windows; set to true on Linux/Mac CI
+

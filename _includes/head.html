@@ -1,0 +1,86 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.portal_name | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+
+    <!-- i18n hreflang alternate links (Robust Polyglot Logic) -->
+    {% if site.languages %}
+      {% assign url_parts = page.url | split: '/' %}
+      {% assign first_part = url_parts[1] %}
+      {% assign is_lang_prefixed = false %}
+      {% for lang in site.languages %}
+        {% if lang == first_part and lang != site.default_lang %}
+          {% assign is_lang_prefixed = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if is_lang_prefixed %}
+        {% assign clean_path = page.url | remove_first: '/' | remove_first: first_part %}
+      {% else %}
+        {% assign clean_path = page.url %}
+      {% endif %}
+      {% assign clean_page_url = clean_path | default: '/' %}
+
+      {% for lang in site.languages %}
+        {% if lang == site.default_lang %}
+          <link rel="alternate" hreflang="{{ lang }}" href="{{ site.url }}{{ site.baseurl }}{{ clean_page_url | relative_url }}" />
+        {% else %}
+          <link rel="alternate" hreflang="{{ lang }}" href="{{ site.url }}{{ site.baseurl }}/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}" />
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style id="coderic-theme-variables">
+        :root {
+            --bg-surface: #ffffff;
+            --bg-surface-alt: #f8fafc;
+            --bg-panel: rgba(0, 0, 0, 0.05);
+            --border-surface: rgba(0, 0, 0, 0.1);
+            --text-base: #0f172a;
+            --text-muted: #4b5563;
+        }
+        .dark {
+            --bg-surface: #050505;
+            --bg-surface-alt: #0a0a0a;
+            --bg-panel: rgba(255, 255, 255, 0.03);
+            --border-surface: rgba(255, 255, 255, 0.08);
+            --text-base: #f1f5f9;
+            --text-muted: #cbd5e1; /* Brighter gray for better accessibility in dark mode */
+        }
+
+        /* Global Reusable Gradients for SVG & CSS */
+        .gradient-metal {
+            fill: url(#metal-grad);
+        }
+        .gradient-brand {
+            fill: url(#brand-grad);
+        }
+        .bg-gradient-brand {
+            background: linear-gradient(180deg, #fec963 0%, #fea032 50%, #ff5c0a 100%);
+        }
+    </style>
+    <script id="coderic-theme-controller">
+        (function() {
+            const theme = localStorage.getItem('coderic-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            if (theme === 'dark') document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
+        })();
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('coderic-theme', isDark ? 'dark' : 'light');
+        }
+    </script>
+
+    <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+</head>

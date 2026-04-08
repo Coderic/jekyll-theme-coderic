@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg
+   viewBox="0 0 274 274"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+    <stop offset="0%" stop-color="hsl(0,0%,58%)" />
+    <stop offset="47%" stop-color="hsl(0,0%,80%)" />
+    <stop offset="53%" stop-color="hsl(0,0%,38%)" />
+    <stop offset="100%" stop-color="hsl(0,0%,58%)" />
+    </linearGradient>
+    <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fec963" />
+      <stop offset="50%" stop-color="#fea032" />
+      <stop offset="100%" stop-color="#fe7b05" />
+    </linearGradient>
+  </defs>
+  <polygon points="150,15 258,77 258,202 150,265 42,202 42,77"
+  
+   
+  style="fill:url(#Gradient2);stroke:url(#Gradient1);stroke-width:15;stroke-linecap:round"
+  transform="translate(-10)" />
+</svg>

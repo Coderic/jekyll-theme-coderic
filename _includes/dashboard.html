@@ -1,0 +1,37 @@
+<div class="max-w-7xl mx-auto px-6 py-20 animate-[fadeIn_0.5s_ease-out]">
+    <div class="glass-panel p-8 md:p-12 mb-10 overflow-hidden relative">
+        <div class="absolute top-0 right-0 p-8 opacity-10">
+            <i class="ph ph-layout text-9xl"></i>
+        </div>
+        <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-coderic-600/10 flex items-center justify-center border border-coderic-600/20 shadow-[0_0_15px_rgba(240,65,0,0.2)]">
+                    <i class="ph-bold ph-user text-2xl text-coderic-500"></i>
+                </div>
+                <h1 class="text-4xl font-display font-bold">Portal Dashboard</h1>
+            </div>
+            <p class="text-xl text-muted max-w-2xl leading-relaxed mb-8">
+                Welcome to the operational command center for <span class="text-[var(--text-base)] font-semibold">{{ site.portal_name }}</span>. Orchestrate your local resources and monitor global Prodaric nodes from a single-pane interface.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-surface-panel/40 border border-surface-border p-6 rounded-2xl">
+                    <span class="text-xs font-bold text-muted uppercase tracking-widest block mb-2">Systems Active</span>
+                    <span class="text-3xl font-display font-bold text-coderic-500">14 / 14</span>
+                </div>
+                <div class="bg-surface-panel/40 border border-surface-border p-6 rounded-2xl">
+                    <span class="text-xs font-bold text-muted uppercase tracking-widest block mb-2">Sync Status</span>
+                    <span class="text-3xl font-display font-bold text-emerald-500">OPTIMAL</span>
+                </div>
+                <div class="bg-surface-panel/40 border border-surface-border p-6 rounded-2xl">
+                    <span class="text-xs font-bold text-muted uppercase tracking-widest block mb-2">Active Nodes</span>
+                    <span class="text-3xl font-display font-bold text-cyan-500">22</span>
+                </div>
+                <div class="bg-surface-panel/40 border border-surface-border p-6 rounded-2xl">
+                    <span class="text-xs font-bold text-muted uppercase tracking-widest block mb-2">Encryption</span>
+                    <span class="text-3xl font-display font-bold text-purple-500">AES-256</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

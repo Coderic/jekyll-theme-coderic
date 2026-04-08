@@ -1,0 +1,74 @@
+# _data/fr/ui.yml — Chaînes de l'interface (Français)
+
+# ── Navigation de l'En-tête ──────────────────────────────────────────────────
+nav:
+  business: "Affaires"
+  financial: "Financier"
+  cloud: "Nuage"
+  network: "Réseau"
+  io: "I/O"
+  development: "Développement"
+  organization: "Organisation"
+  store: "Boutique"
+
+# ── Section Hero ─────────────────────────────────────────────────────────────
+hero:
+  badge: "Aperçu du Thème"
+  title_part1: "Évolutivité"
+  title_part2: "Entreprise"
+  title_part3: "Sans Limites."
+  description: "Ceci est l'environnement d'échafaudage local s'exécutant directement depuis le dossier du thème. Le menu et les mises en page se chargent correctement via site.data.subnav et la structure _layouts/default.html."
+  cta_deploy: "Déployer l'Architecture"
+  cta_contact: "Contacter Partenaires"
+
+# ── Page Produits ────────────────────────────────────────────────────────────
+products:
+  title: "Solutions d'Entreprise"
+  description: "Infrastructure évolutive et ressources numériques pour votre entreprise."
+
+# ── Actions de l'En-tête ───────────────────────────────────────────────────────
+header:
+  toggle_theme: "Changer de Thème"
+  open_menu: "Ouvrir Menu"
+  console: "Console"
+  panel: "Tableau"
+
+# ── Sélecteur de Langue ────────────────────────────────────────────────────────
+lang_switcher:
+  label: "Langue"
+  en: "English"
+  es: "Español"
+  pt: "Português"
+  fr: "Français"
+
+# ── Actions de Sous-navigation ─────────────────────────────────────────────────
+subnav:
+  console: "Console"
+  panel: "Tableau"
+
+# ── Pied de Page ──────────────────────────────────────────────────────────────
+footer:
+  company_description: >
+    Corporation Orientée vers le Développement de Ressources d'Ingénierie et
+    d'Information pour le Commerce, le futur de l'Ingénierie de Logiciels dans LATAM depuis 2004.
+  col_organization: "Organisation"
+  col_legal: "Cadre Légal"
+  col_ecosystem: "Écosystème"
+  link_about: "À Propos de Nous"
+  link_history: "Histoire"
+  link_team: "Équipe"
+  link_join: "Rejoindre Coderic"
+  link_policies: "Politiques"
+  link_docs: "Documentation"
+  link_privacy: "Politique de Confidentialité"
+  link_legal: "Informations Légales"
+  link_tos: "Conditions d'Utilisation"
+  link_business: "Coderic Affaires"
+  link_network: "Coderic Central Réseau"
+  link_org: "Coderic Organisation"
+  link_financial: "Coderic Financier"
+  link_cloud: "Coderic Nuage"
+  link_store: "Coderic Boutique"
+  link_dev: "Coderic Développement"
+items:
+  explore: "Explorer"

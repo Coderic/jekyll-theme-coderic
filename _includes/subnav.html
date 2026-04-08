@@ -1,0 +1,34 @@
+{% assign t_ui = site.data[site.active_lang].ui %}
+{% assign subnav_data = site.data[site.active_lang].subnav | default: site.data.subnav %}
+{% if subnav_data %}
+<div class="fixed top-20 w-full z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl h-12 hidden md:block">
+    <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+        <div class="flex items-center w-1/4 min-w-[280px] lg:w-[320px] h-full">
+            <ul class="flex h-full text-xs font-bold text-muted uppercase tracking-widest gap-6">
+                {% for item in subnav_data %}
+                <li class="h-full relative group flex items-center border-r border-surface-border pr-6 transition-colors last:border-r-0">
+                    <a href="{{ item.url | default: '#' }}" class="h-full flex items-center gap-1.5 text-muted hover:text-coderic-500 transition-colors cursor-default">
+                        {{ item.title }} <i class="ph-bold ph-caret-down opacity-50"></i>
+                    </a>
+                    {% if item.children %}
+                    <ul class="absolute top-[48px] left-0 w-64 bg-surface py-2 hidden group-hover:block transition-all shadow-2xl origin-top border border-surface-border z-[100]">
+                        {% for child in item.children %}
+                        <li><a href="{{ child.url | relative_url }}" class="block px-5 py-3 text-muted hover:bg-surface-panel hover:text-coderic-500 transition-colors border-b border-surface-border last:border-0 font-medium text-[13px]">{{ child.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="flex-grow"></div>
+
+        <div class="flex items-center justify-end w-1/4 lg:w-[320px] gap-4">
+            <a href="{{ '/console/' | relative_url }}" class="text-xs font-bold text-muted hover:text-coderic-500 uppercase tracking-widest flex items-center gap-1.5"><i class="ph-bold ph-terminal"></i> {{ t_ui.subnav.console | default: 'Console' }}</a>
+            <a href="{{ '/dashboard/' | relative_url }}" class="text-xs font-bold text-coderic-500 hover:text-coderic-400 uppercase tracking-widest flex items-center gap-1.5"><i class="ph-bold ph-user"></i> {{ t_ui.subnav.panel | default: 'Panel' }}</a>
+        </div>
+    </div>
+
+</div>
+{% endif %}

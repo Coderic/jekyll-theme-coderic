@@ -1,0 +1,72 @@
+# _data/en/ui.yml — Interface strings (English)
+
+# ── Header Navigation ─────────────────────────────────────────────────────────
+nav:
+  business: "Business"
+  financial: "Financial"
+  cloud: "Cloud"
+  network: "Network"
+  io: "Hub"
+  development: "Development"
+  organization: "Organization"
+  store: "Store"
+
+# ── Hero Section ─────────────────────────────────────────────────────────────
+hero:
+  badge: "Theme Preview"
+  title_part1: "Uncompromising"
+  title_part2: "Enterprise"
+  title_part3: "Scale."
+  description: "This is the local scaffolding environment running directly from the theme folder. The menu and layouts are loading correctly via site.data.subnav and the _layouts/default.html structure."
+  cta_deploy: "Deploy Architecture"
+  cta_contact: "Contact Partners"
+
+# ── Products Page ────────────────────────────────────────────────────────────
+products:
+  title: "Enterprise Solutions"
+  description: "Scalable infrastructure and digital resources for your business."
+
+# ── Header Actions ────────────────────────────────────────────────────────────
+header:
+  toggle_theme: "Toggle Theme"
+  open_menu: "Open Menu"
+
+# ── Language Switcher ─────────────────────────────────────────────────────────
+lang_switcher:
+  label: "Language"
+  en: "English"
+  es: "Español"
+  pt: "Português"
+  fr: "Français"
+
+# ── Subnav Actions ────────────────────────────────────────────────────────────
+subnav:
+  console: "Console"
+  panel: "Panel"
+
+# ── Footer ────────────────────────────────────────────────────────────────────
+footer:
+  company_description: >
+    Corporation Oriented to the Development of Engineering Resources and
+    Information for Commerce, the future of LATAM Software Engineering since 2004.
+  col_organization: "Organization"
+  col_legal: "Legal Framework"
+  col_ecosystem: "Ecosystem"
+  link_about: "About Us"
+  link_history: "History"
+  link_team: "Team"
+  link_join: "Join Coderic"
+  link_policies: "Policies"
+  link_docs: "Documentation"
+  link_privacy: "Privacy Policy"
+  link_legal: "Legal Information"
+  link_tos: "Terms and Conditions"
+  link_business: "Coderic Business"
+  link_network: "Coderic Network Hub"
+  link_org: "Coderic Organization"
+  link_financial: "Coderic Financial"
+  link_cloud: "Coderic Cloud"
+  link_store: "Coderic Store"
+  link_dev: "Coderic Development"
+items:
+  explore: "Explore"
