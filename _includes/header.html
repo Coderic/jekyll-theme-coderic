@@ -162,12 +162,13 @@ async function startCodericLogin(e) {
     const challenge = await generateCodeChallenge(verifier);
     
     // 2. Hub Registration Details
-    const clientId = 'coderic-fintech-app';
-    const redirectUri = 'https://financial.coderic.com/api/auth/callback'; // Destination after correct login
+    const portalEnv = '{{ site.portal_id | default: "core" }}';
+    const clientId = `coderic-${portalEnv}-app`;
+    const redirectUri = `${window.location.origin}/callback/`; // Destination after correct login
     const state = btoa(window.location.href); // Remember where they clicked Login
     
     // 3. Delegation Redirect
-    const hubUrl = `https://coderic.com/oauth2/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
+    const hubUrl = `https://id.coderic.com/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
     
     window.location.href = hubUrl;
 }

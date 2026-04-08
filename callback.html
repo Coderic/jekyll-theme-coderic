@@ -1,0 +1,115 @@
+---
+layout: default
+title: Authenticating
+permalink: /callback/
+---
+
+<div class="min-h-[80vh] w-full flex flex-col items-center justify-center relative overflow-hidden" id="auth-callback-container">
+    <div class="glass p-10 sm:p-12 rounded-3xl w-full max-w-lg z-10 shadow-2xl flex flex-col items-center border border-surface-border bg-surface-panel/50 backdrop-blur-xl">
+        <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-500 mb-6 text-center">Verifying Authentication...</h1>
+        <div id="loading-spinner" class="animate-spin rounded-full h-12 w-12 border-b-2 border-coderic-500"></div>
+        <p id="callback-message" class="mt-6 text-sm text-gray-400 text-center">Please wait while we establish your secured session with Coderic Identity Cloud.</p>
+        
+        <div id="error-box" class="hidden mt-6 p-4 bg-red-900/40 border border-red-500/50 rounded-xl text-red-200 text-sm text-center w-full"></div>
+        
+        <a href="/" id="return-home-btn" class="hidden mt-6 text-coderic-400 hover:text-coderic-300 text-sm underline underline-offset-4">Return Home</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const spinner = document.getElementById('loading-spinner');
+    const msg = document.getElementById('callback-message');
+    const errBox = document.getElementById('error-box');
+    const returnBtn = document.getElementById('return-home-btn');
+
+    const showError = (message) => {
+        spinner.classList.add('hidden');
+        msg.classList.add('hidden');
+        errBox.classList.remove('hidden');
+        errBox.innerText = message;
+        returnBtn.classList.remove('hidden');
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const state = params.get('state');
+    const error = params.get('error');
+
+    if (error) {
+        return showError('Authentication Failed: ' + (params.get('error_description') || error));
+    }
+
+    if (!code) {
+        // Normal fallback for direct visit
+        return window.location.replace('/');
+    }
+
+    const verifier = sessionStorage.getItem('coderic_oauth_verifier');
+    if (!verifier) {
+        return showError('Security session expired. Please attempt to login again.');
+    }
+
+    try {
+        const portalEnv = '{{ site.portal_id | default: "core" }}';
+        const clientId = `coderic-${portalEnv}-app`;
+        const redirectUri = `${window.location.origin}/callback/`;
+
+        const body = new URLSearchParams({
+            grant_type: 'authorization_code',
+            client_id: clientId,
+            code: code,
+            redirect_uri: redirectUri,
+            code_verifier: verifier
+        });
+
+        const tokenResp = await fetch('https://id.coderic.com/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: body.toString()
+        });
+
+        if (!tokenResp.ok) {
+            let errorMsg = 'Failed to exchange authorization code.';
+            try {
+                const errorData = await tokenResp.json();
+                if (errorData.error_description) errorMsg = errorData.error_description;
+            } catch(e) {}
+            throw new Error(errorMsg);
+        }
+
+        const data = await tokenResp.json();
+        
+        // Save the access token securely
+        localStorage.setItem('coderic_access_token', data.access_token);
+        if (data.id_token) localStorage.setItem('coderic_id_token', data.id_token);
+        
+        sessionStorage.removeItem('coderic_oauth_verifier');
+
+        // Restore original URL or fallback to home
+        let returnUrl = '/';
+        if (state) {
+            try {
+                const decodedState = atob(state);
+                if (decodedState.startsWith(window.location.origin)) {
+                    returnUrl = decodedState;
+                }
+            } catch(e) {}
+        }
+        
+        msg.innerText = 'Success! Redirecting...';
+        msg.classList.remove('text-gray-400');
+        msg.classList.add('text-coderic-500', 'font-bold');
+        
+        setTimeout(() => {
+            window.location.replace(returnUrl);
+        }, 300);
+
+    } catch (err) {
+        console.error('Callback error:', err);
+        showError(err.message || 'An unexpected error occurred during authentication.');
+    }
+});
+</script>
