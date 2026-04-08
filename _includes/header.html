@@ -107,16 +107,38 @@
             <!-- Auth Dynamic Interface Wrapper -->
             <div id="auth-state-wrapper" class="flex items-center gap-2">
                 <!-- Logged In State (Hidden by default until proven authenticated) -->
-                <div id="auth-authenticated" class="hidden items-center gap-2">
-                    <!-- Console Link -->
-                    <a href="/console/" id="link-console" class="w-10 h-10 rounded-full hidden sm:flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border text-muted hover:text-coderic-500" title="{{ t.header.console | default: 'Console' }}">
-                        <i class="ph ph-terminal-window text-xl"></i>
-                    </a>
+                <div id="auth-authenticated" class="hidden relative group items-center">
+                    <button id="btn-auth-menu" class="flex items-center gap-2 px-1.5 py-1.5 pr-3 rounded-full border border-surface-border hover:bg-surface-panel transition-colors" aria-haspopup="true" aria-expanded="false">
+                        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-coderic-500 to-coderic-400 flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                            <i class="ph-fill ph-user"></i>
+                        </div>
+                        <div class="flex flex-col items-start hidden sm:flex">
+                            <span id="auth-user-name" class="text-xs font-bold text-[var(--text-base)] leading-none truncate max-w-[100px]">Mi Cuenta</span>
+                        </div>
+                        <i class="ph ph-caret-down text-muted text-xs ml-1 transition-transform group-hover:rotate-180"></i>
+                    </button>
 
-                    <!-- Dashboard/Panel Link -->
-                    <a href="/dashboard/" id="link-dashboard" class="w-10 h-10 rounded-full hidden sm:flex items-center justify-center hover:bg-surface-panel transition-colors border border-surface-border text-muted hover:text-coderic-500" title="{{ t.header.panel | default: 'Dashboard' }}">
-                        <i class="ph ph-gauge text-xl"></i>
-                    </a>
+                    <ul id="auth-menu-dropdown" class="absolute right-0 top-full mt-2 w-56 rounded-xl bg-surface border border-surface-border shadow-2xl py-2 hidden group-hover:block z-[200] before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4" role="menu">
+                        <li class="px-4 py-2 border-b border-surface-border mb-1">
+                            <p class="text-[10px] font-bold text-muted tracking-wider uppercase mb-0.5">Coderic ID</p>
+                            <p id="auth-user-email" class="text-sm font-medium text-[var(--text-base)] truncate">Conectando...</p>
+                        </li>
+                        <li role="menuitem">
+                            <a href="/dashboard/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
+                                <i class="ph ph-squares-four text-lg text-coderic-500"></i> Dashboard
+                            </a>
+                        </li>
+                        <li role="menuitem">
+                            <a href="/console/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
+                                <i class="ph ph-terminal-window text-lg"></i> Console
+                            </a>
+                        </li>
+                        <li class="border-t border-surface-border mt-1 pt-1" role="menuitem">
+                            <button onclick="codericSignOut()" class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left">
+                                <i class="ph ph-sign-out text-lg"></i> {{ t.header.signout | default: 'Cerrar sesión' }}
+                            </button>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Logged Out State (Visible by default) -->
@@ -126,7 +148,7 @@
                         {{ t.header.signin | default: 'Sign In' }}
                     </a>
                     <!-- Register Button -->
-                    <a href="#" onclick="startCodericLogin(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors items-center gap-2">
+                    <a href="#" onclick="startCodericLogin(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-coderic-600 text-white font-bold text-sm hover:bg-coderic-500 shadow-md hover:shadow-lg transition-all items-center gap-2">
                         <i class="ph-bold ph-user-plus"></i> {{ t.header.register | default: 'Register' }}
                     </a>
                 </div>
@@ -173,13 +195,39 @@ async function startCodericLogin(e) {
     window.location.href = hubUrl;
 }
 
+function codericSignOut() {
+    localStorage.removeItem('coderic_access_token');
+    sessionStorage.removeItem('coderic_oauth_verifier');
+    window.location.reload();
+}
+
+function parseCodericJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch(e) {
+        return null;
+    }
+}
+
 // Check real-time authentication state
 document.addEventListener('DOMContentLoaded', () => {
-    // Real frontend implementation would verify JWT validity here.
-    // For now we check if an active session key exists in local storage.
-    const isAuthenticated = localStorage.getItem('coderic_access_token') !== null;
+    const token = localStorage.getItem('coderic_access_token');
+    const isAuthenticated = token !== null;
     
     if (isAuthenticated) {
+        const claims = parseCodericJwt(token);
+        
+        // Populate DOM elements dynamically
+        if (claims) {
+            document.getElementById('auth-user-name').innerText = claims.given_name || claims.name || 'Mi Cuenta';
+            document.getElementById('auth-user-email').innerText = claims.email || 'Usuario';
+        }
+
         document.getElementById('auth-unauthenticated')?.classList.add('hidden');
         document.getElementById('auth-unauthenticated')?.classList.remove('flex');
         
