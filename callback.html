@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const portalEnv = '{{ site.portal_id | default: "core" }}';
-        const clientId = `coderic-${portalEnv}-app`;
+        const clientId = 'coderic';
         const redirectUri = `${window.location.origin}/callback/`;
 
         const body = new URLSearchParams({

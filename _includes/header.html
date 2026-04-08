@@ -163,7 +163,7 @@ async function startCodericLogin(e) {
     
     // 2. Hub Registration Details
     const portalEnv = '{{ site.portal_id | default: "core" }}';
-    const clientId = `coderic-${portalEnv}-app`;
+    const clientId = 'coderic';
     const redirectUri = `${window.location.origin}/callback/`; // Destination after correct login
     const state = btoa(window.location.href); // Remember where they clicked Login
     
