@@ -184,25 +184,46 @@ function parseCodericJwt(token) {
     }
 }
 
-// Check real-time authentication state
+
+const ID_HUB = 'https://id.coderic.com';
+
+function applyAuthState(token) {
+    const claims = parseCodericJwt(token);
+    if (claims) {
+        document.getElementById('auth-user-name').innerText = claims.display_name || claims.given_name || claims.name || claims.email || 'Account';
+        document.getElementById('auth-user-email').innerText = claims.email || '';
+    }
+    document.getElementById('auth-unauthenticated')?.classList.add('hidden');
+    document.getElementById('auth-unauthenticated')?.classList.remove('flex');
+    document.getElementById('auth-authenticated')?.classList.remove('hidden');
+    document.getElementById('auth-authenticated')?.classList.add('flex');
+}
+
+// Cross-domain SSO: listen for token relayed from id.coderic.com iframe
+window.addEventListener('message', (event) => {
+    if (event.origin !== ID_HUB) return;
+    if (event.data?.type !== 'coderic_session') return;
+    const token = event.data.token;
+    if (token) {
+        localStorage.setItem('coderic_access_token', token);
+        applyAuthState(token);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('coderic_access_token');
-    const isAuthenticated = token !== null;
-    
-    if (isAuthenticated) {
-        const claims = parseCodericJwt(token);
-        
-        // Populate DOM elements dynamically
-        if (claims) {
-            document.getElementById('auth-user-name').innerText = claims.display_name || claims.given_name || claims.name || claims.email || 'Account';
-            document.getElementById('auth-user-email').innerText = claims.email || '';
-        }
 
-        document.getElementById('auth-unauthenticated')?.classList.add('hidden');
-        document.getElementById('auth-unauthenticated')?.classList.remove('flex');
-        
-        document.getElementById('auth-authenticated')?.classList.remove('hidden');
-        document.getElementById('auth-authenticated')?.classList.add('flex');
+    if (token) {
+        // Token already in localStorage (same portal or returning user)
+        applyAuthState(token);
+    } else {
+        // Inject silent relay iframe to check session on id.coderic.com
+        const relay = document.createElement('iframe');
+        relay.src = ID_HUB + '/session-relay';
+        relay.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;';
+        relay.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(relay);
+        // Iframe will postMessage back if session exists (handled above)
     }
 });
 </script>
