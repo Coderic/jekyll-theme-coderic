@@ -38,7 +38,7 @@
                     <span class="text-xs font-bold text-muted uppercase tracking-widest">{{ active_lang | default: site.default_lang }}</span>
                     <i class="ph-bold ph-caret-down text-[10px] text-muted opacity-50 ml-0.5 group-hover:rotate-180 transition-transform duration-200"></i>
                 </button>
-                <ul id="lang-switcher-menu" class="absolute right-0 top-full mt-2 w-40 bg-surface border border-surface-border shadow-2xl py-1 hidden group-hover:block z-[200] before:content-[''] before:absolute before:-top-6 before:left-0 before:w-full before:h-6" role="menu">
+                <ul id="lang-switcher-menu" class="absolute right-0 top-full w-40 bg-surface border border-surface-border shadow-2xl py-1 hidden group-hover:block z-[200]" role="menu">
                     {% assign url_parts = page.url | split: '/' %}
                     {% assign first_part = url_parts[1] %}
                     {% assign is_lang_prefixed = false %}

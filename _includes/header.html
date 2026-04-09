@@ -45,7 +45,7 @@
             <a href="https://financial.coderic.com/" class="text-sm transition-colors {% if site.portal_id == 'financial' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
             <a href="https://coderic.cloud/" class="text-sm transition-colors {% if site.portal_id == 'cloud' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
             <a href="https://coderic.net/" class="text-sm transition-colors {% if site.portal_id == 'network' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.network | default: 'Network' }}</a>
-            <a href="https://coderic.io/" class="text-sm transition-colors {% if site.portal_id == 'io' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.io | default: 'I/O' }}</a>
+            <a href="https://io.coderic.net/" class="text-sm transition-colors {% if site.portal_id == 'io' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.io | default: 'Hub' }}</a>
             <a href="https://coderic.dev/" class="text-sm transition-colors {% if site.portal_id == 'development' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.development | default: 'Development' }}</a>
             <a href="https://coderic.org/" class="text-sm transition-colors {% if site.portal_id == 'organization' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.organization | default: 'Organization' }}</a>
             <a href="https://coderic.store/" class="text-sm transition-colors {% if site.portal_id == 'store' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.store | default: 'Store' }}</a>
@@ -68,7 +68,7 @@
                         <i class="ph ph-caret-down text-muted text-xs ml-1 transition-transform group-hover:rotate-180"></i>
                     </button>
 
-                    <ul id="auth-menu-dropdown" class="absolute right-0 top-full mt-2 w-56 rounded-xl bg-surface border border-surface-border shadow-2xl py-2 hidden group-hover:block z-[200] before:content-[''] before:absolute before:-top-4 before:left-0 before:w-full before:h-4" role="menu">
+                    <ul id="auth-menu-dropdown" class="absolute right-0 top-full w-56 rounded-xl bg-surface border border-surface-border shadow-2xl py-2 hidden group-hover:block z-[200]" role="menu">
                         <li class="px-4 py-2 border-b border-surface-border mb-1">
                             <p class="text-[10px] font-bold text-muted tracking-wider uppercase mb-0.5">Coderic ID</p>
                             <p id="auth-user-email" class="text-sm font-medium text-[var(--text-base)] truncate">Conectando...</p>
@@ -98,7 +98,7 @@
                         {{ t.header.signin | default: 'Sign In' }}
                     </a>
                     <!-- Register Button -->
-                    <a href="#" onclick="startCodericLogin(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-coderic-600 text-white font-bold text-sm hover:bg-coderic-500 shadow-md hover:shadow-lg transition-all items-center gap-2">
+                    <a href="#" onclick="startCodericRegister(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-coderic-600 text-white font-bold text-sm hover:bg-coderic-500 shadow-md hover:shadow-lg transition-all items-center gap-2">
                         <i class="ph-bold ph-user-plus"></i> {{ t.header.register | default: 'Register' }}
                     </a>
                 </div>
@@ -141,6 +141,26 @@ async function startCodericLogin(e) {
     
     // 3. Delegation Redirect
     const hubUrl = `https://id.coderic.com/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
+    
+    window.location.href = hubUrl;
+}
+
+async function startCodericRegister(e) {
+    if (e) e.preventDefault();
+    
+    const array = new Uint32Array(28);
+    window.crypto.getRandomValues(array);
+    const verifier = Array.from(array, dec => ('0' + dec.toString(16)).substr(-2)).join('');
+    
+    sessionStorage.setItem('coderic_oauth_verifier', verifier);
+    const challenge = await generateCodeChallenge(verifier);
+    
+    const portalEnv = '{{ site.portal_id | default: "core" }}';
+    const clientId = 'coderic';
+    const redirectUri = `${window.location.origin}/callback/`;
+    const state = btoa(window.location.href);
+    
+    const hubUrl = `https://id.coderic.com/register?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
     
     window.location.href = hubUrl;
 }
