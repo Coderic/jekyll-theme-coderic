@@ -1,4 +1,5 @@
-{% assign t = site.data[site.active_lang].ui %}
+{% include portal_urls.html %}
+{% assign t = site.data[active_lang].ui %}
 <footer class="border-t border-surface-border bg-black pt-20 pb-10 text-white" id="global-footer">
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
@@ -41,42 +42,42 @@
             <div>
                 <h4 class="font-medium text-lg mb-6 text-white">{{ t.footer.col_organization | default: 'Organization' }}</h4>
                 <ul class="space-y-4">
-                    <li><a href="https://coderic.org/about" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_about | default: 'About Us' }}</a></li>
-                    <li><a href="https://coderic.org/history" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_history | default: 'History' }}</a></li>
-                    <li><a href="https://coderic.org/team" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_team | default: 'Team' }}</a></li>
-                    <li><a href="https://coderic.org/policies" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_policies | default: 'Policies' }}</a></li>
-                    <li><a href="https://coderic.org/docs/" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
+                    <li><a href="{{ portal_org }}about" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_about | default: 'About Us' }}</a></li>
+                    <li><a href="{{ portal_org }}history" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_history | default: 'History' }}</a></li>
+                    <li><a href="{{ portal_org }}team" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_team | default: 'Team' }}</a></li>
+                    <li><a href="{{ portal_org }}policies" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_policies | default: 'Policies' }}</a></li>
+                    <li><a href="{{ portal_org }}docs/" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="font-medium text-lg mb-6 text-white">{{ t.footer.col_legal | default: 'Legal Framework' }}</h4>
                 <ul class="space-y-4">
-                    <li><a href="https://coderic.org/privacy" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_privacy | default: 'Privacy Policy' }}</a></li>
-                    <li><a href="https://coderic.org/legal" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_legal | default: 'Legal Information' }}</a></li>
-                    <li><a href="https://coderic.org/tos" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_tos | default: 'Terms and Conditions' }}</a></li>
+                    <li><a href="{{ portal_org }}privacy" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_privacy | default: 'Privacy Policy' }}</a></li>
+                    <li><a href="{{ portal_org }}legal" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_legal | default: 'Legal Information' }}</a></li>
+                    <li><a href="{{ portal_org }}tos" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_tos | default: 'Terms and Conditions' }}</a></li>
                 </ul>
 
                 <h4 class="font-medium text-lg mt-8 mb-6 text-white">{{ t.footer.col_involved | default: 'Get Involved' }}</h4>
                 <ul class="space-y-4">
-                    <li><a href="https://coderic.dev/freelancers/join-network.html" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_join_alt | default: 'Join Coderic' }}</a></li>
-                    <li><a href="https://coderic.com/partners/" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
-                    <li><a href="https://coderic.dev/community/" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
-                    <li><a href="https://coderic.org/expansion/contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Sponsors' }}</a></li>
+                    <li><a href="{{ portal_dev }}freelancers/join-network.html" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_join_alt | default: 'Join Coderic' }}</a></li>
+                    <li><a href="{{ portal_coderic_com }}partners/" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
+                    <li><a href="{{ portal_dev }}community/" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
+                    <li><a href="{{ portal_org }}expansion/contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Sponsors' }}</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="font-medium text-lg mb-6 text-white">{{ t.footer.col_ecosystem | default: 'Ecosystem' }}</h4>
                 <ul class="space-y-4">
-                    <li><a href="https://coderic.com/" class="{% if site.portal_id == 'business' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_business | default: 'Coderic Business' }}</a></li>
-                    <li><a href="https://coderic.net/" class="{% if site.portal_id == 'network' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_network | default: 'Coderic Network' }}</a></li>
-                    <li><a href="https://coderic.org/" class="{% if site.portal_id == 'organization' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_org | default: 'Coderic Organization' }}</a></li>
-                    <li><a href="https://coderic.io/" class="{% if site.portal_id == 'io' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">Coderic Hub</a></li>
-                    <li><a href="https://financial.coderic.com/" class="{% if site.portal_id == 'financial' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_financial | default: 'Coderic Financial' }}</a></li>
-                    <li><a href="https://coderic.cloud/" class="{% if site.portal_id == 'cloud' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_cloud | default: 'Coderic Cloud' }}</a></li>
-                    <li><a href="https://coderic.store/" class="{% if site.portal_id == 'store' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_store | default: 'Coderic Store' }}</a></li>
-                    <li><a href="https://coderic.dev/" class="{% if site.portal_id == 'development' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_dev | default: 'Coderic Development' }}</a></li>
+                    <li><a href="{{ portal_coderic_com }}" class="{% if site.portal_id == 'business' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_business | default: 'Coderic Business' }}</a></li>
+                    <li><a href="{{ portal_network }}" class="{% if site.portal_id == 'network' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_network | default: 'Coderic Network' }}</a></li>
+                    <li><a href="{{ portal_org }}" class="{% if site.portal_id == 'organization' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_org | default: 'Coderic Organization' }}</a></li>
+                    <li><a href="{{ portal_hub_io }}" class="{% if site.portal_id == 'io' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">Coderic Hub</a></li>
+                    <li><a href="{{ portal_financial }}" class="{% if site.portal_id == 'financial' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_financial | default: 'Coderic Financial' }}</a></li>
+                    <li><a href="{{ portal_cloud }}" class="{% if site.portal_id == 'cloud' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_cloud | default: 'Coderic Cloud' }}</a></li>
+                    <li><a href="{{ portal_store }}" class="{% if site.portal_id == 'store' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_store | default: 'Coderic Store' }}</a></li>
+                    <li><a href="{{ portal_dev }}" class="{% if site.portal_id == 'development' %}text-coderic-500 font-medium{% else %}text-gray-400 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_dev | default: 'Coderic Development' }}</a></li>
                 </ul>
             </div>
         </div>

@@ -1,4 +1,4 @@
-{% assign active_lang = site.active_lang | default: site.default_lang | default: 'en' %}
+{% include portal_urls.html %}
 {% assign t = site.data[active_lang].ui %}
 <header class="fixed top-0 w-full z-[100] border-b border-surface-border bg-surface/90 backdrop-blur-md transition-all duration-300" id="global-header">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -41,14 +41,14 @@
         </div>
 
         <nav class="hidden lg:flex flex-grow items-center justify-center gap-3 xl:gap-6">
-            <a href="https://coderic.com/" class="text-sm transition-colors {% if site.portal_id == 'business' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
-            <a href="https://financial.coderic.com/" class="text-sm transition-colors {% if site.portal_id == 'financial' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
-            <a href="https://coderic.cloud/" class="text-sm transition-colors {% if site.portal_id == 'cloud' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
-            <a href="https://coderic.net/" class="text-sm transition-colors {% if site.portal_id == 'network' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.network | default: 'Network' }}</a>
-            <a href="https://io.coderic.net/" class="text-sm transition-colors {% if site.portal_id == 'io' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.io | default: 'Hub' }}</a>
-            <a href="https://coderic.dev/" class="text-sm transition-colors {% if site.portal_id == 'development' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.development | default: 'Development' }}</a>
-            <a href="https://coderic.org/" class="text-sm transition-colors {% if site.portal_id == 'organization' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.organization | default: 'Organization' }}</a>
-            <a href="https://coderic.store/" class="text-sm transition-colors {% if site.portal_id == 'store' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.store | default: 'Store' }}</a>
+            <a href="{{ portal_coderic_com }}" class="text-sm transition-colors {% if site.portal_id == 'business' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
+            <a href="{{ portal_financial }}" class="text-sm transition-colors {% if site.portal_id == 'financial' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
+            <a href="{{ portal_cloud }}" class="text-sm transition-colors {% if site.portal_id == 'cloud' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
+            <a href="{{ portal_network }}" class="text-sm transition-colors {% if site.portal_id == 'network' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.network | default: 'Network' }}</a>
+            <a href="{{ portal_io }}" class="text-sm transition-colors {% if site.portal_id == 'io' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.io | default: 'Hub' }}</a>
+            <a href="{{ portal_dev }}" class="text-sm transition-colors {% if site.portal_id == 'development' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.development | default: 'Development' }}</a>
+            <a href="{{ portal_org }}" class="text-sm transition-colors {% if site.portal_id == 'organization' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.organization | default: 'Organization' }}</a>
+            <a href="{{ portal_store }}" class="text-sm transition-colors {% if site.portal_id == 'store' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.store | default: 'Store' }}</a>
         </nav>
 
         <!-- Actions -->
@@ -138,9 +138,10 @@ async function startCodericLogin(e) {
     const clientId = 'coderic';
     const redirectUri = `${window.location.origin}/callback/`; // Destination after correct login
     const state = btoa(window.location.href); // Remember where they clicked Login
+    const uiLocales = '{{ active_lang | default: site.default_lang | default: "en" }}';
     
     // 3. Delegation Redirect
-    const hubUrl = `https://id.coderic.com/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
+    const hubUrl = `https://id.coderic.com/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}&ui_locales=${encodeURIComponent(uiLocales)}`;
     
     window.location.href = hubUrl;
 }
@@ -159,8 +160,9 @@ async function startCodericRegister(e) {
     const clientId = 'coderic';
     const redirectUri = `${window.location.origin}/callback/`;
     const state = btoa(window.location.href);
+    const uiLocales = '{{ active_lang | default: site.default_lang | default: "en" }}';
     
-    const hubUrl = `https://id.coderic.com/register?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`;
+    const hubUrl = `https://id.coderic.com/register?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}&ui_locales=${encodeURIComponent(uiLocales)}`;
     
     window.location.href = hubUrl;
 }

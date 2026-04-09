@@ -1,0 +1,26 @@
+{% comment %}
+  Portal roots for Polyglot: unprefixed when active_lang == default_lang, else /{lang}/
+{% endcomment %}
+{% assign default_lang = site.default_lang | default: 'en' %}
+{% assign active_lang = site.active_lang | default: default_lang %}
+{% if active_lang == default_lang %}
+  {% assign portal_coderic_com = 'https://coderic.com/' %}
+  {% assign portal_financial = 'https://financial.coderic.com/' %}
+  {% assign portal_cloud = 'https://coderic.cloud/' %}
+  {% assign portal_network = 'https://coderic.net/' %}
+  {% assign portal_io = 'https://io.coderic.net/' %}
+  {% assign portal_dev = 'https://coderic.dev/' %}
+  {% assign portal_org = 'https://coderic.org/' %}
+  {% assign portal_store = 'https://coderic.store/' %}
+  {% assign portal_hub_io = 'https://coderic.io/' %}
+{% else %}
+  {% assign portal_coderic_com = 'https://coderic.com/' | append: active_lang | append: '/' %}
+  {% assign portal_financial = 'https://financial.coderic.com/' | append: active_lang | append: '/' %}
+  {% assign portal_cloud = 'https://coderic.cloud/' | append: active_lang | append: '/' %}
+  {% assign portal_network = 'https://coderic.net/' | append: active_lang | append: '/' %}
+  {% assign portal_io = 'https://io.coderic.net/' | append: active_lang | append: '/' %}
+  {% assign portal_dev = 'https://coderic.dev/' | append: active_lang | append: '/' %}
+  {% assign portal_org = 'https://coderic.org/' | append: active_lang | append: '/' %}
+  {% assign portal_store = 'https://coderic.store/' | append: active_lang | append: '/' %}
+  {% assign portal_hub_io = 'https://coderic.io/' | append: active_lang | append: '/' %}
+{% endif %}
