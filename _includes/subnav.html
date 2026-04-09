@@ -52,12 +52,15 @@
                     {% if is_lang_prefixed %}
                         {% assign lang_prefix_string = first_part | prepend: '/' %}
                         {% assign clean_page_url = page.url | remove_first: lang_prefix_string %}
-                        {% if clean_page_url == "" or clean_page_url == nil %}
-                            {% assign clean_page_url = "/" %}
-                        {% endif %}
                     {% else %}
-                        {% assign clean_page_url = page.url | default: '/' %}
+                        {% assign clean_page_url = page.url %}
                     {% endif %}
+
+                    {% if clean_page_url == "" or clean_page_url == nil %}
+                        {% assign clean_page_url = "/" %}
+                    {% endif %}
+
+                    {% assign base_url = site.url | default: '' %}
 
                     {% for lang in site.languages %}
                         {% assign lang_label = site.data[lang].ui.lang_switcher[lang] | default: lang %}
@@ -68,12 +71,12 @@
                         {% else %}
                         <li role="menuitem">
                             {% if lang == site.default_lang %}
-                            <a href="{{ clean_page_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                            <a href="{{ base_url }}{{ clean_page_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
                                 <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                             </a>
                             {% else %}
                             {% assign target_url = clean_page_url | prepend: lang | prepend: '/' | replace: '//', '/' %}
-                            <a href="{{ target_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                            <a href="{{ base_url }}{{ target_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
                                 <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                             </a>
                             {% endif %}
