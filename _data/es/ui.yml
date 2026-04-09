@@ -2,12 +2,12 @@
 
 # ── Navegación del Cabezal ───────────────────────────────────────────────────
 nav:
-  business: "Negocios"
-  financial: "Financiero"
-  cloud: "Nube"
-  network: "Red"
+  business: "Business"
+  financial: "Financial"
+  cloud: "Cloud"
+  network: "Network"
   io: "Hub"
-  development: "Desarrollo"
+  development: "Development"
   organization: "Organización"
   store: "Tienda"
 
@@ -64,12 +64,12 @@ footer:
   link_privacy: "Política de Privacidad"
   link_legal: "Información Legal"
   link_tos: "Términos y Condiciones"
-  link_business: "Coderic Negocios"
-  link_network: "Coderic Red Central"
-  link_org: "Coderic Organización"
-  link_financial: "Coderic Financiero"
-  link_cloud: "Coderic Nube"
-  link_store: "Coderic Tienda"
-  link_dev: "Coderic Desarrollo"
+  link_business: "Coderic Business"
+  link_network: "Coderic Network"
+  link_org: "Coderic Organization"
+  link_financial: "Coderic Financial"
+  link_cloud: "Coderic Cloud"
+  link_store: "Coderic Store"
+  link_dev: "Coderic Development"
 items:
   explore: "Explorar"
