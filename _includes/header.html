@@ -40,7 +40,7 @@
             </a>
         </div>
 
-        <nav class="hidden lg:flex flex-grow items-center justify-center gap-2 xl:gap-5">
+        <nav class="hidden lg:flex flex-grow items-center justify-center gap-3 xl:gap-6">
             <a href="https://coderic.com/" class="text-sm transition-colors {% if site.portal_id == 'business' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
             <a href="https://financial.coderic.com/" class="text-sm transition-colors {% if site.portal_id == 'financial' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
             <a href="https://coderic.cloud/" class="text-sm transition-colors {% if site.portal_id == 'cloud' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
