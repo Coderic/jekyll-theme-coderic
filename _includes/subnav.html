@@ -60,8 +60,6 @@
                         {% assign clean_page_url = "/" %}
                     {% endif %}
 
-                    {% assign base_url = site.url | default: '' %}
-
                     {% for lang in site.languages %}
                         {% assign lang_label = site.data[lang].ui.lang_switcher[lang] | default: lang %}
                         {% if lang == active_lang %}
@@ -71,12 +69,12 @@
                         {% else %}
                         <li role="menuitem">
                             {% if lang == site.default_lang %}
-                            <a href="{{ base_url }}{{ clean_page_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                            <a href="{{ clean_page_url }}" data-lang-absolute="true" class="lang-switch-link flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
                                 <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                             </a>
                             {% else %}
                             {% assign target_url = clean_page_url | prepend: lang | prepend: '/' | replace: '//', '/' %}
-                            <a href="{{ base_url }}{{ target_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                            <a href="{{ target_url }}" data-lang-absolute="true" class="lang-switch-link flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
                                 <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                             </a>
                             {% endif %}
@@ -90,3 +88,18 @@
 
 </div>
 {% endif %}
+
+<script>
+// Fix language switcher links to use absolute URLs based on runtime origin
+document.addEventListener('DOMContentLoaded', function() {
+    var origin = window.location.origin;
+    document.querySelectorAll('.lang-switch-link[data-lang-absolute="true"]').forEach(function(a) {
+        var path = a.getAttribute('href');
+        // Only fix if the href is a relative path (starts with /)
+        if (path && path.charAt(0) === '/') {
+            a.setAttribute('href', origin + path);
+        }
+    });
+});
+</script>
+
