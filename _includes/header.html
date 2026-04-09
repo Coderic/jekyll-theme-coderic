@@ -63,7 +63,7 @@
                             <i class="ph-fill ph-user"></i>
                         </div>
                         <div class="flex flex-col items-start hidden sm:flex">
-                            <span id="auth-user-name" class="text-xs font-bold text-[var(--text-base)] leading-none truncate max-w-[100px]">Mi Cuenta</span>
+                            <span id="auth-user-name" class="text-xs font-bold text-[var(--text-base)] leading-none truncate max-w-[120px]">...</span>
                         </div>
                         <i class="ph ph-caret-down text-muted text-xs ml-1 transition-transform group-hover:rotate-180"></i>
                     </button>
@@ -95,7 +95,7 @@
                 <div id="auth-unauthenticated" class="flex items-center gap-2">
                     <!-- Sign In Button -->
                     <a href="#" onclick="startCodericLogin(event)" id="link-signin" class="hidden lg:flex px-5 py-2 rounded-full border border-surface-border hover:bg-surface-panel text-muted hover:text-[var(--text-base)] font-medium text-sm transition-colors items-center gap-2">
-                        {{ t.header.signin | default: 'Sign In' }}
+                        <i class="ph-bold ph-sign-in"></i> {{ t.header.signin | default: 'Sign In' }}
                     </a>
                     <!-- Register Button -->
                     <a href="#" onclick="startCodericRegister(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-coderic-600 text-white font-bold text-sm hover:bg-coderic-500 shadow-md hover:shadow-lg transition-all items-center gap-2">
@@ -194,8 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Populate DOM elements dynamically
         if (claims) {
-            document.getElementById('auth-user-name').innerText = claims.given_name || claims.name || 'Mi Cuenta';
-            document.getElementById('auth-user-email').innerText = claims.email || 'Usuario';
+            document.getElementById('auth-user-name').innerText = claims.display_name || claims.given_name || claims.name || claims.email || 'Account';
+            document.getElementById('auth-user-email').innerText = claims.email || '';
         }
 
         document.getElementById('auth-unauthenticated')?.classList.add('hidden');
