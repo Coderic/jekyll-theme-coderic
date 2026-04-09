@@ -1,6 +1,19 @@
+# --- Gem (rake build / gem build) ---
 *.gem
-.bundle
-.jekyll-cache
-.sass-cache
-_site
+
+# --- Bundler ---
+.bundle/
+vendor/bundle/
+
+# --- Jekyll (build local / jekyll serve del theme) ---
+_site/
+.jekyll-cache/
+.sass-cache/
+
+# --- Entorno / SO ---
+.DS_Store
+.env
+.env.*
+
+# --- Lockfile (gem library: Bundler recomienda no versionar Gemfile.lock) ---
 Gemfile.lock
