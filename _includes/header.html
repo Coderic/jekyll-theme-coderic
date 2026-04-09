@@ -185,45 +185,37 @@ function parseCodericJwt(token) {
 }
 
 
-const ID_HUB = 'https://id.coderic.com';
-
-function applyAuthState(token) {
-    const claims = parseCodericJwt(token);
-    if (claims) {
-        document.getElementById('auth-user-name').innerText = claims.display_name || claims.given_name || claims.name || claims.email || 'Account';
-        document.getElementById('auth-user-email').innerText = claims.email || '';
-    }
+function applyAuthState(user) {
+    document.getElementById('auth-user-name').innerText = user.display_name || user.given_name || user.name || user.email || 'Account';
+    document.getElementById('auth-user-email').innerText = user.email || '';
     document.getElementById('auth-unauthenticated')?.classList.add('hidden');
     document.getElementById('auth-unauthenticated')?.classList.remove('flex');
     document.getElementById('auth-authenticated')?.classList.remove('hidden');
     document.getElementById('auth-authenticated')?.classList.add('flex');
 }
 
-// Cross-domain SSO: listen for token relayed from id.coderic.com iframe
-window.addEventListener('message', (event) => {
-    if (event.origin !== ID_HUB) return;
-    if (event.data?.type !== 'coderic_session') return;
-    const token = event.data.token;
-    if (token) {
-        localStorage.setItem('coderic_access_token', token);
-        applyAuthState(token);
-    }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('coderic_access_token');
+    if (!token) return;
 
-    if (token) {
-        // Token already in localStorage (same portal or returning user)
-        applyAuthState(token);
-    } else {
-        // Inject silent relay iframe to check session on id.coderic.com
-        const relay = document.createElement('iframe');
-        relay.src = ID_HUB + '/session-relay';
-        relay.style.cssText = 'display:none;width:0;height:0;border:0;position:absolute;';
-        relay.setAttribute('aria-hidden', 'true');
-        document.body.appendChild(relay);
-        // Iframe will postMessage back if session exists (handled above)
-    }
+    // Standard OAuth2: call the portal's own /api/account with the Bearer token
+    // Each portal proxies this to id.coderic.com/userinfo (OIDC standard)
+    fetch('/api/account', {
+        headers: { 'Authorization': 'Bearer ' + token }
+    })
+    .then(res => {
+        if (res.status === 401) {
+            // Token expired or invalid — clean up and show logged-out state
+            localStorage.removeItem('coderic_access_token');
+            return null;
+        }
+        return res.json();
+    })
+    .then(user => { if (user) applyAuthState(user); })
+    .catch(() => {
+        // Network error: fallback to parsing JWT claims locally
+        const claims = parseCodericJwt(token);
+        if (claims) applyAuthState(claims);
+    });
 });
 </script>
