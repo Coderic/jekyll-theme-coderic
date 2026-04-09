@@ -70,7 +70,7 @@
             background: linear-gradient(180deg, #fec963 0%, #fea032 50%, #ff5c0a 100%);
         }
     </style>
-    <script id="coderic-theme-controller">
+    <script id="coderic-theme-controller" data-cfasync="false">
         (function() {
             const theme = localStorage.getItem('coderic-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             if (theme === 'dark') document.documentElement.classList.add('dark');
