@@ -10,28 +10,14 @@
                 <div class="flex flex-col">
                     <svg class="h-8 sm:h-10" viewBox="0 0 400 60" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
-                    <defs>
-                        <linearGradient id="metal-grad" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stop-color="hsl(0,0%,58%)" />
-                        <stop offset="47%" stop-color="hsl(0,0%,80%)" />
-                        <stop offset="53%" stop-color="hsl(0,0%,38%)" />
-                        <stop offset="100%" stop-color="hsl(0,0%,58%)" />
-                        </linearGradient>
-                        <linearGradient id="brand-grad" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stop-color="#fec963" />
-                        <stop offset="50%" stop-color="#fea032" />
-                        <stop offset="100%" stop-color="#ff5c0a" />
-                        </linearGradient>
-                    </defs>
                     <text
                         itemprop="name"
-                        class="gradient-metal"
+                        fill="#cbd5e1"
                         style="font-size:32px;
                         font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:-1.5px;"
                         x="0" y="35">CODERIC</text>
-                    
                     <text
-                        class="gradient-brand"
+                        fill="#ea580c"
                         style="font-size:16px;
                         font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:0.5px;"
                         x="0" y="52">{{ site.portal_name | default: 'PORTAL' | upcase }}</text>
@@ -59,7 +45,7 @@
                 <!-- Logged In State (Hidden by default until proven authenticated) -->
                 <div id="auth-authenticated" class="hidden relative group items-center">
                     <button id="btn-auth-menu" class="flex items-center gap-2 px-1.5 py-1.5 pr-3 rounded-full border border-surface-border hover:bg-surface-panel transition-colors" aria-haspopup="true" aria-expanded="false">
-                        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-coderic-500 to-coderic-400 flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                        <div class="w-7 h-7 rounded-full bg-coderic-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">
                             <i class="ph-fill ph-user"></i>
                         </div>
                         <div class="flex flex-col items-start hidden sm:flex">

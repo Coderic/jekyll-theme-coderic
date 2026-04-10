@@ -42,19 +42,10 @@
             --bg-panel: rgba(255, 255, 255, 0.03);
             --border-surface: rgba(255, 255, 255, 0.08);
             --text-base: #f1f5f9;
-            --text-muted: #cbd5e1; /* Brighter gray for better accessibility in dark mode */
+            --text-muted: #d1d5db; /* slate-300 — improved contrast on dark surfaces */
         }
 
-        /* Global Reusable Gradients for SVG & CSS */
-        .gradient-metal {
-            fill: url(#metal-grad);
-        }
-        .gradient-brand {
-            fill: url(#brand-grad);
-        }
-        .bg-gradient-brand {
-            background: linear-gradient(180deg, #fec963 0%, #fea032 50%, #ff5c0a 100%);
-        }
+        /* Brand surfaces: solid colors only (no decorative gradients on content) */
     </style>
     <script id="coderic-theme-controller" data-cfasync="false">
         (function() {
