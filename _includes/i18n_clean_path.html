@@ -1,0 +1,20 @@
+{% comment %}
+  Polyglot: ruta sin prefijo de idioma (misma logica que hreflang en head).
+  Requiere site.languages. Define clean_path y clean_page_url.
+{% endcomment %}
+{% if site.languages %}
+  {% assign url_parts = page.url | split: '/' %}
+  {% assign first_part = url_parts[1] %}
+  {% assign is_lang_prefixed = false %}
+  {% for lang in site.languages %}
+    {% if lang == first_part and lang != site.default_lang %}
+      {% assign is_lang_prefixed = true %}
+    {% endif %}
+  {% endfor %}
+  {% if is_lang_prefixed %}
+    {% assign clean_path = page.url | remove_first: '/' | remove_first: first_part %}
+  {% else %}
+    {% assign clean_path = page.url %}
+  {% endif %}
+  {% assign clean_page_url = clean_path | default: '/' %}
+{% endif %}

@@ -1,4 +1,6 @@
-{% assign t_ui = site.data[site.active_lang].ui %}
+{% assign default_lang = site.default_lang | default: 'en' %}
+{% assign active_lang = site.active_lang | default: default_lang %}
+{% assign t_ui = site.data[active_lang].ui %}
 {% assign subnav_data = site.data.subnav %}
 {% if subnav_data %}
 <div class="fixed top-20 w-full z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl h-12 hidden md:block">
@@ -39,23 +41,9 @@
                     <i class="ph-bold ph-caret-down text-[10px] text-muted opacity-50 ml-0.5 group-hover:rotate-180 transition-transform duration-200"></i>
                 </button>
                 <ul id="lang-switcher-menu" class="absolute right-0 top-full w-40 bg-surface border border-surface-border shadow-2xl py-1 hidden group-hover:block z-[200]" role="menu">
-                    {% assign url_parts = page.url | split: '/' %}
-                    {% assign first_part = url_parts[1] %}
-                    {% assign is_lang_prefixed = false %}
-                    {% for l in site.languages %}
-                        {% if l == first_part and l != site.default_lang %}
-                            {% assign is_lang_prefixed = true %}
-                            {% break %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if is_lang_prefixed %}
-                        {% assign lang_prefix_string = first_part | prepend: '/' %}
-                        {% assign clean_page_url = page.url | remove_first: lang_prefix_string %}
-                    {% else %}
-                        {% assign clean_page_url = page.url %}
+                    {% if site.languages %}
+                      {% include i18n_clean_path.html %}
                     {% endif %}
-
                     {% if clean_page_url == "" or clean_page_url == nil %}
                         {% assign clean_page_url = "/" %}
                     {% endif %}
@@ -69,12 +57,11 @@
                         {% else %}
                         <li role="menuitem">
                             {% if lang == site.default_lang %}
-                            <a href="{{ clean_page_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                            <a {% static_href %}href="{{ clean_page_url | relative_url }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
                                 <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                             </a>
                             {% else %}
-                            {% assign target_url = clean_page_url | prepend: lang | prepend: '/' | replace: '//', '/' %}
-                            <a href="{{ target_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
+                            <a {% static_href %}href="/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
                                 <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                             </a>
                             {% endif %}
@@ -88,4 +75,3 @@
 
 </div>
 {% endif %}
-
