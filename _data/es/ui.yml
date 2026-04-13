@@ -2,18 +2,18 @@
 
 # ── Navegación del Cabezal ───────────────────────────────────────────────────
 nav:
-  business: "Business"
-  financial: "Financial"
-  cloud: "Cloud"
-  network: "Network"
+  business: "Negocios"
+  financial: "Financiero"
+  cloud: "Nube"
+  network: "Red"
   io: "Hub"
-  development: "Development"
+  development: "Desarrollo"
   organization: "Organización"
   store: "Tienda"
 
 # ── Sección Hero ─────────────────────────────────────────────────────────────
 hero:
-  badge: "Vista Previa del Tema"
+  badge: "Los ganadores no improvisan"
   title_part1: "Escalabilidad"
   title_part2: "Empresarial"
   title_part3: "Sin Preocupaciones."
@@ -28,11 +28,13 @@ products:
 
 # ── Acciones del Cabezal ──────────────────────────────────────────────────────
 header:
+  signin: "Iniciar Sesión"
+  register: "Registrarse"
+  dashboard: "Tablero"
   toggle_theme: "Cambiar Tema"
   open_menu: "Abrir Menú"
-  signin: "Iniciar Sesión"
   console: "Consola"
-  panel: "Tablero"
+  panel: "Panel Control"
 
 # ── Selector de Idioma ────────────────────────────────────────────────────────
 lang_switcher:
@@ -45,7 +47,7 @@ lang_switcher:
 # ── Acciones de Subnavegación ──────────────────────────────────────────────────
 subnav:
   console: "Consola"
-  panel: "Tablero"
+  panel: "Panel Control"
 
 # ── Pie de Página ─────────────────────────────────────────────────────────────
 footer:
@@ -64,12 +66,12 @@ footer:
   link_privacy: "Política de Privacidad"
   link_legal: "Información Legal"
   link_tos: "Términos y Condiciones"
-  link_business: "Coderic Business"
-  link_network: "Coderic Network"
+  link_business: "Negocios"
+  link_network: "Red"
   link_org: "Coderic Organization"
-  link_financial: "Coderic Financial"
-  link_cloud: "Coderic Cloud"
-  link_store: "Coderic Store"
+  link_financial: "Financiero"
+  link_cloud: "Nube"
+  link_store: "Tienda"
   link_dev: "Coderic Development"
 items:
   explore: "Explorar"

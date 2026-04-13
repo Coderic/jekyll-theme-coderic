@@ -17,7 +17,7 @@ cta_text: "Deploy Architecture"
 plugins:
   - jekyll-polyglot
 
-languages: ["en", "es", "pt", "fr"]
+languages: ["en", "es"]
 default_lang: "en"
 exclude_from_localization:
   - "assets"

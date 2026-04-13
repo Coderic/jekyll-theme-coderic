@@ -1,7 +1,7 @@
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
 {% assign t_ui = site.data[active_lang].ui %}
-{% assign subnav_data = site.data.subnav %}
+{% assign subnav_data = site.data[active_lang].subnav | default: site.data.subnav %}
 {% if subnav_data %}
 <div class="fixed top-20 w-full z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl h-12 hidden md:block">
     <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">

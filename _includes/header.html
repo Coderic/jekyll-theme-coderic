@@ -20,7 +20,7 @@
                         fill="#ea580c"
                         style="font-size:16px;
                         font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:0.5px;"
-                        x="0" y="52">{{ site.portal_name | default: 'PORTAL' | upcase }}</text>
+                        x="0" y="52">{{ t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase }}</text>
                     </svg>
                 </div>
             </a>
@@ -61,12 +61,12 @@
                         </li>
                         <li role="menuitem">
                             <a href="/dashboard/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
-                                <i class="ph ph-squares-four text-lg text-coderic-500"></i> Dashboard
+                                <i class="ph ph-squares-four text-lg text-coderic-500"></i> {{ t.header.dashboard | default: 'Dashboard' }}
                             </a>
                         </li>
                         <li role="menuitem">
                             <a href="/console/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
-                                <i class="ph ph-terminal-window text-lg"></i> Console
+                                <i class="ph ph-terminal-window text-lg"></i> {{ t.header.console | default: 'Console' }}
                             </a>
                         </li>
                         <li class="border-t border-surface-border mt-1 pt-1" role="menuitem">

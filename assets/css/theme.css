@@ -12,7 +12,7 @@
     .glass-panel {
         @apply bg-surface-panel backdrop-blur-xl border border-surface-border rounded-2xl;
     }
-    .text-muted {
+    .text-muted, .text-muted-foreground {
         color: var(--text-muted);
     }
 }
