@@ -8,8 +8,20 @@
             <a href="{{ site.url | default: '/' }}" class="flex items-center gap-3 group" itemscope itemtype="https://schema.org/Corporation">
                 <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-12 sm:h-14 transition-transform duration-300 group-hover:scale-105">
                 <div class="flex flex-col">
-                    <span class="brand-coderic select-none uppercase">CODERIC</span>
-                    <span class="text-[14px] font-bold text-coderic-600 tracking-[0.5px] uppercase leading-none mt-1">{{ t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase }}</span>
+                    <svg class="h-8 sm:h-10" viewBox="0 0 400 60" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
+                    <text
+                        itemprop="name"
+                        fill="#cbd5e1"
+                        style="font-size:32px;
+                        font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:-1.5px;"
+                        x="0" y="35">CODERIC</text>
+                    <text
+                        fill="#ea580c"
+                        style="font-size:16px;
+                        font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:0.5px;"
+                        x="0" y="52">{{ t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase }}</text>
+                    </svg>
                 </div>
             </a>
         </div>
