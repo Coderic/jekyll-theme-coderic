@@ -33,6 +33,7 @@ header:
   signin: "Entrar"
   console: "Console"
   panel: "Painel"
+  hello_world: "Hello World"
 
 # ── Seletor de Idioma ─────────────────────────────────────────────────────────
 lang_switcher:
@@ -46,6 +47,16 @@ lang_switcher:
 subnav:
   console: "Console"
   panel: "Painel"
+
+hello_world:
+  title: "Hello World (API)"
+  lead: "Chama as Cloudflare Pages Functions em GET /api/hello-world. Sem Authorization: Bearer o endpoint responde 401."
+  btn: "Chamar /api/hello-world"
+  status_label: "HTTP"
+  body_label: "Resposta JSON"
+  no_token: "Sem token neste navegador. Inicie sessão primeiro."
+  loading: "A pedir…"
+  btn_probe: "GET sem Bearer (espera 401)"
 
 # ── Rodapé ────────────────────────────────────────────────────────────────────
 footer:

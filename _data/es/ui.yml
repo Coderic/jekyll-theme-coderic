@@ -35,6 +35,7 @@ header:
   open_menu: "Abrir Menú"
   console: "Consola"
   panel: "Panel Control"
+  hello_world: "Hello World"
 
 # ── Selector de Idioma ────────────────────────────────────────────────────────
 lang_switcher:
@@ -48,6 +49,17 @@ lang_switcher:
 subnav:
   console: "Consola"
   panel: "Panel Control"
+
+# ── Hello World (demo Functions) ────────────────────────────────────────────────
+hello_world:
+  title: "Hello World (API)"
+  lead: "Llama a Cloudflare Pages Functions en GET /api/hello-world. El endpoint responde 401 si no envías Authorization: Bearer con el access token de la sesión."
+  btn: "Llamar a /api/hello-world"
+  status_label: "Estado HTTP"
+  body_label: "Respuesta JSON"
+  no_token: "No hay token en este navegador. Inicia sesión primero."
+  loading: "Solicitando…"
+  btn_probe: "GET sin Bearer (espera 401)"
 
 # ── Pie de Página ─────────────────────────────────────────────────────────────
 footer:

@@ -1,0 +1,71 @@
+---
+layout: default
+title: Hello World
+permalink: /hello-world/
+---
+
+{% assign active_lang = site.active_lang | default: site.default_lang | default: 'en' %}
+{% assign t = site.data[active_lang].ui %}
+
+<div class="max-w-7xl mx-auto px-6 py-16">
+  <div class="glass-panel p-8 md:p-10 rounded-3xl border border-surface-border max-w-3xl">
+    <h1 class="text-3xl font-display font-bold text-[var(--text-base)] mb-3">{{ t.hello_world.title | default: 'Hello World (API)' }}</h1>
+    <p class="text-muted text-sm leading-relaxed mb-8">{{ t.hello_world.lead | default: 'GET /api/hello-world via Cloudflare Functions; requires Bearer token.' }}</p>
+
+    <div class="flex flex-wrap gap-3 mb-6">
+      <button type="button" id="hw-call" class="px-5 py-2.5 rounded-full bg-coderic-600 text-white text-sm font-semibold hover:bg-coderic-500 transition-colors">
+        {{ t.hello_world.btn | default: 'Call /api/hello-world' }}
+      </button>
+      <button type="button" id="hw-call-no-auth" class="px-5 py-2.5 rounded-full border border-surface-border text-sm font-medium text-muted hover:bg-surface-panel transition-colors">
+        {{ t.hello_world.btn_probe | default: 'GET without Bearer (expect 401)' }}
+      </button>
+    </div>
+
+    <div class="space-y-4">
+      <div>
+        <p class="text-xs font-bold text-muted uppercase tracking-wider mb-1">{{ t.hello_world.status_label | default: 'HTTP status' }}</p>
+        <p id="hw-status" class="text-lg font-mono text-coderic-500">ù</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold text-muted uppercase tracking-wider mb-1">{{ t.hello_world.body_label | default: 'JSON response' }}</p>
+        <pre id="hw-body" class="text-xs font-mono bg-surface-panel/80 border border-surface-border rounded-xl p-4 overflow-x-auto whitespace-pre-wrap min-h-[120px] text-[var(--text-base)]">ù</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const lblLoading = {{ t.hello_world.loading | default: 'Loadingù' | jsonify }};
+  const lblNoToken = {{ t.hello_world.no_token | default: 'No access token. Sign in first.' | jsonify }};
+
+  const statusEl = document.getElementById('hw-status');
+  const bodyEl = document.getElementById('hw-body');
+
+  async function doFetch(withBearer) {
+    statusEl.textContent = 'ù';
+    bodyEl.textContent = lblLoading;
+    const headers = {};
+    if (withBearer) {
+      const token = localStorage.getItem('coderic_access_token');
+      if (!token) {
+        statusEl.textContent = 'ù';
+        bodyEl.textContent = lblNoToken;
+        return;
+      }
+      headers['Authorization'] = 'Bearer ' + token;
+    }
+    const res = await fetch('/api/hello-world', { headers });
+    statusEl.textContent = String(res.status);
+    const text = await res.text();
+    try {
+      bodyEl.textContent = JSON.stringify(JSON.parse(text), null, 2);
+    } catch {
+      bodyEl.textContent = text || '(empty)';
+    }
+  }
+
+  document.getElementById('hw-call').addEventListener('click', function () { doFetch(true); });
+  document.getElementById('hw-call-no-auth').addEventListener('click', function () { doFetch(false); });
+})();
+</script>

@@ -31,6 +31,7 @@ header:
   toggle_theme: "Toggle Theme"
   open_menu: "Open Menu"
   signin: "Sign In"
+  hello_world: "Hello World"
 
 # ── Language Switcher ─────────────────────────────────────────────────────────
 lang_switcher:
@@ -44,6 +45,17 @@ lang_switcher:
 subnav:
   console: "Console"
   panel: "Panel"
+
+# ── Hello World (Functions demo) ───────────────────────────────────────────────
+hello_world:
+  title: "Hello World (API)"
+  lead: "Calls Cloudflare Pages Functions at GET /api/hello-world. The endpoint returns 401 unless the request includes Authorization: Bearer with your session access token."
+  btn: "Call /api/hello-world"
+  status_label: "HTTP status"
+  body_label: "JSON response"
+  no_token: "No access token in this browser. Use Sign in first."
+  loading: "Requesting…"
+  btn_probe: "GET without Bearer (expect 401)"
 
 # ── Footer ────────────────────────────────────────────────────────────────────
 footer:
