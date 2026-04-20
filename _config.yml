@@ -7,6 +7,11 @@ baseurl: ""
 # Coderic Portal Variables
 portal_name: "Coderic UI"
 portal_id: "business"
+
+# OAuth2/OIDC sandbox (Auth0); valores por defecto para desarrollo local del theme
+oidc_domain: "auth.coderic.org"
+oidc_client_id: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56"
+
 cta_url: "#"
 cta_text: "Deploy Architecture"
 

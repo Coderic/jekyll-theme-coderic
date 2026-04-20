@@ -121,13 +121,14 @@ async function startCodericLogin(e) {
     
     // 2. Hub Registration Details
     const portalEnv = '{{ site.portal_id | default: "core" }}';
-    const clientId = 'coderic';
-    const redirectUri = `${window.location.origin}/callback/`; // Destination after correct login
+    const clientId = '{{ site.oidc_client_id | default: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56" }}';
+    const redirectUri = `${window.location.origin}/callback/`; // Must match Auth0 app callback URLs
     const state = btoa(window.location.href); // Remember where they clicked Login
     const uiLocales = '{{ active_lang | default: site.default_lang | default: "en" }}';
-    
-    // 3. Delegation Redirect
-    const hubUrl = `https://id.coderic.com/authorize?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}&ui_locales=${encodeURIComponent(uiLocales)}`;
+    const authBase = 'https://{{ site.oidc_domain | default: "auth.coderic.org" }}';
+
+    // 3. Auth0 OIDC (sandbox); migración futura: IdP propio en id.coderic.com
+    const hubUrl = `${authBase}/authorize?client_id=${encodeURIComponent(clientId)}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}&ui_locales=${encodeURIComponent(uiLocales)}`;
     
     window.location.href = hubUrl;
 }
@@ -143,12 +144,13 @@ async function startCodericRegister(e) {
     const challenge = await generateCodeChallenge(verifier);
     
     const portalEnv = '{{ site.portal_id | default: "core" }}';
-    const clientId = 'coderic';
+    const clientId = '{{ site.oidc_client_id | default: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56" }}';
     const redirectUri = `${window.location.origin}/callback/`;
     const state = btoa(window.location.href);
     const uiLocales = '{{ active_lang | default: site.default_lang | default: "en" }}';
-    
-    const hubUrl = `https://id.coderic.com/register?client_id=${clientId}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}&ui_locales=${encodeURIComponent(uiLocales)}`;
+    const authBase = 'https://{{ site.oidc_domain | default: "auth.coderic.org" }}';
+
+    const hubUrl = `${authBase}/authorize?client_id=${encodeURIComponent(clientId)}&response_type=code&scope=${encodeURIComponent('openid profile email')}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}&screen_hint=signup&ui_locales=${encodeURIComponent(uiLocales)}`;
     
     window.location.href = hubUrl;
 }
@@ -174,7 +176,7 @@ function parseCodericJwt(token) {
 
 
 function applyAuthState(user) {
-    document.getElementById('auth-user-name').innerText = user.display_name || user.given_name || user.name || user.email || 'Account';
+    document.getElementById('auth-user-name').innerText = user.display_name || user.given_name || user.name || user.nickname || user.email || 'Account';
     document.getElementById('auth-user-email').innerText = user.email || '';
     document.getElementById('auth-unauthenticated')?.classList.add('hidden');
     document.getElementById('auth-unauthenticated')?.classList.remove('flex');
@@ -186,8 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('coderic_access_token');
     if (!token) return;
 
-    // Standard OAuth2: call the portal's own /api/account with the Bearer token
-    // Each portal proxies this to id.coderic.com/userinfo (OIDC standard)
+    // OAuth2: /api/account en cada portal (proxy a userinfo del IdP; Auth0 sandbox → tenant /userinfo)
     fetch('/api/account', {
         headers: { 'Authorization': 'Bearer ' + token }
     })

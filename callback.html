@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const portalEnv = '{{ site.portal_id | default: "core" }}';
-        const clientId = 'coderic';
+        const clientId = '{{ site.oidc_client_id | default: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56" }}';
         const redirectUri = `${window.location.origin}/callback/`;
 
         const body = new URLSearchParams({
@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             code_verifier: verifier
         });
 
-        const tokenResp = await fetch('https://id.coderic.com/token', {
+        const tokenUrl = 'https://{{ site.oidc_domain | default: "auth.coderic.org" }}/oauth/token';
+        const tokenResp = await fetch(tokenUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
