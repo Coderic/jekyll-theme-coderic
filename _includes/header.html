@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        {# 8 portales: sin scroll horizontal el último (Store) suele quedar fuera en lg. #}
+        {% comment %}8 portales: sin scroll horizontal el ultimo (Store) suele quedar fuera en lg.{% endcomment %}
         <nav class="hidden lg:flex min-w-0 flex-1 items-center justify-start gap-2 xl:gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain py-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Portales Coderic">
             <a href="{{ portal_coderic_com }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'business' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
             <a href="{{ portal_financial }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'financial' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
@@ -56,9 +56,11 @@
                     </button>
 
                     <ul id="auth-menu-dropdown" class="absolute right-0 top-full w-56 rounded-xl bg-surface border border-surface-border shadow-2xl py-2 hidden group-hover:block z-[200]" role="menu">
-                        <li class="px-4 py-2 border-b border-surface-border mb-1">
-                            <p class="text-[10px] font-bold text-muted tracking-wider uppercase mb-0.5">Coderic ID</p>
-                            <p id="auth-user-email" class="text-sm font-medium text-[var(--text-base)] truncate">Conectando...</p>
+                        <li class="border-b border-surface-border mb-1">
+                            <a href="/profile/" class="block px-4 py-2 hover:bg-surface-panel transition-colors rounded-t-xl">
+                                <p class="text-[10px] font-bold text-muted tracking-wider uppercase mb-0.5">Coderic ID</p>
+                                <p id="auth-user-email" class="text-sm font-medium text-[var(--text-base)] truncate">Conectando...</p>
+                            </a>
                         </li>
                         <li role="menuitem">
                             <a href="/dashboard/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
@@ -182,7 +184,7 @@ function parseCodericJwt(token) {
 
 
 function applyAuthState(user) {
-    document.getElementById('auth-user-name').innerText = user.display_name || user.given_name || user.name || user.nickname || user.email || 'Account';
+    document.getElementById('auth-user-name').innerText = user.name || user.given_name || user.name || user.nickname || user.email || 'Account';
     document.getElementById('auth-user-email').innerText = user.email || '';
     document.getElementById('auth-unauthenticated')?.classList.add('hidden');
     document.getElementById('auth-unauthenticated')?.classList.remove('flex');
