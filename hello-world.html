@@ -24,11 +24,11 @@ permalink: /hello-world/
     <div class="space-y-4">
       <div>
         <p class="text-xs font-bold text-muted uppercase tracking-wider mb-1">{{ t.hello_world.status_label | default: 'HTTP status' }}</p>
-        <p id="hw-status" class="text-lg font-mono text-coderic-500">ù</p>
+        <p id="hw-status" class="text-lg font-mono text-coderic-500">&mdash;</p>
       </div>
       <div>
         <p class="text-xs font-bold text-muted uppercase tracking-wider mb-1">{{ t.hello_world.body_label | default: 'JSON response' }}</p>
-        <pre id="hw-body" class="text-xs font-mono bg-surface-panel/80 border border-surface-border rounded-xl p-4 overflow-x-auto whitespace-pre-wrap min-h-[120px] text-[var(--text-base)]">ù</pre>
+        <pre id="hw-body" class="text-xs font-mono bg-surface-panel/80 border border-surface-border rounded-xl p-4 overflow-x-auto whitespace-pre-wrap min-h-[120px] text-[var(--text-base)]">&mdash;</pre>
       </div>
     </div>
   </div>
@@ -36,20 +36,20 @@ permalink: /hello-world/
 
 <script>
 (function () {
-  const lblLoading = {{ t.hello_world.loading | default: 'Loadingù' | jsonify }};
+  const lblLoading = {{ t.hello_world.loading | default: 'Requesting...' | jsonify }};
   const lblNoToken = {{ t.hello_world.no_token | default: 'No access token. Sign in first.' | jsonify }};
 
   const statusEl = document.getElementById('hw-status');
   const bodyEl = document.getElementById('hw-body');
 
   async function doFetch(withBearer) {
-    statusEl.textContent = 'ù';
+    statusEl.textContent = '\u2014';
     bodyEl.textContent = lblLoading;
     const headers = {};
     if (withBearer) {
       const token = localStorage.getItem('coderic_access_token');
       if (!token) {
-        statusEl.textContent = 'ù';
+        statusEl.textContent = '\u2014';
         bodyEl.textContent = lblNoToken;
         return;
       }
