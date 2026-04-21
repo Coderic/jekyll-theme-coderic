@@ -3,75 +3,77 @@
 {% assign t_ui = site.data[active_lang].ui %}
 {% assign subnav_data = site.data[active_lang].subnav | default: site.data.subnav %}
 {% if subnav_data %}
-<div class="fixed top-20 w-full z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl h-12 hidden md:block">
-    <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-        <div class="flex items-center w-1/4 min-w-[280px] lg:w-[320px] h-full">
-            <ul class="flex h-full text-xs font-bold text-muted uppercase tracking-widest gap-6">
-                {% for item in subnav_data %}
-                <li class="h-full relative group flex items-center border-r border-surface-border pr-6 transition-colors last:border-r-0">
-                    <a href="{{ item.url | default: '#' }}" class="h-full flex items-center gap-1.5 text-muted hover:text-coderic-500 transition-colors cursor-default">
-                        {{ item.title }} <i class="ph-bold ph-caret-down opacity-50"></i>
-                    </a>
-                    {% if item.children %}
-                    <ul class="absolute top-[48px] left-0 w-64 bg-surface py-2 hidden group-hover:block transition-all shadow-2xl origin-top border border-surface-border z-[100]">
-                        {% for child in item.children %}
-                        <li><a href="{{ child.url | relative_url }}" class="block px-5 py-3 text-muted hover:bg-surface-panel hover:text-coderic-500 transition-colors border-b border-surface-border last:border-0 font-medium text-[13px]">{{ child.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        
-        <div class="flex-grow"></div>
-
-        <div class="flex items-center justify-end w-1/4 lg:w-[320px] gap-2">
-            <!-- Theme Toggle -->
-            <button onclick="toggleTheme()" id="btn-toggle-theme" class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-surface-panel transition-colors text-muted" title="{{ t_ui.header.toggle_theme | default: 'Toggle Theme' }}">
-                <i class="ph ph-sun-dim dark:hidden text-lg text-gray-600 hover:text-gray-800"></i>
-                <i class="ph ph-moon-stars hidden dark:block text-lg text-yellow-500 hover:text-yellow-400"></i>
-            </button>
-
-            <!-- Language Switcher -->
-            <div class="relative group" id="lang-switcher">
-                <button id="btn-lang-switcher" class="flex items-center justify-center hover:bg-surface-panel transition-colors px-2 py-1.5 rounded-md gap-1" title="{{ t_ui.lang_switcher.label | default: 'Language' }}" aria-haspopup="true" aria-expanded="false">
-                    <i class="ph ph-translate text-lg text-muted group-hover:text-coderic-500 transition-colors"></i>
-                    <span class="text-xs font-bold text-muted uppercase tracking-widest">{{ active_lang | default: site.default_lang }}</span>
-                    <i class="ph-bold ph-caret-down text-[10px] text-muted opacity-50 ml-0.5 group-hover:rotate-180 transition-transform duration-200"></i>
-                </button>
-                <ul id="lang-switcher-menu" class="absolute right-0 top-full w-40 bg-surface border border-surface-border shadow-2xl py-1 hidden group-hover:block z-[200]" role="menu">
-                    {% if site.languages %}
-                      {% include i18n_clean_path.html %}
-                    {% endif %}
-                    {% if clean_page_url == "" or clean_page_url == nil %}
-                        {% assign clean_page_url = "/" %}
-                    {% endif %}
-
-                    {% for lang in site.languages %}
-                        {% assign lang_label = site.data[lang].ui.lang_switcher[lang] | default: lang %}
-                        {% if lang == active_lang %}
-                        <li role="menuitem" class="flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-coderic-500 uppercase tracking-wider cursor-default bg-coderic-50 dark:bg-coderic-900/20">
-                            <i class="ph-fill ph-check-circle text-sm"></i> {{ lang_label }}
-                        </li>
-                        {% else %}
-                        <li role="menuitem">
-                            {% if lang == site.default_lang %}
-                            <a {% static_href %}href="{{ clean_page_url | relative_url }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
-                                <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
-                            </a>
-                            {% else %}
-                            <a {% static_href %}href="/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-muted hover:text-coderic-500 hover:bg-surface-panel transition-colors uppercase tracking-wider">
-                                <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
-                            </a>
+<div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl hidden md:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex h-14 items-center justify-between gap-3">
+            <nav class="min-w-0 flex-1" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
+                <ul class="flex items-center gap-1 overflow-x-auto overflow-y-hidden py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-2">
+                    {% for item in subnav_data %}
+                    <li class="group relative shrink-0">
+                        <a href="{{ item.url | default: '#' }}" class="inline-flex items-center gap-1.5 rounded-md px-2 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-3">
+                            <span>{{ item.title }}</span>
+                            {% if item.children %}
+                            <i class="ph-bold ph-caret-down opacity-60" aria-hidden="true"></i>
                             {% endif %}
-                        </li>
+                        </a>
+                        {% if item.children %}
+                        <ul class="absolute left-0 top-full z-[100] mt-0 hidden w-64 rounded-lg border border-surface-border bg-surface py-1 shadow-2xl group-hover:block" role="menu">
+                            {% for child in item.children %}
+                            <li role="none">
+                                <a role="menuitem" href="{{ child.url | relative_url }}" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
                         {% endif %}
+                    </li>
                     {% endfor %}
                 </ul>
+            </nav>
+
+            <div class="flex shrink-0 items-center gap-1 border-l border-surface-border pl-3 sm:gap-2 sm:pl-4">
+                <button type="button" onclick="toggleTheme()" id="btn-toggle-theme" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-muted transition-colors hover:bg-surface-panel" title="{{ t_ui.header.toggle_theme | default: 'Toggle Theme' }}">
+                    <i class="ph ph-sun-dim dark:hidden text-lg text-muted"></i>
+                    <i class="ph ph-moon-stars hidden dark:block text-lg text-yellow-500 hover:text-yellow-400"></i>
+                </button>
+
+                <div class="relative group" id="lang-switcher">
+                    <button type="button" id="btn-lang-switcher" class="flex h-8 w-max items-center justify-center gap-1 rounded-md px-2 py-1 text-muted transition-colors hover:bg-surface-panel" title="{{ t_ui.lang_switcher.label | default: 'Language' }}" aria-haspopup="true" aria-expanded="false">
+                        <i class="ph ph-translate text-lg group-hover:text-coderic-500 transition-colors"></i>
+                        <span class="text-xs font-semibold uppercase tracking-wide">{{ active_lang | default: site.default_lang }}</span>
+                        <i class="ph-bold ph-caret-down opacity-50 transition-transform duration-200 group-hover:rotate-180"></i>
+                    </button>
+                    <ul id="lang-switcher-menu" class="absolute right-0 top-full z-[200] hidden w-40 border border-surface-border bg-surface py-1 shadow-2xl group-hover:block" role="menu">
+                        {% if site.languages %}
+                          {% include i18n_clean_path.html %}
+                        {% endif %}
+                        {% if clean_page_url == "" or clean_page_url == nil %}
+                            {% assign clean_page_url = "/" %}
+                        {% endif %}
+
+                        {% for lang in site.languages %}
+                            {% assign lang_label = site.data[lang].ui.lang_switcher[lang] | default: lang %}
+                            {% if lang == active_lang %}
+                            <li role="menuitem" class="flex cursor-default items-center gap-2 bg-coderic-50 px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-coderic-500 dark:bg-coderic-900/20">
+                                <i class="ph-fill ph-check-circle text-sm"></i> {{ lang_label }}
+                            </li>
+                            {% else %}
+                            <li role="menuitem">
+                                {% if lang == site.default_lang %}
+                                <a {% static_href %}href="{{ clean_page_url | relative_url }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
+                                    <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
+                                </a>
+                                {% else %}
+                                <a {% static_href %}href="/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
+                                    <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
+                                </a>
+                                {% endif %}
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 {% endif %}
