@@ -57,6 +57,18 @@ hello_world:
   loading: "Requesting…"
   btn_probe: "GET without Bearer (expect 401)"
 
+# ── Profile (/profile/) ────────────────────────────────────────────────────────
+profile:
+  title: "Coderic ID"
+  subtitle: "Account data from this portal via GET /api/account (OIDC userinfo)."
+  loading: "Loading..."
+  error: "Could not load your profile. Try signing in again."
+  sign_in_lead: "Sign in to view your Coderic ID profile."
+  sign_in_cta: "Sign in"
+  field_name: "Name"
+  field_email: "Email"
+  field_sub: "Subject (sub)"
+
 # ── Footer ────────────────────────────────────────────────────────────────────
 footer:
   company_description: >

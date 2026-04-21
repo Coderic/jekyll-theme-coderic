@@ -58,6 +58,17 @@ hello_world:
   loading: "A pedir…"
   btn_probe: "GET sem Bearer (espera 401)"
 
+profile:
+  title: "Coderic ID"
+  subtitle: "Dados da conta deste portal via GET /api/account (userinfo OIDC)."
+  loading: "A carregar..."
+  error: "Nao foi possivel carregar o perfil. Inicie sessao novamente."
+  sign_in_lead: "Inicie sessao para ver o seu perfil Coderic ID."
+  sign_in_cta: "Entrar"
+  field_name: "Nome"
+  field_email: "E-mail"
+  field_sub: "Subject (sub)"
+
 # ── Rodapé ────────────────────────────────────────────────────────────────────
 footer:
   company_description: >

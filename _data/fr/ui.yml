@@ -58,6 +58,17 @@ hello_world:
   loading: "Requête…"
   btn_probe: "GET sans Bearer (401 attendu)"
 
+profile:
+  title: "Coderic ID"
+  subtitle: "Donnees du compte via GET /api/account (userinfo OIDC)."
+  loading: "Chargement..."
+  error: "Impossible de charger le profil. Reconnectez-vous."
+  sign_in_lead: "Connectez-vous pour voir votre profil Coderic ID."
+  sign_in_cta: "Connexion"
+  field_name: "Nom"
+  field_email: "E-mail"
+  field_sub: "Subject (sub)"
+
 # ── Pied de Page ──────────────────────────────────────────────────────────────
 footer:
   company_description: >

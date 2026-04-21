@@ -1,0 +1,105 @@
+---
+layout: default
+title: Profile
+permalink: /profile/
+---
+
+{% assign active_lang = site.active_lang | default: site.default_lang | default: 'en' %}
+{% assign t = site.data[active_lang].ui %}
+
+<div class="max-w-7xl mx-auto px-6 py-16">
+  <div class="glass-panel p-8 md:p-10 rounded-3xl border border-surface-border max-w-2xl">
+    <h1 class="text-3xl font-display font-bold text-[var(--text-base)] mb-1">{{ t.profile.title | default: 'Coderic ID' }}</h1>
+    <p class="text-muted text-sm mb-8">{{ t.profile.subtitle | default: 'Account via /api/account' }}</p>
+
+    <div id="profile-loading" class="flex items-center gap-3 text-muted">
+      <span class="inline-block h-8 w-8 animate-spin rounded-full border-2 border-coderic-500 border-t-transparent"></span>
+      <span>{{ t.profile.loading | default: 'Loading...' }}</span>
+    </div>
+
+    <div id="profile-signed-out" class="hidden">
+      <p class="text-muted text-sm mb-6">{{ t.profile.sign_in_lead | default: 'Sign in to view your profile.' }}</p>
+      <a href="#" onclick="startCodericLogin(event)" class="inline-flex px-5 py-2.5 rounded-full bg-coderic-600 text-white text-sm font-semibold hover:bg-coderic-500 transition-colors">{{ t.profile.sign_in_cta | default: 'Sign in' }}</a>
+    </div>
+
+    <div id="profile-error" class="hidden text-red-400 text-sm mb-4" role="alert"></div>
+
+    <div id="profile-loaded" class="hidden">
+      <div class="flex flex-col sm:flex-row gap-6 items-start">
+        <div id="profile-avatar-wrap" class="shrink-0 hidden">
+          <img id="profile-picture" src="" alt="" class="h-24 w-24 rounded-2xl border border-surface-border object-cover bg-surface-panel" width="96" height="96" />
+        </div>
+        <dl class="flex-1 space-y-3 min-w-0">
+          <div>
+            <dt class="text-[10px] font-bold text-muted uppercase tracking-wider">{{ t.profile.field_name | default: 'Name' }}</dt>
+            <dd id="profile-name" class="text-lg font-medium text-[var(--text-base)] truncate"></dd>
+          </div>
+          <div>
+            <dt class="text-[10px] font-bold text-muted uppercase tracking-wider">{{ t.profile.field_email | default: 'Email' }}</dt>
+            <dd id="profile-email" class="text-sm text-[var(--text-base)] break-all"></dd>
+          </div>
+          <div>
+            <dt class="text-[10px] font-bold text-muted uppercase tracking-wider">{{ t.profile.field_sub | default: 'Subject (sub)' }}</dt>
+            <dd id="profile-sub" class="text-xs font-mono text-muted break-all"></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var msgError = {{ t.profile.error | default: 'Could not load profile.' | jsonify }};
+  var elLoad = document.getElementById('profile-loading');
+  var elOut = document.getElementById('profile-signed-out');
+  var elErr = document.getElementById('profile-error');
+  var elOk = document.getElementById('profile-loaded');
+  var elPic = document.getElementById('profile-picture');
+  var elPicWrap = document.getElementById('profile-avatar-wrap');
+  var elName = document.getElementById('profile-name');
+  var elEmail = document.getElementById('profile-email');
+  var elSub = document.getElementById('profile-sub');
+
+  var token = localStorage.getItem('coderic_access_token');
+  if (!token) {
+    elLoad.classList.add('hidden');
+    elOut.classList.remove('hidden');
+    return;
+  }
+
+  fetch('/api/account', { headers: { 'Authorization': 'Bearer ' + token } })
+    .then(function (res) {
+      if (res.status === 401) {
+        localStorage.removeItem('coderic_access_token');
+        elLoad.classList.add('hidden');
+        elOut.classList.remove('hidden');
+        return null;
+      }
+      return res.json();
+    })
+    .then(function (user) {
+      elLoad.classList.add('hidden');
+      if (!user || user.error) {
+        elErr.textContent = msgError;
+        elErr.classList.remove('hidden');
+        return;
+      }
+      var name = user.name || [user.given_name, user.family_name].filter(Boolean).join(' ') || user.nickname || user.email || '';
+      elName.textContent = name;
+      elEmail.textContent = user.email || '';
+      elSub.textContent = user.sub || '';
+      if (user.picture) {
+        elPic.src = user.picture;
+        elPic.alt = name || 'Avatar';
+        elPicWrap.classList.remove('hidden');
+      }
+      elOk.classList.remove('hidden');
+    })
+    .catch(function () {
+      elLoad.classList.add('hidden');
+      elErr.textContent = msgError;
+      elErr.classList.remove('hidden');
+    });
+});
+</script>
