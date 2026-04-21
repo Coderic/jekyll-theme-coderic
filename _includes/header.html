@@ -3,12 +3,12 @@
 <header class="fixed top-0 w-full z-[100] border-b border-surface-border bg-surface/90 backdrop-blur-md transition-all duration-300" id="global-header">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center gap-4 lg:gap-6">
         
-        <!-- Logo Container (ancho fijo alineado con subnav) -->
-        <div class="flex items-center w-max shrink-0 lg:w-[320px]">
-            <a href="{{ site.url | default: '/' }}" class="flex items-center gap-3 group" itemscope itemtype="https://schema.org/Corporation">
-                <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-12 sm:h-14 transition-transform duration-300 group-hover:scale-105">
-                <div class="flex flex-col">
-                    <svg class="h-8 sm:h-10" viewBox="0 0 400 60" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        <!-- Logo: ancho acotado para no comer espacio del nav (el SVG sin max-width ocupaba ~400px) -->
+        <div class="flex min-w-0 shrink-0 max-w-[200px] sm:max-w-[240px] lg:max-w-[260px]">
+            <a href="{{ site.url | default: '/' }}" class="flex min-w-0 max-w-full items-center gap-2 sm:gap-3 group" itemscope itemtype="https://schema.org/Corporation">
+                <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-10 w-10 sm:h-12 sm:w-12 shrink-0 transition-transform duration-300 group-hover:scale-105">
+                <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
+                    <svg class="h-7 w-full max-w-[11rem] sm:h-8 sm:max-w-[13rem]" viewBox="0 0 400 60" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
                     <text
                         itemprop="name"
