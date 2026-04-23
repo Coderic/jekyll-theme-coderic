@@ -3,7 +3,7 @@
 {% assign t_ui = site.data[active_lang].ui %}
 {% assign subnav_data = site.data[active_lang].subnav | default: site.data.subnav %}
 {% if subnav_data %}
-<div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl hidden md:block">
+<div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex h-14 items-center justify-between gap-3">
             <nav class="min-w-0 flex-1" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
