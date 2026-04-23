@@ -1,21 +1,22 @@
+# Demo del tema: enlaces a páginas del propio tema (sin anclas rotas).
 - title: "ERP & Management"
-  url: "#erp"
+  url: /products.html
   children:
     - title: "Operations"
-      url: "#"
+      url: /products.html
     - title: "Human Capital (HRM)"
-      url: "#"
+      url: /products.html
 - title: "Cloud Engine"
-  url: "#cloud"
+  url: /products.html
   children:
     - title: "Virtual Machines"
-      url: "#"
+      url: /products.html
     - title: "Managed Databases"
-      url: "#"
+      url: /products.html
 - title: "Corporate"
-  url: "#corp"
+  url: https://coderic.org/history
   children:
     - title: "Our History"
-      url: "https://coderic.org/history"
+      url: https://coderic.org/history
     - title: "SLA Policies"
-      url: "https://coderic.org/legal"
+      url: https://coderic.org/legal
