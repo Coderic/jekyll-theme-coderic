@@ -1,45 +1,33 @@
 {% include portal_urls.html %}
 {% assign t = site.data[active_lang].ui %}
 <header class="fixed top-0 w-full z-[100] border-b border-surface-border bg-surface/90 backdrop-blur-md transition-all duration-300" id="global-header">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center gap-4 lg:gap-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center gap-3 lg:gap-4">
         
-        <!-- Logo: ancho acotado para no comer espacio del nav (el SVG sin max-width ocupaba ~400px) -->
-        <div class="flex min-w-0 shrink-0 max-w-[200px] sm:max-w-[240px] lg:max-w-[260px]">
+        <!-- Logo: ancho acotado para dejar sitio al nav entre logo y acciones -->
+        <div class="flex min-w-0 shrink-0 max-w-[180px] sm:max-w-[220px] lg:max-w-[240px]">
             <a href="{{ site.url | default: '/' }}" class="flex min-w-0 max-w-full items-center gap-2 sm:gap-3 group" itemscope itemtype="https://schema.org/Corporation">
                 <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-10 w-10 sm:h-12 sm:w-12 shrink-0 transition-transform duration-300 group-hover:scale-105">
-                <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
-                    <svg class="h-7 w-full max-w-[11rem] sm:h-8 sm:max-w-[13rem]" viewBox="0 0 400 60" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
-                    <text
-                        itemprop="name"
-                        fill="#cbd5e1"
-                        style="font-size:32px;
-                        font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:-1.5px;"
-                        x="0" y="35">CODERIC</text>
-                    <text
-                        fill="#ea580c"
-                        style="font-size:16px;
-                        font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:0.5px;"
-                        x="0" y="52">{{ t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase }}</text>
-                    </svg>
+                <div class="flex min-w-0 flex-1 flex-col justify-center gap-0.5 overflow-hidden">
+                    <span itemprop="name" class="brand-coderic select-none uppercase truncate leading-none">CODERIC</span>
+                    <span class="truncate text-[11px] font-semibold uppercase tracking-wide text-coderic-600 sm:text-sm" style="font-family:'Outfit','Red Hat Display',sans-serif;">{{ t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase }}</span>
                 </div>
             </a>
         </div>
 
-        {% comment %}8 portales: sin scroll horizontal el ultimo (Store) suele quedar fuera en lg.{% endcomment %}
-        <nav class="hidden lg:flex min-w-0 flex-1 items-center justify-start gap-2 xl:gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Portales Coderic">
-            <a href="{{ portal_coderic_com }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'business' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
-            <a href="{{ portal_financial }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'financial' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
-            <a href="{{ portal_cloud }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'cloud' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
-            <a href="{{ portal_network }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'network' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.network | default: 'Network' }}</a>
-            <a href="{{ portal_io }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'io' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.io | default: 'Hub' }}</a>
-            <a href="{{ portal_dev }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'development' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.development | default: 'Development' }}</a>
-            <a href="{{ portal_org }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'organization' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.organization | default: 'Organization' }}</a>
-            <a href="{{ portal_store }}" class="shrink-0 whitespace-nowrap text-sm transition-colors {% if site.portal_id == 'store' %}font-bold text-base relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)]{% endif %}">{{ t.nav.store | default: 'Store' }}</a>
+        {% comment %}Navegación pensada para escritorio: siempre visible (sin menú hamburguesa).{% endcomment %}
+        <nav class="flex min-w-0 flex-1 items-center justify-center gap-1.5 xl:gap-3 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-1" aria-label="Portales Coderic">
+            <a href="{{ portal_coderic_com }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'business' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
+            <a href="{{ portal_financial }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'financial' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
+            <a href="{{ portal_cloud }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'cloud' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
+            <a href="{{ portal_network }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'network' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.network | default: 'Network' }}</a>
+            <a href="{{ portal_io }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'io' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.io | default: 'Hub' }}</a>
+            <a href="{{ portal_dev }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'development' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.development | default: 'Development' }}</a>
+            <a href="{{ portal_org }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'organization' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.organization | default: 'Organization' }}</a>
+            <a href="{{ portal_store }}" class="shrink-0 whitespace-nowrap text-sm transition-colors border-b-2 border-transparent pb-0.5 {% if site.portal_id == 'store' %}font-semibold text-[var(--text-base)] border-coderic-600{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:border-surface-border{% endif %}">{{ t.nav.store | default: 'Store' }}</a>
         </nav>
 
-        <!-- Actions: ancho fijo en lg para que no varíe entre sesión iniciada o no -->
-        <div class="flex shrink-0 items-center justify-end gap-2 w-max min-w-0 lg:w-[320px] lg:min-w-[320px] lg:max-w-[320px]">
+        <!-- Acciones: ancho natural (evita robar ~320px fijos al nav en viewports justos) -->
+        <div class="flex shrink-0 items-center justify-end gap-2 min-w-0 lg:max-w-[min(100%,18rem)] xl:max-w-none">
 
             <!-- Auth Dynamic Interface Wrapper -->
             <div id="auth-state-wrapper" class="flex w-full min-h-[40px] items-center justify-end gap-2">
@@ -88,20 +76,15 @@
                 <!-- Logged Out State (Visible by default) -->
                 <div id="auth-unauthenticated" class="flex items-center gap-2">
                     <!-- Sign In Button -->
-                    <a href="#" onclick="startCodericLogin(event)" id="link-signin" class="hidden lg:flex px-5 py-2 rounded-full border border-surface-border hover:bg-surface-panel text-muted hover:text-[var(--text-base)] font-medium text-sm transition-colors items-center gap-2">
+                    <a href="#" onclick="startCodericLogin(event)" id="link-signin" class="flex px-5 py-2 rounded-full border border-surface-border hover:bg-surface-panel text-muted hover:text-[var(--text-base)] font-medium text-sm transition-colors items-center gap-2">
                         <i class="ph-bold ph-sign-in"></i> {{ t.header.signin | default: 'Sign In' }}
                     </a>
                     <!-- Register Button -->
-                    <a href="#" onclick="startCodericRegister(event)" id="link-register" class="ml-1 hidden lg:flex px-5 py-2 rounded-full bg-coderic-600 text-white font-bold text-sm hover:bg-coderic-500 shadow-md hover:shadow-lg transition-all items-center gap-2">
+                    <a href="#" onclick="startCodericRegister(event)" id="link-register" class="ml-1 flex px-5 py-2 rounded-full bg-coderic-600 text-white font-bold text-sm hover:bg-coderic-500 shadow-md hover:shadow-lg transition-all items-center gap-2">
                         <i class="ph-bold ph-user-plus"></i> {{ t.header.register | default: 'Register' }}
                     </a>
                 </div>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="lg:hidden text-muted hover:text-white" id="btn-mobile-menu" aria-label="{{ t.header.open_menu | default: 'Open Menu' }}">
-                <i class="ph ph-list text-2xl"></i>
-            </button>
         </div>
     </div>
 </header>
