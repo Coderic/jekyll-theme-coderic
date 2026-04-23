@@ -6,26 +6,36 @@
 <div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex h-14 items-center justify-between gap-3">
-            <nav class="min-w-0 flex-1" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
-                <ul class="flex items-center gap-1 overflow-x-auto overflow-y-hidden py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-2">
+            {% comment %}
+              El scroll horizontal va en <nav> con solo overflow-x para no recortar (overflow-y-hidden en el ul
+              cortaba los submenús position:absolute). Los ítems con `children` en YAML son desplegables.
+            {% endcomment %}
+            <nav class="min-w-0 flex-1 overflow-x-auto overflow-y-visible py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
+                <ul class="flex min-h-[2.5rem] items-center gap-1 md:gap-2">
                     {% for item in subnav_data %}
-                    <li class="group relative shrink-0">
+                    {% if item.children %}
+                    <li class="subnav-dropdown group relative z-0 shrink-0 hover:z-[120] focus-within:z-[120]">
+                        <a href="{{ item.url | default: '#' }}" class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-3" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                            <span>{{ item.title }}</span>
+                            <i class="ph-bold ph-caret-down opacity-60 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true"></i>
+                        </a>
+                        <div class="subnav-dropdown-panel absolute left-0 top-full z-[100] hidden w-max min-w-[12rem] max-w-[min(100vw-2rem,20rem)] pt-2 -mt-1 group-hover:block group-focus-within:block">
+                            <ul class="rounded-lg border border-surface-border bg-surface py-1 shadow-2xl" role="menu">
+                                {% for child in item.children %}
+                                <li role="none">
+                                    <a role="menuitem" href="{{ child.url | relative_url }}" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="relative shrink-0">
                         <a href="{{ item.url | default: '#' }}" class="inline-flex items-center gap-1.5 rounded-md px-2 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-3">
                             <span>{{ item.title }}</span>
-                            {% if item.children %}
-                            <i class="ph-bold ph-caret-down opacity-60" aria-hidden="true"></i>
-                            {% endif %}
                         </a>
-                        {% if item.children %}
-                        <ul class="absolute left-0 top-full z-[100] mt-0 hidden w-64 rounded-lg border border-surface-border bg-surface py-1 shadow-2xl group-hover:block" role="menu">
-                            {% for child in item.children %}
-                            <li role="none">
-                                <a role="menuitem" href="{{ child.url | relative_url }}" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
                     </li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
             </nav>
@@ -76,4 +86,44 @@
         </div>
     </div>
 </div>
+<style>
+  /* Pantallas táctiles / sin hover: abrir subnav con un toque (el ul ya no recorta el panel). */
+  @media (hover: none) {
+    .subnav-dropdown.is-open .subnav-dropdown-panel {
+      display: block;
+    }
+  }
+</style>
+<script>
+(function () {
+  function coarsePointer() {
+    return window.matchMedia('(hover: none)').matches;
+  }
+  document.querySelectorAll('.subnav-dropdown').forEach(function (root) {
+    var trigger = root.querySelector('.subnav-dropdown-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', function (e) {
+      if (!coarsePointer()) return;
+      e.preventDefault();
+      var willOpen = !root.classList.contains('is-open');
+      document.querySelectorAll('.subnav-dropdown.is-open').forEach(function (el) {
+        el.classList.remove('is-open');
+      });
+      if (willOpen) root.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.subnav-dropdown.is-open').forEach(function (el) {
+      if (!el.contains(e.target)) el.classList.remove('is-open');
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.subnav-dropdown.is-open').forEach(function (el) {
+        el.classList.remove('is-open');
+      });
+    }
+  });
+})();
+</script>
 {% endif %}
