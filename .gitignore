@@ -1,3 +1,6 @@
+# Chrome DevTools (local): copiar después de clone con scripts/chrome-devtools-well-known-json.sh
+.well-known/
+
 # --- Gem (rake build / gem build) ---
 *.gem
 
