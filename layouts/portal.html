@@ -1,0 +1,101 @@
+---
+layout: default
+title: "Portal / SaaS Layout — Theme Demo"
+description: "Authenticated portal layout with a vertical navigation rail and a content panel."
+lang: en
+permalink: /layouts/portal/
+---
+
+<div class="py-16">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <nav class="text-xs text-muted mb-10 flex items-center gap-2">
+      <a href="/layouts/" class="hover:text-coderic-500 transition-colors">Layouts</a>
+      <i class="ph ph-caret-right text-xs"></i>
+      <span>Portal / SaaS</span>
+    </nav>
+
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-8">
+      Layout demo
+    </div>
+    <h1 class="text-4xl font-display font-bold mb-4">Portal / SaaS layout</h1>
+    <p class="text-xl text-muted mb-12 max-w-2xl leading-relaxed">
+      Vertical navigation rail on the left, main content panel on the right.
+      Used for authenticated areas, account settings, and Prodaric application screens.
+    </p>
+
+    <div class="flex gap-0 rounded-2xl border border-surface-border overflow-hidden">
+
+      <nav class="hidden md:flex flex-col w-52 shrink-0 border-r border-surface-border bg-surface-panel p-4 gap-1">
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest px-3 py-2 mb-1">Application</p>
+        <a href="/dashboard/" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-muted hover:bg-surface-border hover:text-[var(--text-base)] transition-colors">
+          <i class="ph ph-squares-four w-4"></i> Dashboard
+        </a>
+        <a href="/profile/" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium bg-coderic-600/10 text-coderic-500">
+          <i class="ph-bold ph-user w-4"></i> Profile
+        </a>
+        <a href="/account/settings/" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-muted hover:bg-surface-border hover:text-[var(--text-base)] transition-colors">
+          <i class="ph ph-gear w-4"></i> Settings
+        </a>
+        <a href="/account/security/" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-muted hover:bg-surface-border hover:text-[var(--text-base)] transition-colors">
+          <i class="ph ph-shield w-4"></i> Security
+        </a>
+        <a href="/account/billing/" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-muted hover:bg-surface-border hover:text-[var(--text-base)] transition-colors">
+          <i class="ph ph-credit-card w-4"></i> Billing
+        </a>
+        <div class="border-t border-surface-border my-2"></div>
+        <p class="text-xs font-semibold text-muted uppercase tracking-widest px-3 py-2 mb-1">Support</p>
+        <a href="/support/" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-muted hover:bg-surface-border hover:text-[var(--text-base)] transition-colors">
+          <i class="ph ph-lifebuoy w-4"></i> Help center
+        </a>
+      </nav>
+
+      <main class="flex-1 min-w-0 p-8">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h2 class="text-xl font-bold">Content panel</h2>
+            <p class="text-muted text-sm">This area is the scrollable main content region.</p>
+          </div>
+          <button class="px-4 py-2 rounded-xl bg-coderic-600 hover:bg-coderic-500 transition-colors text-sm font-semibold">
+            Action
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div class="p-5 rounded-xl border border-surface-border bg-surface-panel">
+            <p class="text-xs text-muted uppercase tracking-widest mb-1">Metric A</p>
+            <p class="text-2xl font-bold">1,204</p>
+          </div>
+          <div class="p-5 rounded-xl border border-surface-border bg-surface-panel">
+            <p class="text-xs text-muted uppercase tracking-widest mb-1">Metric B</p>
+            <p class="text-2xl font-bold">98.3%</p>
+          </div>
+          <div class="p-5 rounded-xl border border-surface-border bg-surface-panel">
+            <p class="text-xs text-muted uppercase tracking-widest mb-1">Metric C</p>
+            <p class="text-2xl font-bold">42 ms</p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-surface-border bg-surface-panel">
+          <p class="text-sm text-muted leading-relaxed">
+            In production portals (coderic.co, business.coderic.co) this panel holds tables,
+            forms, and charts. Authentication state is managed via the OAuth2 SDK injected in
+            <code class="text-coderic-500 text-xs">header.html</code>.
+            See <a href="/features/oauth2/" class="text-coderic-500 hover:underline">OAuth2 feature</a> for details.
+          </p>
+        </div>
+      </main>
+
+    </div>
+
+    <div class="mt-10 flex items-center justify-between">
+      <a href="/layouts/docs/" class="text-sm text-muted hover:text-coderic-500 transition-colors flex items-center gap-2">
+        <i class="ph ph-arrow-left"></i> Docs layout
+      </a>
+      <a href="/layouts/" class="text-sm text-coderic-500 hover:underline flex items-center gap-2">
+        All layouts <i class="ph ph-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</div>

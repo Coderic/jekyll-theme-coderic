@@ -1,0 +1,68 @@
+---
+layout: default
+title: "Layouts — Theme Demo"
+description: "Gallery of available page layout patterns in jekyll-theme-coderic."
+lang: en
+permalink: /layouts/
+---
+
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-coderic-500"></span>
+        Theme demo
+      </div>
+      <h1 class="text-5xl md:text-6xl font-display font-bold mb-6">Layouts</h1>
+      <p class="text-xl text-muted max-w-2xl leading-relaxed">
+        Page layout patterns available in the Coderic theme. Each variant uses the same
+        <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">default</code> base layout
+        — only the content structure inside <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">&lt;main&gt;</code> differs.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <a href="/layouts/minimal/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-article text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Minimal</h2>
+        <p class="text-muted text-sm leading-relaxed">Centered prose, no sidebars. Ideal for documentation articles, blog posts, and legal pages.</p>
+      </a>
+
+      <a href="/layouts/landing/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-rocket-launch text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Landing page</h2>
+        <p class="text-muted text-sm leading-relaxed">Hero + conversion blocks. Used by the portal homepages across the Coderic ecosystem.</p>
+      </a>
+
+      <a href="/layouts/docs/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-book-open text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Docs</h2>
+        <p class="text-muted text-sm leading-relaxed">Left sidebar table of contents + main content column. Used by coderic.net and API references.</p>
+      </a>
+
+      <a href="/layouts/portal/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-monitor text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Portal / SaaS</h2>
+        <p class="text-muted text-sm leading-relaxed">Vertical nav + content panel. Used by authenticated areas and Prodaric application screens.</p>
+      </a>
+
+      <a href="/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-house text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Default home</h2>
+        <p class="text-muted text-sm leading-relaxed">Full-bleed hero with the enterprise component. This is the theme's root <code class="text-xs">index.html</code>.</p>
+      </a>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+---
+layout: default
+title: "Minimal Layout — Theme Demo"
+description: "Centered prose layout with no sidebars. Best for articles, docs, and long-form content."
+lang: en
+permalink: /layouts/minimal/
+---
+
+<article class="py-24">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <nav class="text-xs text-muted mb-10 flex items-center gap-2">
+      <a href="/layouts/" class="hover:text-coderic-500 transition-colors">Layouts</a>
+      <i class="ph ph-caret-right text-xs"></i>
+      <span>Minimal</span>
+    </nav>
+
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-6">
+      Layout demo
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
+      Minimal layout
+    </h1>
+
+    <p class="text-xl text-muted leading-relaxed mb-10">
+      Clean, centered column. Maximum reading width is <strong class="text-[var(--text-base)]">48rem</strong> (<code class="text-coderic-500 text-sm">max-w-3xl</code>).
+      Header, subnav, and footer still use <code class="text-coderic-500 text-sm">max-w-7xl</code>, so the chrome
+      always extends edge-to-edge.
+    </p>
+
+    <div class="border-t border-surface-border pt-10 space-y-8 text-[var(--text-base)] leading-relaxed">
+
+      <h2 class="text-2xl font-bold">When to use this layout</h2>
+      <p>
+        Use the minimal layout for any page where the primary value is text: policy documents,
+        blog posts, changelogs, or documentation articles. The narrow column improves readability
+        and reduces cognitive load compared to wider containers.
+      </p>
+
+      <h2 class="text-2xl font-bold">How it is implemented</h2>
+      <p>
+        The <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">default</code> layout
+        in <code class="text-sm">_layouts/default.html</code> provides only a bare
+        <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">&lt;main&gt;</code> wrapper.
+        Each page is responsible for its own container class. This page uses
+        <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">max-w-3xl mx-auto px-6</code>
+        inside an <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">&lt;article&gt;</code> element.
+      </p>
+
+      <div class="p-6 rounded-2xl border border-surface-border bg-surface-panel">
+        <pre class="text-sm text-coderic-400 overflow-x-auto"><code>&lt;article class="py-24"&gt;
+  &lt;div class="max-w-3xl mx-auto px-6"&gt;
+    &lt;h1&gt;...&lt;/h1&gt;
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+      </div>
+
+      <h2 class="text-2xl font-bold">Live examples in the ecosystem</h2>
+      <ul class="list-disc list-inside space-y-2 text-muted">
+        <li><a href="https://coderic.org/legal" class="text-coderic-500 hover:underline">coderic.org/legal</a> — legal framework page</li>
+        <li><a href="https://coderic.org/privacy" class="text-coderic-500 hover:underline">coderic.org/privacy</a> — privacy policy</li>
+        <li><a href="https://coderic.dev/learning/" class="text-coderic-500 hover:underline">coderic.dev/learning/</a> — learning resources</li>
+      </ul>
+
+    </div>
+
+    <div class="mt-16 flex items-center justify-between border-t border-surface-border pt-8">
+      <a href="/layouts/" class="text-sm text-muted hover:text-coderic-500 transition-colors flex items-center gap-2">
+        <i class="ph ph-arrow-left"></i> All layouts
+      </a>
+      <a href="/layouts/landing/" class="text-sm text-coderic-500 hover:underline flex items-center gap-2">
+        Landing page <i class="ph ph-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</article>

@@ -1,0 +1,74 @@
+---
+layout: default
+title: "Features — Theme Demo"
+description: "Capabilities built into jekyll-theme-coderic: dark mode, i18n, OAuth2, responsive design, and more."
+lang: en
+permalink: /features/
+---
+
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-coderic-500"></span>
+        Out of the box
+      </div>
+      <h1 class="text-5xl md:text-6xl font-display font-bold mb-6">Features</h1>
+      <p class="text-xl text-muted max-w-2xl leading-relaxed">
+        Everything included when you set <code class="text-coderic-500 bg-coderic-600/10 px-1.5 py-0.5 rounded text-sm">remote_theme: Coderic/jekyll-theme-coderic</code>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <a href="/features/dark-mode/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-moon text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Dark mode</h2>
+        <p class="text-muted text-sm leading-relaxed">CSS custom properties with class-based toggle. Works without JavaScript at render time.</p>
+      </a>
+
+      <a href="/features/responsive/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-devices text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Responsive design</h2>
+        <p class="text-muted text-sm leading-relaxed">Tailwind CSS breakpoints. Mobile-first with consistent <code class="text-xs">max-w-7xl</code> container across all viewports.</p>
+      </a>
+
+      <a href="/features/i18n/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-translate text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Internationalization</h2>
+        <p class="text-muted text-sm leading-relaxed">jekyll-polyglot mirrors every page under <code class="text-xs">/es/</code>. UI strings in <code class="text-xs">_data/en/ui.yml</code> and <code class="text-xs">_data/es/ui.yml</code>.</p>
+      </a>
+
+      <a href="/features/oauth2/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-lock-key text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">OAuth2 / OIDC</h2>
+        <p class="text-muted text-sm leading-relaxed">Auth0-compatible SPA SDK. Config injected via JSON script block. Callback and profile pages included.</p>
+      </a>
+
+      <a href="/features/typography/" class="group block p-8 rounded-2xl border border-surface-border bg-surface-panel hover:border-coderic-600/40 transition-colors">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-5">
+          <i class="ph-bold ph-text-aa text-coderic-500 text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 group-hover:text-coderic-500 transition-colors">Typography</h2>
+        <p class="text-muted text-sm leading-relaxed">Display font for headings, system sans-serif for body. Fluid scale from text-sm to text-8xl.</p>
+      </a>
+
+      <div class="p-8 rounded-2xl border border-dashed border-surface-border">
+        <div class="w-10 h-10 rounded-xl bg-surface-panel flex items-center justify-center mb-5">
+          <i class="ph ph-plus text-muted text-xl"></i>
+        </div>
+        <h2 class="text-lg font-bold mb-2 text-muted">More coming</h2>
+        <p class="text-muted text-sm leading-relaxed">Subnav multi-level dropdowns, Alpine.js components, and Petstore API demo are also included.</p>
+      </div>
+
+    </div>
+  </div>
+</section>

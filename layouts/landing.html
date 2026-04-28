@@ -1,0 +1,78 @@
+---
+layout: default
+title: "Landing Page Layout — Theme Demo"
+description: "Marketing landing page layout: full-bleed hero, feature highlights, and conversion CTA."
+lang: en
+permalink: /layouts/landing/
+---
+
+<section class="relative pb-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <nav class="text-xs text-muted mb-16 flex items-center gap-2 pt-4">
+      <a href="/layouts/" class="hover:text-coderic-500 transition-colors">Layouts</a>
+      <i class="ph ph-caret-right text-xs"></i>
+      <span>Landing page</span>
+    </nav>
+    <div class="max-w-4xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-coderic-500 animate-pulse"></span>
+        Layout demo
+      </div>
+      <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight mb-8">
+        Landing page <span class="text-coderic-500">layout.</span>
+      </h1>
+      <p class="text-xl text-muted mb-12 max-w-2xl leading-relaxed">
+        Full-bleed hero with badge, large heading, description, and a dual-CTA row.
+        This is the standard pattern used by every portal homepage in the Coderic ecosystem.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/features/" class="px-8 py-4 rounded-full bg-coderic-600 text-base font-bold hover:bg-coderic-500 transition-colors flex items-center justify-center gap-2">
+          Explore features <i class="ph-bold ph-arrow-right"></i>
+        </a>
+        <a href="/layouts/" class="px-8 py-4 rounded-full border border-surface-border bg-surface-panel hover:bg-surface-border transition-colors flex items-center justify-center gap-2 font-semibold">
+          All layouts <i class="ph-bold ph-squares-four"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 border-t border-surface-border">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-display font-bold mb-4">Feature highlights</h2>
+    <p class="text-muted mb-12 max-w-2xl">A three-column feature grid typically follows the hero. Each card uses an icon, title, and one-sentence description.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl border border-surface-border bg-surface-panel">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-4">
+          <i class="ph-bold ph-moon text-coderic-500 text-xl"></i>
+        </div>
+        <h3 class="font-bold mb-2">Dark mode by default</h3>
+        <p class="text-muted text-sm leading-relaxed">CSS custom properties switch the entire palette between light and dark without a page reload.</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-surface-border bg-surface-panel">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-4">
+          <i class="ph-bold ph-translate text-coderic-500 text-xl"></i>
+        </div>
+        <h3 class="font-bold mb-2">Bilingual (polyglot)</h3>
+        <p class="text-muted text-sm leading-relaxed">jekyll-polyglot mirrors every page under <code class="text-xs">/es/</code> with zero extra config per page.</p>
+      </div>
+      <div class="p-6 rounded-2xl border border-surface-border bg-surface-panel">
+        <div class="w-10 h-10 rounded-xl bg-coderic-600/10 flex items-center justify-center mb-4">
+          <i class="ph-bold ph-lock-key text-coderic-500 text-xl"></i>
+        </div>
+        <h3 class="font-bold mb-2">OAuth2 / OIDC ready</h3>
+        <p class="text-muted text-sm leading-relaxed">Auth0-compatible SDK wired via a JSON config block; callback and profile pages included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 border-t border-surface-border">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-display font-bold mb-6">Ready to deploy?</h2>
+    <p class="text-muted mb-10 max-w-xl mx-auto">Set <code class="text-coderic-500 text-sm">remote_theme: Coderic/jekyll-theme-coderic</code> in your <code class="text-coderic-500 text-sm">_config.yml</code> and you are live in minutes.</p>
+    <a href="/docs/getting-started/" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-coderic-600 hover:bg-coderic-500 transition-colors font-bold">
+      Get started <i class="ph-bold ph-arrow-right"></i>
+    </a>
+  </div>
+</section>

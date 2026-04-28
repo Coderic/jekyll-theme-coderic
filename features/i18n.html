@@ -1,0 +1,96 @@
+---
+layout: default
+title: "Internationalization — Features"
+description: "Bilingual support (English / Spanish) via jekyll-polyglot in jekyll-theme-coderic."
+lang: en
+permalink: /features/i18n/
+---
+
+<article class="py-24">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <nav class="text-xs text-muted mb-10 flex items-center gap-2">
+      <a href="/features/" class="hover:text-coderic-500 transition-colors">Features</a>
+      <i class="ph ph-caret-right text-xs"></i>
+      <span>Internationalization</span>
+    </nav>
+
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-coderic-600/10 border border-coderic-600/20 text-coderic-500 text-xs font-semibold tracking-widest uppercase mb-6">
+      Feature
+    </div>
+    <h1 class="text-4xl font-display font-bold mb-6">Internationalization</h1>
+    <p class="text-xl text-muted leading-relaxed mb-10">
+      The theme uses <a href="https://github.com/untra/polyglot" class="text-coderic-500 hover:underline">jekyll-polyglot</a>
+      to generate a parallel <code class="text-coderic-500 text-sm">/es/</code> copy of every page automatically.
+    </p>
+
+    <div class="space-y-10 leading-relaxed">
+
+      <div>
+        <h2 class="text-2xl font-bold mb-4">How it works</h2>
+        <p class="text-muted mb-4">
+          polyglot reads <code class="text-coderic-500 text-sm">languages: ["en", "es"]</code> from <code class="text-sm">_config.yml</code>
+          and builds each page once per language. Pages with <code class="text-coderic-500 text-sm">lang: en</code> in front matter
+          are the canonical English source; the Spanish build outputs under <code class="text-coderic-500 text-sm">/es/</code>.
+        </p>
+        <div class="p-5 rounded-2xl border border-surface-border bg-surface-panel">
+          <pre class="text-sm text-coderic-400 overflow-x-auto"><code># _config.yml
+plugins:
+  - jekyll-polyglot
+
+languages: ["en", "es"]
+default_lang: "en"
+exclude_from_localization:
+  - "assets"
+  - "404.html"</code></pre>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold mb-4">UI strings</h2>
+        <p class="text-muted mb-4">
+          All UI copy lives in <code class="text-sm">_data/en/ui.yml</code> and <code class="text-sm">_data/es/ui.yml</code>.
+          Pages reference them with:
+        </p>
+        <div class="p-5 rounded-2xl border border-surface-border bg-surface-panel">
+          <pre class="text-sm text-coderic-400 overflow-x-auto"><code>{% raw %}{% assign t = site.data[site.active_lang].ui %}
+{{ t.hero.title_part1 | default: 'Fallback text' }}{% endraw %}</code></pre>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Language switcher</h2>
+        <p class="text-muted mb-4">
+          The header renders a language link using the <code class="text-sm">i18n_clean_path.html</code> include to
+          strip or add the <code class="text-coderic-500 text-sm">/es/</code> prefix from the current URL.
+        </p>
+        <div class="flex gap-3">
+          <a href="/features/i18n/" class="px-4 py-2 rounded-xl border border-coderic-600/40 bg-coderic-600/10 text-coderic-500 text-sm font-semibold">
+            EN
+          </a>
+          <a href="/es/features/i18n/" class="px-4 py-2 rounded-xl border border-surface-border text-muted hover:border-coderic-600/40 text-sm font-semibold transition-colors">
+            ES
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Full docs</h2>
+        <p class="text-muted">
+          See <a href="/docs/i18n/" class="text-coderic-500 hover:underline">/docs/i18n/</a> for the complete internationalization guide.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="mt-16 flex items-center justify-between border-t border-surface-border pt-8">
+      <a href="/features/responsive/" class="text-sm text-muted hover:text-coderic-500 transition-colors flex items-center gap-2">
+        <i class="ph ph-arrow-left"></i> Responsive design
+      </a>
+      <a href="/features/oauth2/" class="text-sm text-coderic-500 hover:underline flex items-center gap-2">
+        OAuth2 / OIDC <i class="ph ph-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</article>

@@ -1,113 +1,107 @@
-# Demo del tema: URLs internas sin prefijo de idioma; polyglot (`static_href` en subnav) resuelve /es/... en español.
-#
-# Para mostrar la capacidad del tema con submenús, esta navegación incluye
-# múltiples dropdowns con suficientes entradas (internas + externas).
+# Demo navigation for jekyll-theme-coderic
+# Mirrors CoWorker theme structure (without Headers section).
+# Portals override this file with their own _data/subnav.yml.
 
-- title: "Theme demo"
-  url: /
+- title: "Layouts"
+  url: /layouts/
   children:
-    - title: "Home"
+    - title: "Layouts overview"
+      url: /layouts/
+    - title: "Minimal"
+      url: /layouts/minimal/
+    - title: "Landing page"
+      url: /layouts/landing/
+    - title: "Docs"
+      url: /layouts/docs/
+    - title: "Portal / SaaS"
+      url: /layouts/portal/
+    - title: "Home (default)"
       url: /
-    - title: "Dashboard"
-      url: /dashboard/
-    - title: "Products"
-      url: /products.html
-    - title: "Profile"
-      url: /profile/
-    - title: "Hello World (API)"
-      url: /hello-world/
-    - title: "Pet Store (Alpine)"
-      url: /petstore-demo/
 
-- title: "Docs"
-  url: /docs/
+- title: "Features"
+  url: /features/
   children:
-    - title: "Docs home"
-      url: /docs/
-    - title: "Getting started"
-      url: /docs/getting-started/
-    - title: "Navigation & submenus"
-      url: /docs/navigation/
-    - title: "Theme configuration"
-      url: /docs/configuration/
-    - title: "Internationalization (i18n)"
-      url: /docs/i18n/
-    - title: "Auth0 integration"
-      url: /docs/auth0/
-    - title: "Documentation (demo)"
+    - title: "Features overview"
+      url: /features/
+    - title: "Dark mode"
+      url: /features/dark-mode/
+    - title: "Responsive design"
+      url: /features/responsive/
+    - title: "Internationalization"
+      url: /features/i18n/
+    - title: "OAuth2 / OIDC"
+      url: /features/oauth2/
+    - title: "Typography"
+      url: /features/typography/
+
+- title: "Portfolio"
+  url: /portfolio/
+  children:
+    - title: "All projects"
+      url: /portfolio/
+    - title: "CodericOS"
+      url: /portfolio/coderic-os/
+    - title: "Prodaric Framework"
+      url: /portfolio/prodaric/
+    - title: "Coderic IDE"
+      url: /portfolio/coderic-ide/
+    - title: "Jekyll Theme"
+      url: /portfolio/jekyll-theme/
+
+- title: "Pages"
+  url: /pages/
+  children:
+    - title: "Pages overview"
+      url: /pages/
+    - title: "Team"
+      url: /pages/team/
+    - title: "Pricing"
+      url: /pages/pricing/
+    - title: "FAQ"
+      url: /pages/faq/
+    - title: "Under construction"
+      url: /pages/under-construction/
+    - title: "Sitemap"
+      url: /pages/sitemap/
+    - title: "About"
+      url: /company/about/
+    - title: "Press"
+      url: /company/press/
+    - title: "Careers"
+      url: /company/careers/
+
+- title: "Blog"
+  url: /blog/
+  children:
+    - title: "All posts"
+      url: /blog/
+    - title: "Open Source First"
+      url: /blog/open-source-first/
+    - title: "La Federación Coderic"
+      url: /blog/coderic-federation/
+    - title: "Docs (demo)"
       url: /demo-docs/
     - title: "Support (demo)"
       url: /demo-support/
-    - title: "Portal (demo)"
-      url: /demo-portal/
-    - title: "Products page"
-      url: /products.html
 
-- title: "Developer"
-  url: /developer/
+- title: "Contact"
+  url: /contact/
   children:
-    - title: "Developer home"
-      url: /developer/
-    - title: "API: Hello World"
-      url: /hello-world/
-    - title: "SDK overview"
-      url: /developer/sdk/
-    - title: "Webhooks (filler)"
-      url: /developer/webhooks/
-    - title: "Changelog (filler)"
-      url: /developer/changelog/
-    - title: "OAuth flow"
-      url: /callback/
-    - title: "OAuth notes"
-      url: /oauth-demo/
-    - title: "Petstore demo"
-      url: /petstore-demo/
-    - title: "External status (placeholder)"
-      url: "#"
-
-- title: "Account"
-  url: /profile/
-  children:
-    - title: "Coderic ID"
-      url: /profile/
-    - title: "Callback"
-      url: /callback/
-    - title: "Dashboard"
-      url: /dashboard/
-    - title: "Settings (filler)"
-      url: /account/settings/
-    - title: "Security (filler)"
-      url: /account/security/
-    - title: "Billing (filler)"
-      url: /account/billing/
-
-- title: "Support"
-  url: /support/
-  children:
-    - title: "Support home"
+    - title: "Contact us"
+      url: /contact/
+    - title: "Offices"
+      url: /contact/offices/
+    - title: "Support"
       url: /support/
-    - title: "Contact"
-      url: /support/contact/
     - title: "FAQ"
       url: /support/faq/
-    - title: "Status (filler)"
+    - title: "Status"
       url: /support/status/
-
-- title: "Company"
-  url: https://coderic.org/history
-  children:
-    - title: "About (filler)"
-      url: /company/about/
-    - title: "Press (filler)"
-      url: /company/press/
-    - title: "Careers (filler)"
-      url: /company/careers/
-    - title: "History"
-      url: https://coderic.org/history
-    - title: "Legal"
-      url: https://coderic.org/legal
-    - title: "Home"
-      url: /
-
-- title: "Products"
-  url: /products.html
+    - title: "Developer"
+      url: /developer/
+    - title: "Docs"
+      url: /docs/
+    - title: "Account"
+      url: /profile/
+    - title: "Dashboard"
+      url: /dashboard/

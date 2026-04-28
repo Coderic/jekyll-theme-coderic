@@ -1,0 +1,120 @@
+---
+layout: default
+title: "La Federación Coderic: siete portales, un ecosistema"
+description: "How the seven Coderic portals interoperate as a federated ecosystem with no content duplication."
+lang: en
+permalink: /blog/coderic-federation/
+---
+
+<article class="py-24">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <nav class="text-xs text-muted mb-10 flex items-center gap-2">
+      <a href="/blog/" class="hover:text-coderic-500 transition-colors">Blog</a>
+      <i class="ph ph-caret-right text-xs"></i>
+      <span>La Federación Coderic</span>
+    </nav>
+
+    <div class="flex items-center gap-3 mb-6">
+      <span class="text-xs text-coderic-500 font-semibold uppercase tracking-widest">Ecosystem</span>
+      <span class="text-muted text-xs">·</span>
+      <time class="text-xs text-muted" datetime="2025-01-15">January 15, 2025</time>
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
+      La Federación Coderic: siete portales, un ecosistema
+    </h1>
+
+    <p class="text-xl text-muted leading-relaxed mb-12">
+      The Coderic ecosystem is made up of seven specialized portals. Each has a distinct responsibility.
+      None duplicates the others. Here is how they fit together.
+    </p>
+
+    <div class="space-y-8 text-[var(--text-base)] leading-relaxed">
+
+      <h2 class="text-2xl font-bold">One theme, seven portals</h2>
+      <p>
+        All seven portals share <code class="text-coderic-500 text-sm">jekyll-theme-coderic</code> via
+        <code class="text-coderic-500 text-sm">remote_theme</code>. Navigation, colors, footer, and
+        authentication are consistent. What differs is the <code class="text-coderic-500 text-sm">_config.yml</code>
+        values (<code class="text-coderic-500 text-sm">portal_id</code>, <code class="text-coderic-500 text-sm">network</code>)
+        and the page content.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-surface-border">
+              <th class="text-left py-3 pr-6 font-semibold text-muted text-xs uppercase tracking-widest">Portal</th>
+              <th class="text-left py-3 pr-6 font-semibold text-muted text-xs uppercase tracking-widest">Role</th>
+              <th class="text-left py-3 font-semibold text-muted text-xs uppercase tracking-widest">Metaphor</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-border">
+            <tr>
+              <td class="py-3 pr-6"><a href="https://coderic.org" class="text-coderic-500 hover:underline">coderic.org</a></td>
+              <td class="py-3 pr-6 text-muted">Incubator &amp; corporation</td>
+              <td class="py-3 text-muted">The kitchen</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6"><a href="https://coderic.co" class="text-coderic-500 hover:underline">coderic.co</a></td>
+              <td class="py-3 pr-6 text-muted">Financial services</td>
+              <td class="py-3 text-muted">The dining room</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6"><a href="https://coderic.cloud" class="text-coderic-500 hover:underline">coderic.cloud</a></td>
+              <td class="py-3 pr-6 text-muted">Cloud infrastructure</td>
+              <td class="py-3 text-muted">The infrastructure</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6"><a href="https://coderic.net" class="text-coderic-500 hover:underline">coderic.net</a></td>
+              <td class="py-3 pr-6 text-muted">APIs &amp; data hub</td>
+              <td class="py-3 text-muted">The network</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6"><a href="https://coderic.dev" class="text-coderic-500 hover:underline">coderic.dev</a></td>
+              <td class="py-3 pr-6 text-muted">Developer community</td>
+              <td class="py-3 text-muted">The workshop</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6"><a href="https://coderic.com" class="text-coderic-500 hover:underline">coderic.com</a></td>
+              <td class="py-3 pr-6 text-muted">Commercial gateway</td>
+              <td class="py-3 text-muted">The storefront</td>
+            </tr>
+            <tr>
+              <td class="py-3"><a href="https://coderic.store" class="text-coderic-500 hover:underline">coderic.store</a></td>
+              <td class="py-3 pr-6 text-muted">Hardware e-commerce</td>
+              <td class="py-3 text-muted">The warehouse</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-bold">The no-duplication rule</h2>
+      <p class="text-muted">
+        Each portal owns its content domain. If coderic.org describes the incubator model,
+        coderic.dev does not repeat it — it links to it. If coderic.cloud lists infrastructure pricing,
+        coderic.com does not mirror it. This discipline keeps SEO clean and content authoritative.
+      </p>
+
+      <h2 class="text-2xl font-bold">Integration via Coderic Hub</h2>
+      <p class="text-muted">
+        Runtime integration between portals happens through
+        <a href="https://coderic.net" class="text-coderic-500 hover:underline">coderic.net</a>:
+        public APIs, shared datasets, MQTT endpoints. No direct cross-portal HTML dependencies.
+        Each portal is independently deployable to Cloudflare Pages.
+      </p>
+
+    </div>
+
+    <div class="mt-16 flex items-center justify-between border-t border-surface-border pt-8">
+      <a href="/blog/open-source-first/" class="text-sm text-muted hover:text-coderic-500 transition-colors flex items-center gap-2">
+        <i class="ph ph-arrow-left"></i> Open Source First
+      </a>
+      <a href="/blog/" class="text-sm text-coderic-500 hover:underline flex items-center gap-2">
+        All posts <i class="ph ph-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</article>
