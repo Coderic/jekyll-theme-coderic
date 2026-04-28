@@ -108,7 +108,7 @@
 </header>
 
 <!-- Auth0 SPA SDK: config desde _config.yml (sin hardcode). -->
-<script type="application/json" id="coderic-auth0-config">
+<script type="application/json" id="coderic-oauth2-config">
 {
   "clientId": {{ site.oidc_client_id | jsonify }},
   "oidcDomain": {{ site.oidc_domain | jsonify }},
@@ -117,7 +117,7 @@
 </script>
 <script>
 const CODERIC_OAUTH = (function () {
-  const el = document.getElementById('coderic-auth0-config');
+  const el = document.getElementById('coderic-oauth2-config');
   if (!el) return {};
   try { return JSON.parse(el.textContent || '{}'); } catch { return {}; }
 })();
