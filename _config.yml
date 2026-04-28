@@ -22,8 +22,10 @@ portal_id: "business"
 #
 # oauth.com playground: útil para flujos guiados; Implicit allí no usa /callback/ de este tema.
 oauth_demo_sign_in: false
-# Mismo cliente SPA sandbox que los portales Coderic (Auth0 Universal Login + auth0-spa-js).
-oidc_client_id: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56"
+# Cliente SPA de desarrollo del repo del tema (localhost / demo). Los sitios en producción
+# deben definir en su _config.yml oidc_client_id distinto; p. ej. producción Coderic:
+# In43D8hfptI5B17Xo7XZX4aBkhfMuH56 (no sustituir aquí el ID de dev por el de prod).
+oidc_client_id: "GZ0eS1P9Y7C8p6kt8d4LIdojgHvkB5Sg"
 # Auth0 custom domain (sin esquema).
 oidc_domain: "auth.coderic.org"
 # Con Auth0 SPA SDK (auth0-spa-js) no necesitamos fijar endpoints explícitos.
