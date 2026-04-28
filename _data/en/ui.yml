@@ -32,14 +32,13 @@ header:
   open_menu: "Open Menu"
   signin: "Sign In"
   hello_world: "Hello World"
+  oauth_debugger: "AuthTester"
 
 # ── Language Switcher ─────────────────────────────────────────────────────────
 lang_switcher:
   label: "Language"
   en: "English"
   es: "Español"
-  pt: "Português"
-  fr: "Français"
 
 # ── Subnav Actions ────────────────────────────────────────────────────────────
 subnav:
@@ -56,6 +55,31 @@ hello_world:
   no_token: "No access token in this browser. Use Sign in first."
   loading: "Requesting…"
   btn_probe: "GET without Bearer (expect 401)"
+
+# ── Pet Store demo (Alpine.js + OpenAPI demo) ─────────────────────────────────
+petstore_demo:
+  title: "Pet Store demo (Alpine.js)"
+  lead: "Public Swagger Petstore 3 — browser `fetch`, CORS `*`. Do not use `credentials: 'include'`."
+  id_label: "Pet ID"
+  load_btn: "Load pet"
+  loading: "Loading…"
+  not_found: "No pet found for this ID."
+  http_error: "Request failed"
+  raw_json: "Response (JSON)"
+  api_link: "API base"
+  quick_hint: "IDs 1 and 3 often return 200."
+
+# ── OAuth / PKCE demo (doc) ───────────────────────────────────────────────────
+oauth_demo:
+  title: "OAuth 2.0 & PKCE (theme demo)"
+  lead: "Staging defaults use [AuthTester](https://www.scottbrady.io/tools/auth-tester) (Scott Brady): discovery [openid-configuration](https://www.scottbrady.io/tools/auth-tester/.well-known/openid-configuration). With `oauth_demo_sign_in: false`, PKCE uses `/callback/` on this origin."
+  step1_title: "Demo vs real sign-in"
+  step1_md: "**`oauth_demo_sign_in: false`** → Sign in uses Auth0 Universal Login via the official SPA SDK and returns to `/callback/`."
+  step2_title: "AuthTester vs your IdP"
+  step2_md: "Use `client_id=test` and the discovery document’s endpoints for quick tests. Configure URLs in the tester UI if offered (`…/configure?requestId=` is session-scoped). For production IdPs, register this site’s `/callback/` on the client."
+  step3_title: "_config.yml"
+  step3_md: "`oidc_client_id` and `oidc_domain` (custom domain or Auth0 tenant). Optional: `oauth_redirect_uri` — see file comments."
+  cta_debugger: "Open AuthTester"
 
 # ── Profile (/profile/) ────────────────────────────────────────────────────────
 profile:

@@ -47,12 +47,20 @@ permalink: /hello-world/
     bodyEl.textContent = lblLoading;
     const headers = {};
     if (withBearer) {
-      const token = localStorage.getItem('coderic_access_token');
-      if (!token) {
+      if (typeof codericGetAuth0Client !== 'function') {
         statusEl.textContent = '\u2014';
         bodyEl.textContent = lblNoToken;
         return;
       }
+      const client = await codericGetAuth0Client();
+      try { await client.checkSession(); } catch {}
+      const authed = await client.isAuthenticated();
+      if (!authed) {
+        statusEl.textContent = '\u2014';
+        bodyEl.textContent = lblNoToken;
+        return;
+      }
+      const token = await client.getTokenSilently();
       headers['Authorization'] = 'Bearer ' + token;
     }
     const res = await fetch('/api/hello-world', { headers });

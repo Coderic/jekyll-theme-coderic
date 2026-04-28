@@ -8,9 +8,30 @@ baseurl: ""
 portal_name: "Coderic UI"
 portal_id: "business"
 
-# OAuth2/OIDC sandbox (Auth0); valores por defecto para desarrollo local del theme
+# OAuth2 / OIDC — demo del tema.
+#
+# oauth_demo_sign_in: false → flujo SPA con Auth0 SPA JS SDK (auth0-spa-js).
+# oauth_redirect_uri: vacío = {origen}/callback/. oauth_scope: absent → openid profile email.
+# oidc_logout_url: URL base de logout del IdP (Auth0: …/v2/logout).
+# (oauth_debugger_url se removió: ya no se usa debugger)
+#
+# Staging recomendado: [AuthTester](https://www.scottbrady.io/tools/auth-tester) — discovery:
+# https://www.scottbrady.io/tools/auth-tester/.well-known/openid-configuration
+# client_id público de prueba del propio tool: "test". Si usás /oauth/authorize/configure?requestId=…
+# el requestId es de sesión; generalo desde la UI del tester, no lo fijes en el repo.
+#
+# oauth.com playground: útil para flujos guiados; Implicit allí no usa /callback/ de este tema.
+oauth_demo_sign_in: false
+oidc_client_id: "GZ0eS1P9Y7C8p6kt8d4LIdojgHvkB5Sg"
+# Auth0 custom domain (sin esquema).
 oidc_domain: "auth.coderic.org"
-oidc_client_id: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56"
+# Con Auth0 SPA SDK (auth0-spa-js) no necesitamos fijar endpoints explícitos.
+oidc_authorize_url: ""
+oidc_token_url: ""
+# oidc_domain: "TU_TENANT.auth0.com"  # alternativa: sin authorize/token explícitos → …/authorize y …/oauth/token
+# oauth_redirect_uri: ""
+# oauth_scope: "openid profile email"
+# oidc_logout_url: "https://TU_TENANT.auth0.com/v2/logout"
 
 cta_url: "#"
 cta_text: "Deploy Architecture"
@@ -22,6 +43,7 @@ cta_text: "Deploy Architecture"
 plugins:
   - jekyll-polyglot
 
+# Idiomas del tema (jekyll-polyglot): solo inglés y español.
 languages: ["en", "es"]
 default_lang: "en"
 exclude_from_localization:

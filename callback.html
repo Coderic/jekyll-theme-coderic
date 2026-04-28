@@ -45,60 +45,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         return window.location.replace('/');
     }
 
-    const verifier = sessionStorage.getItem('coderic_oauth_verifier');
-    if (!verifier) {
-        return showError('Security session expired. Please attempt to login again.');
-    }
-
     try {
-        const portalEnv = '{{ site.portal_id | default: "core" }}';
-        const clientId = '{{ site.oidc_client_id | default: "In43D8hfptI5B17Xo7XZX4aBkhfMuH56" }}';
-        const redirectUri = `${window.location.origin}/callback/`;
-
-        const body = new URLSearchParams({
-            grant_type: 'authorization_code',
-            client_id: clientId,
-            code: code,
-            redirect_uri: redirectUri,
-            code_verifier: verifier
-        });
-
-        const tokenUrl = 'https://{{ site.oidc_domain | default: "auth.coderic.org" }}/oauth/token';
-        const tokenResp = await fetch(tokenUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: body.toString()
-        });
-
-        if (!tokenResp.ok) {
-            let errorMsg = 'Failed to exchange authorization code.';
-            try {
-                const errorData = await tokenResp.json();
-                if (errorData.error_description) errorMsg = errorData.error_description;
-            } catch(e) {}
-            throw new Error(errorMsg);
+        if (typeof codericGetAuth0Client !== 'function') {
+            throw new Error('Auth0 no está inicializado. Verificá que el layout incluya el header y el SDK en head.');
         }
+        const client = await codericGetAuth0Client();
+        const result = await client.handleRedirectCallback();
 
-        const data = await tokenResp.json();
-        
-        // Save the access token securely
-        localStorage.setItem('coderic_access_token', data.access_token);
-        if (data.id_token) localStorage.setItem('coderic_id_token', data.id_token);
-        
-        sessionStorage.removeItem('coderic_oauth_verifier');
+        // Limpia la URL (remove code/state)
+        window.history.replaceState({}, document.title, window.location.pathname);
 
-        // Restore original URL or fallback to home
-        let returnUrl = '/';
-        if (state) {
-            try {
-                const decodedState = atob(state);
-                if (decodedState.startsWith(window.location.origin)) {
-                    returnUrl = decodedState;
-                }
-            } catch(e) {}
-        }
+        const returnUrl = (result && result.appState && result.appState.returnTo)
+            ? String(result.appState.returnTo)
+            : '/';
         
         msg.innerText = 'Success! Redirecting...';
         msg.classList.remove('text-gray-400');

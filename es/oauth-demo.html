@@ -1,0 +1,31 @@
+---
+layout: default
+title: Demo OAuth 2.0 y PKCE
+lang: es
+permalink: /oauth-demo/
+---
+
+{% assign active_lang = site.active_lang | default: site.default_lang | default: 'en' %}
+{% assign t = site.data[active_lang].ui %}
+
+<div class="max-w-3xl mx-auto px-6 py-16">
+  <h1 class="text-3xl md:text-4xl font-display font-bold text-[var(--text-base)] mb-3">{{ t.oauth_demo.title }}</h1>
+  <p class="text-muted text-sm leading-relaxed mb-8">{{ t.oauth_demo.lead }}</p>
+
+  <ol class="list-decimal space-y-8 pl-5 text-sm text-[var(--text-base)]">
+    <li>
+      <p class="font-semibold mb-2">{{ t.oauth_demo.step1_title }}</p>
+      <div class="oauth-demo-md text-muted leading-relaxed [&_p]:mb-2 [&_code]:rounded [&_code]:bg-surface-panel [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs">{{ t.oauth_demo.step1_md | markdownify }}</div>
+    </li>
+    <li>
+      <p class="font-semibold mb-2">{{ t.oauth_demo.step2_title }}</p>
+      <div class="oauth-demo-md text-muted leading-relaxed [&_p]:mb-2 [&_code]:rounded [&_code]:bg-surface-panel [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs">{{ t.oauth_demo.step2_md | markdownify }}</div>
+    </li>
+    <li>
+      <p class="font-semibold mb-2">{{ t.oauth_demo.step3_title }}</p>
+      <div class="oauth-demo-md text-muted leading-relaxed [&_p]:mb-2 [&_code]:rounded [&_code]:bg-surface-panel [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs">{{ t.oauth_demo.step3_md | markdownify }}</div>
+    </li>
+  </ol>
+
+  {%- comment -%}oauth_debugger_url removido: ya no se usa debugger{%- endcomment -%}
+</div>

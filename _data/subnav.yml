@@ -1,22 +1,113 @@
-# Demo del tema: enlaces a páginas del propio tema (sin anclas rotas).
-- title: "ERP & Management"
-  url: /products.html
+# Demo del tema: URLs internas sin prefijo de idioma; polyglot (`static_href` en subnav) resuelve /es/... en español.
+#
+# Para mostrar la capacidad del tema con submenús, esta navegación incluye
+# múltiples dropdowns con suficientes entradas (internas + externas).
+
+- title: "Theme demo"
+  url: /
   children:
-    - title: "Operations"
+    - title: "Home"
+      url: /
+    - title: "Dashboard"
+      url: /dashboard/
+    - title: "Products"
       url: /products.html
-    - title: "Human Capital (HRM)"
-      url: /products.html
-- title: "Cloud Engine"
-  url: /products.html
+    - title: "Profile"
+      url: /profile/
+    - title: "Hello World (API)"
+      url: /hello-world/
+    - title: "Pet Store (Alpine)"
+      url: /petstore-demo/
+
+- title: "Docs"
+  url: /docs/
   children:
-    - title: "Virtual Machines"
+    - title: "Docs home"
+      url: /docs/
+    - title: "Getting started"
+      url: /docs/getting-started/
+    - title: "Navigation & submenus"
+      url: /docs/navigation/
+    - title: "Theme configuration"
+      url: /docs/configuration/
+    - title: "Internationalization (i18n)"
+      url: /docs/i18n/
+    - title: "Auth0 integration"
+      url: /docs/auth0/
+    - title: "Documentation (demo)"
+      url: /demo-docs/
+    - title: "Support (demo)"
+      url: /demo-support/
+    - title: "Portal (demo)"
+      url: /demo-portal/
+    - title: "Products page"
       url: /products.html
-    - title: "Managed Databases"
-      url: /products.html
-- title: "Corporate"
+
+- title: "Developer"
+  url: /developer/
+  children:
+    - title: "Developer home"
+      url: /developer/
+    - title: "API: Hello World"
+      url: /hello-world/
+    - title: "SDK overview"
+      url: /developer/sdk/
+    - title: "Webhooks (filler)"
+      url: /developer/webhooks/
+    - title: "Changelog (filler)"
+      url: /developer/changelog/
+    - title: "OAuth flow"
+      url: /callback/
+    - title: "OAuth notes"
+      url: /oauth-demo/
+    - title: "Petstore demo"
+      url: /petstore-demo/
+    - title: "External status (placeholder)"
+      url: "#"
+
+- title: "Account"
+  url: /profile/
+  children:
+    - title: "Coderic ID"
+      url: /profile/
+    - title: "Callback"
+      url: /callback/
+    - title: "Dashboard"
+      url: /dashboard/
+    - title: "Settings (filler)"
+      url: /account/settings/
+    - title: "Security (filler)"
+      url: /account/security/
+    - title: "Billing (filler)"
+      url: /account/billing/
+
+- title: "Support"
+  url: /support/
+  children:
+    - title: "Support home"
+      url: /support/
+    - title: "Contact"
+      url: /support/contact/
+    - title: "FAQ"
+      url: /support/faq/
+    - title: "Status (filler)"
+      url: /support/status/
+
+- title: "Company"
   url: https://coderic.org/history
   children:
-    - title: "Our History"
+    - title: "About (filler)"
+      url: /company/about/
+    - title: "Press (filler)"
+      url: /company/press/
+    - title: "Careers (filler)"
+      url: /company/careers/
+    - title: "History"
       url: https://coderic.org/history
-    - title: "SLA Policies"
+    - title: "Legal"
       url: https://coderic.org/legal
+    - title: "Home"
+      url: /
+
+- title: "Products"
+  url: /products.html

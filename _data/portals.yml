@@ -1,0 +1,10 @@
+portals:
+  business: "https://coderic.com/"
+  financial: "https://financial.coderic.com/"
+  cloud: "https://coderic.cloud/"
+  network: "https://coderic.net/"
+  hub: "https://io.coderic.net/"
+  development: "https://coderic.dev/"
+  organization: "https://coderic.org/"
+  store: "https://coderic.store/"
+

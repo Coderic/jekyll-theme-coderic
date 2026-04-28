@@ -3,24 +3,25 @@
 {% endcomment %}
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
+{% assign portals = site.data.portals.portals %}
 {% if active_lang == default_lang %}
-  {% assign portal_coderic_com = 'https://coderic.com/' %}
-  {% assign portal_financial = 'https://financial.coderic.com/' %}
-  {% assign portal_cloud = 'https://coderic.cloud/' %}
-  {% assign portal_network = 'https://coderic.net/' %}
-  {% assign portal_io = 'https://io.coderic.net/' %}
-  {% assign portal_dev = 'https://coderic.dev/' %}
-  {% assign portal_org = 'https://coderic.org/' %}
-  {% assign portal_store = 'https://coderic.store/' %}
-  {% assign portal_hub_io = 'https://coderic.io/' %}
+  {% assign portal_coderic_com = portals.business %}
+  {% assign portal_financial = portals.financial %}
+  {% assign portal_cloud = portals.cloud %}
+  {% assign portal_network = portals.network %}
+  {% assign portal_io = portals.hub %}
+  {% assign portal_dev = portals.development %}
+  {% assign portal_org = portals.organization %}
+  {% assign portal_store = portals.store %}
+  {% assign portal_hub_io = portals.hub %}
 {% else %}
-  {% assign portal_coderic_com = 'https://coderic.com/' | append: active_lang | append: '/' %}
-  {% assign portal_financial = 'https://financial.coderic.com/' | append: active_lang | append: '/' %}
-  {% assign portal_cloud = 'https://coderic.cloud/' | append: active_lang | append: '/' %}
-  {% assign portal_network = 'https://coderic.net/' | append: active_lang | append: '/' %}
-  {% assign portal_io = 'https://io.coderic.net/' | append: active_lang | append: '/' %}
-  {% assign portal_dev = 'https://coderic.dev/' | append: active_lang | append: '/' %}
-  {% assign portal_org = 'https://coderic.org/' | append: active_lang | append: '/' %}
-  {% assign portal_store = 'https://coderic.store/' | append: active_lang | append: '/' %}
-  {% assign portal_hub_io = 'https://coderic.io/' | append: active_lang | append: '/' %}
+  {% assign portal_coderic_com = portals.business | append: active_lang | append: '/' %}
+  {% assign portal_financial = portals.financial | append: active_lang | append: '/' %}
+  {% assign portal_cloud = portals.cloud | append: active_lang | append: '/' %}
+  {% assign portal_network = portals.network | append: active_lang | append: '/' %}
+  {% assign portal_io = portals.hub | append: active_lang | append: '/' %}
+  {% assign portal_dev = portals.development | append: active_lang | append: '/' %}
+  {% assign portal_org = portals.organization | append: active_lang | append: '/' %}
+  {% assign portal_store = portals.store | append: active_lang | append: '/' %}
+  {% assign portal_hub_io = portals.hub | append: active_lang | append: '/' %}
 {% endif %}

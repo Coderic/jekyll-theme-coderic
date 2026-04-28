@@ -61,30 +61,31 @@ document.addEventListener('DOMContentLoaded', function () {
   var elEmail = document.getElementById('profile-email');
   var elSub = document.getElementById('profile-sub');
 
-  var token = localStorage.getItem('coderic_access_token');
-  if (!token) {
+  if (typeof codericGetAuth0Client !== 'function') {
     elLoad.classList.add('hidden');
-    elOut.classList.remove('hidden');
+    elErr.textContent = msgError;
+    elErr.classList.remove('hidden');
     return;
   }
 
-  fetch('/api/account', { headers: { 'Authorization': 'Bearer ' + token } })
-    .then(function (res) {
-      if (res.status === 401) {
-        localStorage.removeItem('coderic_access_token');
+  codericGetAuth0Client()
+    .then(function (client) {
+      return client.checkSession().catch(function () { /* noop */ }).then(function () { return client; });
+    })
+    .then(function (client) {
+      return client.isAuthenticated().then(function (ok) { return { client: client, ok: ok }; });
+    })
+    .then(function (ctx) {
+      if (!ctx.ok) {
         elLoad.classList.add('hidden');
         elOut.classList.remove('hidden');
         return null;
       }
-      return res.json();
+      return ctx.client.getUser();
     })
     .then(function (user) {
       elLoad.classList.add('hidden');
-      if (!user || user.error) {
-        elErr.textContent = msgError;
-        elErr.classList.remove('hidden');
-        return;
-      }
+      if (!user) return;
       var name = user.name || [user.given_name, user.family_name].filter(Boolean).join(' ') || user.nickname || user.email || '';
       elName.textContent = name;
       elEmail.textContent = user.email || '';

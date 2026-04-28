@@ -36,14 +36,13 @@ header:
   console: "Consola"
   panel: "Panel Control"
   hello_world: "Hello World"
+  oauth_debugger: "AuthTester"
 
 # ── Selector de Idioma ────────────────────────────────────────────────────────
 lang_switcher:
   label: "Idioma"
   en: "English"
   es: "Español"
-  pt: "Português"
-  fr: "Français"
 
 # ── Acciones de Subnavegación ──────────────────────────────────────────────────
 subnav:
@@ -60,6 +59,31 @@ hello_world:
   no_token: "No hay token en este navegador. Inicia sesión primero."
   loading: "Solicitando…"
   btn_probe: "GET sin Bearer (espera 401)"
+
+# ── Demo Pet Store (Alpine.js + API pública) ───────────────────────────────────
+petstore_demo:
+  title: "Demo Pet Store (Alpine.js)"
+  lead: "Swagger Petstore 3 público — `fetch` en el navegador, CORS `*`. Sin `credentials: 'include'`."
+  id_label: "ID de mascota"
+  load_btn: "Cargar mascota"
+  loading: "Cargando…"
+  not_found: "No hay mascota con ese ID."
+  http_error: "La petición falló"
+  raw_json: "Respuesta (JSON)"
+  api_link: "Base de la API"
+  quick_hint: "Los IDs 1 y 3 suelen responder 200."
+
+# ── OAuth / PKCE (demo documentación) ─────────────────────────────────────────
+oauth_demo:
+  title: "OAuth 2.0 y PKCE (demo del tema)"
+  lead: "Por defecto el staging usa [AuthTester](https://www.scottbrady.io/tools/auth-tester) (Scott Brady): descubrimiento [openid-configuration](https://www.scottbrady.io/tools/auth-tester/.well-known/openid-configuration). Con `oauth_demo_sign_in: false`, el PKCE usa `/callback/` en este origen."
+  step1_title: "Demo vs login real"
+  step1_md: "**`oauth_demo_sign_in: false`** → Iniciar sesión usa Auth0 Universal Login mediante el SDK SPA oficial y vuelve a `/callback/`."
+  step2_title: "AuthTester vs tu IdP"
+  step2_md: "Para pruebas rápidas usá `client_id=test` y los endpoints del documento de descubrimiento. Si el tester ofrece configuración con `…/configure?requestId=`, el `requestId` es de sesión (generalo en la UI, no en el repo). En producción registrá `/callback/` en el cliente del IdP."
+  step3_title: "_config.yml"
+  step3_md: "`oidc_client_id` y `oidc_domain` (custom domain o tenant de Auth0). Opcional: `oauth_redirect_uri` — ver comentarios en el archivo."
+  cta_debugger: "Abrir AuthTester"
 
 # ── Perfil (/profile/) ───────────────────────────────────────────────────────
 profile:
@@ -90,12 +114,13 @@ footer:
   link_privacy: "Política de Privacidad"
   link_legal: "Información Legal"
   link_tos: "Términos y Condiciones"
-  link_business: "Negocios"
-  link_network: "Red"
-  link_org: "Coderic Organization"
-  link_financial: "Financiero"
-  link_cloud: "Nube"
-  link_store: "Tienda"
+  link_business: "Coderic Negocios"
+  link_network: "Coderic Network"
+  link_org: "Coderic Organización"
+  link_hub: "Coderic Hub"
+  link_financial: "Coderic Financiero"
+  link_cloud: "Coderic Cloud"
+  link_store: "Coderic Tienda"
   link_dev: "Coderic Development"
 items:
   explore: "Explorar"

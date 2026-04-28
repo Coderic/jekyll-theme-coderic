@@ -5,17 +5,24 @@
 {% if subnav_data %}
 <div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex h-14 items-center justify-between gap-3">
+        <div class="flex min-h-14 items-center justify-between gap-3 py-2">
             {% comment %}
               El scroll horizontal va en <nav> con solo overflow-x para no recortar (overflow-y-hidden en el ul
               cortaba los submenús position:absolute). Los ítems con `children` en YAML son desplegables.
             {% endcomment %}
-            <nav class="min-w-0 flex-1 overflow-x-auto overflow-y-visible py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
-                <ul class="flex min-h-[2.5rem] items-center gap-1 md:gap-2">
+            <nav class="min-w-0 flex-1 overflow-x-visible overflow-y-visible" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
+                <ul class="flex min-h-[2.5rem] flex-wrap items-center gap-2 md:gap-3 lg:gap-4">
                     {% for item in subnav_data %}
                     {% if item.children %}
                     <li class="subnav-dropdown group relative z-0 shrink-0 hover:z-[120] focus-within:z-[120]">
-                        <a href="{{ item.url | default: '#' }}" class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-3" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                        {% assign item_href = item.url | default: '#' %}
+                        {% if item_href contains '://' %}
+                        <a href="{{ item_href }}" class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                        {% elsif item_href == '#' %}
+                        <a href="#" class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                        {% else %}
+                        <a {% static_href %}href="{{ item_href | relative_url }}"{% endstatic_href %} class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                        {% endif %}
                             <span>{{ item.title }}</span>
                             <i class="ph-bold ph-caret-down opacity-60 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true"></i>
                         </a>
@@ -23,7 +30,14 @@
                             <ul class="rounded-lg border border-surface-border bg-surface py-1 shadow-2xl" role="menu">
                                 {% for child in item.children %}
                                 <li role="none">
-                                    <a role="menuitem" href="{{ child.url | relative_url }}" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                                    {% assign child_href = child.url | default: '#' %}
+                                    {% if child_href contains '://' %}
+                                    <a role="menuitem" href="{{ child_href }}" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                                    {% elsif child_href == '#' %}
+                                    <a role="menuitem" href="#" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                                    {% else %}
+                                    <a role="menuitem" {% static_href %}href="{{ child_href | relative_url }}"{% endstatic_href %} class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                                    {% endif %}
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -31,7 +45,14 @@
                     </li>
                     {% else %}
                     <li class="relative shrink-0">
-                        <a href="{{ item.url | default: '#' }}" class="inline-flex items-center gap-1.5 rounded-md px-2 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-3">
+                        {% assign leaf_href = item.url | default: '#' %}
+                        {% if leaf_href contains '://' %}
+                        <a href="{{ leaf_href }}" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4">
+                        {% elsif leaf_href == '#' %}
+                        <a href="#" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4">
+                        {% else %}
+                        <a {% static_href %}href="{{ leaf_href | relative_url }}"{% endstatic_href %} class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4">
+                        {% endif %}
                             <span>{{ item.title }}</span>
                         </a>
                     </li>
