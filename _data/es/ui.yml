@@ -4,8 +4,8 @@
 nav:
   business: "Negocios"
   financial: "Financiero"
-  cloud: "Nube"
-  network: "Red"
+  cloud: "Cloud"
+  network: "Network"
   io: "Hub"
   development: "Desarrollo"
   organization: "Organización"
