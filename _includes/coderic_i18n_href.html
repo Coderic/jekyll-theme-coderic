@@ -1,0 +1,35 @@
+{% comment %}
+  Builds a public URL for internal links that works:
+  - With jekyll-polyglot locally (site.active_lang)
+  - With GitHub Pages default build (no polyglot tags like static_href)
+
+  Input:
+    - _u: internal path string (may be "/foo/", "foo.html", etc.)
+
+  Output:
+    - coderic_i18n_href
+{% endcomment %}
+
+{% assign default_lang = site.default_lang | default: 'en' %}
+{% assign active_lang = site.active_lang | default: default_lang %}
+
+{% assign coderic_i18n_href = '' %}
+
+{% if _u contains '://' %}
+  {% assign coderic_i18n_href = _u %}
+{% elsif _u == '#' %}
+  {% assign coderic_i18n_href = '#' %}
+{% else %}
+  {% assign rel = _u | relative_url %}
+
+  {% if active_lang == default_lang %}
+    {% assign coderic_i18n_href = rel %}
+  {% else %}
+    {% if rel == '/' %}
+      {% assign coderic_i18n_href = '/' | append: active_lang | append: '/' %}
+    {% else %}
+      {% assign coderic_i18n_href = '/' | append: active_lang | append: rel %}
+    {% endif %}
+    {% assign coderic_i18n_href = coderic_i18n_href | replace: '//', '/' %}
+  {% endif %}
+{% endif %}

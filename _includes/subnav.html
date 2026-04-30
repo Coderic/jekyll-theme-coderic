@@ -21,7 +21,9 @@
                         {% elsif item_href == '#' %}
                         <a href="#" class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
                         {% else %}
-                        <a {% static_href %}href="{{ item_href | relative_url }}"{% endstatic_href %} class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
+                        {% assign _u = item_href %}
+                        {% include coderic_i18n_href.html %}
+                        <a href="{{ coderic_i18n_href }}" class="subnav-dropdown-trigger inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>
                         {% endif %}
                             <span>{{ item.title }}</span>
                             <i class="ph-bold ph-caret-down opacity-60 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true"></i>
@@ -36,7 +38,9 @@
                                     {% elsif child_href == '#' %}
                                     <a role="menuitem" href="#" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
                                     {% else %}
-                                    <a role="menuitem" {% static_href %}href="{{ child_href | relative_url }}"{% endstatic_href %} class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
+                                    {% assign _u = child_href %}
+                                    {% include coderic_i18n_href.html %}
+                                    <a role="menuitem" href="{{ coderic_i18n_href }}" class="block px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">{{ child.title }}</a>
                                     {% endif %}
                                 </li>
                                 {% endfor %}
@@ -51,7 +55,9 @@
                         {% elsif leaf_href == '#' %}
                         <a href="#" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4">
                         {% else %}
-                        <a {% static_href %}href="{{ leaf_href | relative_url }}"{% endstatic_href %} class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4">
+                        {% assign _u = leaf_href %}
+                        {% include coderic_i18n_href.html %}
+                        <a href="{{ coderic_i18n_href }}" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-[var(--text-base)] md:px-4">
                         {% endif %}
                             <span>{{ item.title }}</span>
                         </a>
@@ -90,11 +96,18 @@
                             {% else %}
                             <li role="menuitem">
                                 {% if lang == site.default_lang %}
-                                <a {% static_href %}href="{{ clean_page_url | relative_url }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
+                                <a href="{{ clean_page_url | relative_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
                                     <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                                 </a>
                                 {% else %}
-                                <a {% static_href %}href="/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
+                                {% assign clean_rel = clean_page_url | relative_url %}
+                                {% if clean_rel == '/' %}
+                                  {% assign lang_href = '/' | append: lang | append: '/' %}
+                                {% else %}
+                                  {% assign lang_href = '/' | append: lang | append: clean_rel %}
+                                {% endif %}
+                                {% assign lang_href = lang_href | replace: '//', '/' %}
+                                <a href="{{ lang_href }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
                                     <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                                 </a>
                                 {% endif %}
