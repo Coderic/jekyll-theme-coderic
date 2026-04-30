@@ -4,6 +4,11 @@ description: Scaffolding local environment to test the Jekyll theme.
 url: "http://localhost:4000"
 baseurl: ""
 
+# Demo / staging: cuando es true, el tema emite señales explícitas de no indexación
+# (meta robots + robots.txt disallow) para evitar que buscadores indexen sitios de prueba.
+# En producción, dejalo en false (o simplemente omítelo).
+noindex: false
+
 # Carpetas que empiezan por punto no se copian por defecto; Jekyll debe incluir esta ruta para
 # servir /.well-known/appspecific/com.chrome.devtools.json y evitar spam en logs (jekyll serve).
 include:
