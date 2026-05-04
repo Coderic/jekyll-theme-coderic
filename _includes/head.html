@@ -1,8 +1,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: site.portal_name | default: site.title }}</title>
-    <meta name="description" content="{{ page.description | default: site.description }}">
+    {% assign _ui = site.data[site.active_lang].ui %}
+    {% if page.i18n_source %}
+      {% assign _seo = site.data[site.active_lang][page.i18n_source] %}
+      <title>{{ _seo.meta_title | default: page.title | default: site.portal_name | default: site.title }}</title>
+      <meta name="description" content="{{ _seo.meta_description | default: page.description | default: site.description }}">
+    {% elsif page.i18n %}
+      {% assign _seo = _ui[page.i18n] %}
+      <title>{{ _seo.meta_title | default: page.title | default: site.portal_name | default: site.title }}</title>
+      <meta name="description" content="{{ _seo.meta_description | default: page.description | default: site.description }}">
+    {% else %}
+      <title>{{ page.title | default: site.portal_name | default: site.title }}</title>
+      <meta name="description" content="{{ page.description | default: site.description }}">
+    {% endif %}
     <meta name="google" content="notranslate">
     {% if site.noindex %}
     <meta name="robots" content="noindex, nofollow">

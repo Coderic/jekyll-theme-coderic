@@ -40,6 +40,10 @@ Los enlaces internos del menú pasan por `_includes/coderic_i18n_href.html` para
 
 El conmutador de idioma del subnav usa los tags Liquid **`static_href` / `endstatic_href`** de Polyglot en los enlaces del menú. Los sitios sin Polyglot deben usar otro include o no incluir este bloque tal cual.
 
+### Cabecera (`head`)
+
+`_includes/head.html` define `<title>` y meta description usando `page.i18n_source` / `page.i18n` y `_data/<lang>/…` cuando aplica; si no, cae en `page.title` / `page.description`. Compatible con **jekyll-polyglot** (`site.active_lang`). Opcional: `site.noindex` añade `robots` noindex.
+
 TODO: Describe your available layouts, includes, sass and/or assets beyond subnav.
 
 ## Contributing
