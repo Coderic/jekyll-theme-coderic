@@ -30,7 +30,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here. Describe your available layouts, includes, sass and/or assets.
+### Navegación de sección (`subnav`)
+
+El include `_includes/subnav.html` espera datos en YAML:
+
+- `_data/<lang>/subnav.yml` por idioma (p. ej. `_data/en/subnav.yml`), con reserva a `_data/<default_lang>/subnav.yml` y luego `_data/subnav.yml` si falta el archivo por idioma.
+
+Los enlaces internos del menú pasan por `_includes/coderic_i18n_href.html` para convivir con **jekyll-polyglot**.
+
+El conmutador de idioma del subnav usa los tags Liquid **`static_href` / `endstatic_href`** de Polyglot en los enlaces del menú. Los sitios sin Polyglot deben usar otro include o no incluir este bloque tal cual.
+
+TODO: Describe your available layouts, includes, sass and/or assets beyond subnav.
 
 ## Contributing
 

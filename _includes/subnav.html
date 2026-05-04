@@ -1,14 +1,14 @@
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
 {% assign t_ui = site.data[active_lang].ui %}
-{% assign subnav_data = site.data[active_lang].subnav | default: site.data.subnav %}
+{% assign subnav_data = site.data[active_lang].subnav | default: site.data[default_lang].subnav | default: site.data.subnav %}
 {% if subnav_data %}
 <div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex min-h-14 items-center justify-between gap-3 py-2">
             {% comment %}
-              El scroll horizontal va en <nav> con solo overflow-x para no recortar (overflow-y-hidden en el ul
-              cortaba los submenús position:absolute). Los ítems con `children` en YAML son desplegables.
+              `overflow` visible en el nav para no recortar submenús `position:absolute`. Ítems con `children` en YAML son desplegables.
+              Enlaces internos: `coderic_i18n_href.html` (Polyglot). El menú de idioma usa `static_href` (requiere jekyll-polyglot).
             {% endcomment %}
             <nav class="min-w-0 flex-1 overflow-x-visible overflow-y-visible" aria-label="{{ t_ui.subnav.aria | default: 'Section' }}">
                 <ul class="flex min-h-[2.5rem] flex-wrap items-center gap-2 md:gap-3 lg:gap-4">
@@ -96,18 +96,11 @@
                             {% else %}
                             <li role="menuitem">
                                 {% if lang == site.default_lang %}
-                                <a href="{{ clean_page_url | relative_url }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
+                                <a {% static_href %}href="{{ clean_page_url | relative_url }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
                                     <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                                 </a>
                                 {% else %}
-                                {% assign clean_rel = clean_page_url | relative_url %}
-                                {% if clean_rel == '/' %}
-                                  {% assign lang_href = '/' | append: lang | append: '/' %}
-                                {% else %}
-                                  {% assign lang_href = '/' | append: lang | append: clean_rel %}
-                                {% endif %}
-                                {% assign lang_href = lang_href | replace: '//', '/' %}
-                                <a href="{{ lang_href }}" class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
+                                <a {% static_href %}href="/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}"{% endstatic_href %} class="flex items-center gap-2 px-4 py-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:bg-surface-panel hover:text-coderic-500">
                                     <i class="ph ph-globe-simple text-sm"></i> {{ lang_label }}
                                 </a>
                                 {% endif %}
