@@ -1,7 +1,7 @@
 title: Coderic Demo Theme
 email: demo@coderic.org
 description: Scaffolding local environment to test the Jekyll theme.
-url: "http://localhost:4000"
+url: ""
 baseurl: ""
 
 # Demo / staging: cuando es true, el tema emite señales explícitas de no indexación

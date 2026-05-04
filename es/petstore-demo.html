@@ -19,9 +19,11 @@ permalink: /petstore-demo/
 
   <div
     class="glass-panel rounded-2xl border border-surface-border p-6 md:p-8 mb-8"
-    x-data="petStoreDemo()"
-    x-init="loadPet()"
+    data-petstore-root
   >
+    <script type="application/json" data-petstore-config>
+{"notFound":{{ t.petstore_demo.not_found | jsonify }},"httpError":{{ t.petstore_demo.http_error | jsonify }}}
+    </script>
     <div class="flex flex-col sm:flex-row sm:items-end gap-4 mb-6">
       <div class="flex-1">
         <label for="pet-id-input-es" class="block text-xs font-bold uppercase tracking-wide text-muted mb-2">{{ t.petstore_demo.id_label }}</label>
@@ -30,80 +32,36 @@ permalink: /petstore-demo/
           type="number"
           min="1"
           step="1"
+          value="1"
+          data-pet-id-input
           class="w-full max-w-xs rounded-lg border border-surface-border bg-surface px-3 py-2 text-[var(--text-base)]"
-          x-model.number="petId"
-          @keydown.enter.prevent="loadPet()"
         />
       </div>
       <button
         type="button"
+        data-pet-load
         class="inline-flex items-center justify-center gap-2 rounded-full bg-coderic-600 px-6 py-2.5 text-sm font-bold text-white shadow hover:bg-coderic-500 disabled:opacity-50"
-        @click="loadPet()"
-        :disabled="loading"
       >
-        <i class="ph-bold ph-arrow-clockwise text-base" :class="{ 'animate-spin': loading }"></i>
+        <i class="ph-bold ph-arrow-clockwise text-base" data-pet-load-icon></i>
         {{ t.petstore_demo.load_btn }}
       </button>
     </div>
 
-    <p x-show="loading" class="text-sm text-muted mb-4" x-cloak>{{ t.petstore_demo.loading }}</p>
-    <p x-show="error && !loading" class="text-sm text-red-500 mb-4" x-text="error" x-cloak></p>
+    <p data-pet-loading class="text-sm text-muted mb-4">{{ t.petstore_demo.loading }}</p>
+    <p data-pet-error class="text-sm text-red-500 mb-4" hidden></p>
 
-    <div x-show="pet && !loading" x-cloak class="space-y-4">
+    <div data-pet-result class="space-y-4" hidden>
       <div class="rounded-xl border border-surface-border bg-surface-panel/50 p-4">
-        <p class="text-lg font-semibold text-[var(--text-base)]" x-text="pet.name"></p>
-        <p class="text-xs text-muted mt-1"><span class="font-medium">id:</span> <span x-text="pet.id"></span></p>
-        <template x-if="pet.category && pet.category.name">
-          <p class="text-sm text-muted mt-2"><span class="font-medium">category:</span> <span x-text="pet.category.name"></span></p>
-        </template>
+        <p class="text-lg font-semibold text-[var(--text-base)]" data-pet-name></p>
+        <p class="text-xs text-muted mt-1"><span class="font-medium">id:</span> <span data-pet-id-display></span></p>
+        <p class="text-sm text-muted mt-2" hidden data-pet-category-row><span class="font-medium">category:</span> <span data-pet-category></span></p>
       </div>
       <div>
         <p class="text-xs font-bold uppercase tracking-wide text-muted mb-2">{{ t.petstore_demo.raw_json }}</p>
-        <pre class="max-h-48 overflow-auto rounded-lg border border-surface-border bg-black/40 p-4 text-xs text-stone-200 font-mono" x-text="JSON.stringify(pet, null, 2)"></pre>
+        <pre class="max-h-48 overflow-auto rounded-lg border border-surface-border bg-black/40 p-4 text-xs text-stone-200 font-mono" data-pet-json></pre>
       </div>
     </div>
   </div>
 </div>
 
-<style>
-  [x-cloak] { display: none !important; }
-</style>
-
-<script>
-(function () {
-  var I18N = {
-    notFound: {{ t.petstore_demo.not_found | jsonify }},
-    httpError: {{ t.petstore_demo.http_error | jsonify }}
-  };
-  window.petStoreDemo = function petStoreDemo() {
-    return {
-      petId: 1,
-      loading: false,
-      error: null,
-      pet: null,
-      apiBase: 'https://petstore3.swagger.io/api/v3',
-      async loadPet() {
-        this.loading = true;
-        this.error = null;
-        this.pet = null;
-        try {
-          var id = parseInt(this.petId, 10);
-          if (!id || id < 1) id = 1;
-          this.petId = id;
-          var r = await fetch(this.apiBase + '/pet/' + id);
-          if (r.status === 404) {
-            this.error = I18N.notFound;
-            return;
-          }
-          if (!r.ok) throw new Error(I18N.httpError + ' (HTTP ' + r.status + ')');
-          this.pet = await r.json();
-        } catch (e) {
-          this.error = e.message || I18N.httpError;
-        } finally {
-          this.loading = false;
-        }
-      }
-    };
-  };
-})();
-</script>
+<script defer src="{{ '/assets/js/petstore-demo.js' | relative_url }}"></script>

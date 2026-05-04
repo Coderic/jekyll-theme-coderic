@@ -23,73 +23,73 @@ permalink: /pages/faq/
       <p class="text-xl text-muted leading-relaxed">Answers to the most common questions about Coderic and the theme.</p>
     </div>
 
-    <div class="space-y-4" x-data="{ open: null }">
+    <div class="space-y-4" data-faq-accordion>
 
-      <div class="border border-surface-border rounded-2xl overflow-hidden">
-        <button class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors">
+      <div class="border border-surface-border rounded-2xl overflow-hidden" data-faq-item>
+        <button type="button" id="faq-btn-0" class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors" data-faq-button aria-expanded="true" aria-controls="faq-panel-0">
           What is Coderic?
-          <i class="ph ph-caret-down shrink-0 ml-4"></i>
+          <i class="ph ph-caret-down shrink-0 ml-4 transition-transform rotate-180" data-faq-icon aria-hidden="true"></i>
         </button>
-        <div class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border">
+        <div id="faq-panel-0" role="region" aria-labelledby="faq-btn-0" class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border" data-faq-panel>
           Coderic (Corporation Oriented to the Development of Engineering Resources and Information for Commerce)
           is an open source software incubator and technology company founded on September 30, 2004.
           It operates through an ecosystem of specialized portals covering cloud, financial services, development, and more.
         </div>
       </div>
 
-      <div class="border border-surface-border rounded-2xl overflow-hidden">
-        <button class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors">
+      <div class="border border-surface-border rounded-2xl overflow-hidden" data-faq-item>
+        <button type="button" id="faq-btn-1" class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors" data-faq-button aria-expanded="false" aria-controls="faq-panel-1">
           How do I use the Jekyll theme?
-          <i class="ph ph-caret-down shrink-0 ml-4"></i>
+          <i class="ph ph-caret-down shrink-0 ml-4 transition-transform" data-faq-icon aria-hidden="true"></i>
         </button>
-        <div class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border">
+        <div id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border" data-faq-panel hidden>
           Add <code class="text-coderic-500">remote_theme: Coderic/jekyll-theme-coderic</code> to your
           <code class="text-coderic-500">_config.yml</code> along with the <code class="text-coderic-500">jekyll-remote-theme</code> plugin.
           See <a href="/docs/getting-started/" class="text-coderic-500 hover:underline">/docs/getting-started/</a> for the full guide.
         </div>
       </div>
 
-      <div class="border border-surface-border rounded-2xl overflow-hidden">
-        <button class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors">
+      <div class="border border-surface-border rounded-2xl overflow-hidden" data-faq-item>
+        <button type="button" id="faq-btn-2" class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors" data-faq-button aria-expanded="false" aria-controls="faq-panel-2">
           Is the theme free?
-          <i class="ph ph-caret-down shrink-0 ml-4"></i>
+          <i class="ph ph-caret-down shrink-0 ml-4 transition-transform" data-faq-icon aria-hidden="true"></i>
         </button>
-        <div class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border">
+        <div id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border" data-faq-panel hidden>
           Yes. jekyll-theme-coderic is released under the MIT License.
           It is free for personal and commercial use. Contributions and issues are welcome on
           <a href="https://github.com/Coderic/jekyll-theme-coderic" class="text-coderic-500 hover:underline">GitHub</a>.
         </div>
       </div>
 
-      <div class="border border-surface-border rounded-2xl overflow-hidden">
-        <button class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors">
+      <div class="border border-surface-border rounded-2xl overflow-hidden" data-faq-item>
+        <button type="button" id="faq-btn-3" class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors" data-faq-button aria-expanded="false" aria-controls="faq-panel-3">
           How does the developer revenue model work?
-          <i class="ph ph-caret-down shrink-0 ml-4"></i>
+          <i class="ph ph-caret-down shrink-0 ml-4 transition-transform" data-faq-icon aria-hidden="true"></i>
         </button>
-        <div class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border">
+        <div id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border" data-faq-panel hidden>
           Projects incubated at <a href="https://coderic.org" class="text-coderic-500 hover:underline">coderic.org</a> that reach commercial stage
           follow a revenue-sharing model: 80% goes to the developer or team, 20% plus applicable taxes goes to Coderic.
           The model is documented in full at coderic.org/legal.
         </div>
       </div>
 
-      <div class="border border-surface-border rounded-2xl overflow-hidden">
-        <button class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors">
+      <div class="border border-surface-border rounded-2xl overflow-hidden" data-faq-item>
+        <button type="button" id="faq-btn-4" class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors" data-faq-button aria-expanded="false" aria-controls="faq-panel-4">
           Which countries does Coderic operate in?
-          <i class="ph ph-caret-down shrink-0 ml-4"></i>
+          <i class="ph ph-caret-down shrink-0 ml-4 transition-transform" data-faq-icon aria-hidden="true"></i>
         </button>
-        <div class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border">
+        <div id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border" data-faq-panel hidden>
           Coderic S.A. was incorporated in Venezuela in 2004. Coderic SAS was incorporated in Colombia in 2022.
           The team is distributed across Latin America; services are available globally.
         </div>
       </div>
 
-      <div class="border border-surface-border rounded-2xl overflow-hidden">
-        <button class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors">
+      <div class="border border-surface-border rounded-2xl overflow-hidden" data-faq-item>
+        <button type="button" id="faq-btn-5" class="w-full text-left p-6 flex items-center justify-between font-semibold hover:text-coderic-500 transition-colors" data-faq-button aria-expanded="false" aria-controls="faq-panel-5">
           Where can I get support?
-          <i class="ph ph-caret-down shrink-0 ml-4"></i>
+          <i class="ph ph-caret-down shrink-0 ml-4 transition-transform" data-faq-icon aria-hidden="true"></i>
         </button>
-        <div class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border">
+        <div id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" class="px-6 pb-6 text-muted text-sm leading-relaxed border-t border-surface-border" data-faq-panel hidden>
           Community support via GitHub Issues. Enterprise support contracts are available through
           <a href="https://business.coderic.co" class="text-coderic-500 hover:underline">business.coderic.co</a>.
           You can also reach us at <a href="mailto:hello@coderic.org" class="text-coderic-500 hover:underline">hello@coderic.org</a>.
@@ -107,3 +107,5 @@ permalink: /pages/faq/
 
   </div>
 </section>
+
+<script defer src="{{ '/assets/js/pages-faq.js' | relative_url }}"></script>

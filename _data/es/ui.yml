@@ -60,9 +60,9 @@ hello_world:
   loading: "Solicitando…"
   btn_probe: "GET sin Bearer (espera 401)"
 
-# ── Demo Pet Store (Alpine.js + API pública) ───────────────────────────────────
+# ── Demo Pet Store (JS estándar + API pública) ────────────────────────────────
 petstore_demo:
-  title: "Demo Pet Store (Alpine.js)"
+  title: "Demo Pet Store"
   lead: "Swagger Petstore 3 público — `fetch` en el navegador, CORS `*`. Sin `credentials: 'include'`."
   id_label: "ID de mascota"
   load_btn: "Cargar mascota"
