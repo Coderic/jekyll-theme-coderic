@@ -38,7 +38,11 @@
                 <h4 class="font-medium text-lg mt-8 mb-6 text-white">{{ t.footer.col_involved | default: 'Get Involved' }}</h4>
                 <ul class="space-y-4">
                     <li><a href="{{ portal_dev }}freelancers/join-network.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_join_alt | default: 'Join Coderic' }}</a></li>
+                    {% if site.portal_id == 'financial' %}
+                    <li><a href="{{ '/socios/' | relative_url }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
+                    {% else %}
                     <li><a href="{{ portal_coderic_com }}partners/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
+                    {% endif %}
                     <li><a href="{{ portal_dev }}community/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
                     <li><a href="{{ portal_org }}expansion/contact.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Sponsors' }}</a></li>
                 </ul>
