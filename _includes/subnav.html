@@ -1,3 +1,7 @@
+{% comment %}
+  Section subnav: contract and fallback chain documented in repo README ("Navegación de sección").
+  Sites should supply _data/<lang>/subnav.yml; avoid overriding this file in the portal unless strictly necessary.
+{% endcomment %}
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
 {% assign t_ui = site.data[active_lang].ui %}

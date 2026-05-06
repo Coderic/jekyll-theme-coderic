@@ -32,9 +32,18 @@ Or install it yourself as:
 
 ### Navegación de sección (`subnav`)
 
-El include `_includes/subnav.html` espera datos en YAML:
+**No copies** `_includes/subnav.html` en tu sitio salvo necesidad excepcional: Jekyll usará el include del tema (`remote_theme` / `theme`). Define el menú solo en YAML.
 
-- `_data/<lang>/subnav.yml` por idioma (p. ej. `_data/en/subnav.yml`), con reserva a `_data/<default_lang>/subnav.yml` y luego `_data/subnav.yml` si falta el archivo por idioma.
+El include `_includes/subnav.html` resuelve los datos en este orden:
+
+1. `site.data[<active_lang>].subnav` → archivo `_data/<lang>/subnav.yml` (p. ej. `_data/es/subnav.yml`).
+2. Si está vacío o ausente: `site.data[<default_lang>].subnav` → `_data/<default_lang>/subnav.yml`.
+3. Si sigue vacío: `site.data.subnav` → `_data/subnav.yml` en la raíz del sitio (opcional).
+4. Si aún no hay datos **y** `hide_theme_subnav_fallback` no es `true`: cae al YAML de demostración empaquetado con el tema.
+
+Configuración útil en `_config.yml`:
+
+- **`hide_theme_subnav_fallback: true`** (recomendado en producción cuando ya existan `_data/en/subnav.yml` y `_data/es/subnav.yml` completos): evita que un build incompleto muestre el menú demo del tema.
 
 Los enlaces internos del menú pasan por `_includes/coderic_i18n_href.html` para convivir con **jekyll-polyglot**.
 
