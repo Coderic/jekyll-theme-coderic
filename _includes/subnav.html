@@ -1,8 +1,13 @@
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
 {% assign t_ui = site.data[active_lang].ui %}
-{% assign subnav_data = site.data[active_lang].subnav | default: site.data[default_lang].subnav | default: site.data.subnav %}
-{% if subnav_data %}
+{% assign subnav_data = site.data[active_lang].subnav | default: site.data[default_lang].subnav %}
+{% if subnav_data == nil or subnav_data.size == 0 %}
+  {% unless site.hide_theme_subnav_fallback %}
+    {% assign subnav_data = site.data.subnav %}
+  {% endunless %}
+{% endif %}
+{% if subnav_data and subnav_data.size > 0 %}
 <div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex min-h-14 items-center justify-between gap-3 py-2">
