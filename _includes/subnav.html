@@ -7,9 +7,9 @@
 {% assign t_ui = site.data[active_lang].ui %}
 {% assign subnav_data = site.data[active_lang].subnav | default: site.data[default_lang].subnav %}
 {% if subnav_data == nil or subnav_data.size == 0 %}
-  {% unless site.hide_theme_subnav_fallback %}
+  {% if site.use_theme_subnav_fallback %}
     {% assign subnav_data = site.data.subnav %}
-  {% endunless %}
+  {% endif %}
 {% endif %}
 {% if subnav_data and subnav_data.size > 0 %}
 <div class="fixed top-20 left-0 right-0 z-[90] border-b border-surface-border bg-surface/95 backdrop-blur-xl">

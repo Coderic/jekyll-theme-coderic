@@ -38,12 +38,15 @@ El include `_includes/subnav.html` resuelve los datos en este orden:
 
 1. `site.data[<active_lang>].subnav` → archivo `_data/<lang>/subnav.yml` (p. ej. `_data/es/subnav.yml`).
 2. Si está vacío o ausente: `site.data[<default_lang>].subnav` → `_data/<default_lang>/subnav.yml`.
-3. Si sigue vacío: `site.data.subnav` → `_data/subnav.yml` en la raíz del sitio (opcional) **salvo** que `hide_theme_subnav_fallback` sea `true` (en ese caso no se entra a este paso y tampoco al siguiente).
-4. Si aún no hay datos **y** `hide_theme_subnav_fallback` no es `true`: el merge de datos puede aportar el YAML de demostración empaquetado con el tema bajo la misma clave.
+3. Si sigue vacío: **por defecto no** se usa ningún menú empaquetado ni `_data/subnav.yml` raíz (no se pinta subnav hasta tener YAML por idioma).
+4. Solo si en `_config.yml` está **`use_theme_subnav_fallback: true`**: se asigna `site.data.subnav` (merge del sitio + datos del tema; útil en demos o sitios que solo definen `_data/subnav.yml` raíz).
 
 Configuración útil en `_config.yml`:
 
-- **`hide_theme_subnav_fallback: true`** (recomendado en producción cuando `_data/<default_lang>/subnav.yml` y los demás idiomas activos están completos): si faltan datos en los pasos 1–2, **no** se usa `_data/subnav.yml` raíz ni el menú demo del tema (el subnav puede quedar vacío hasta corregir YAML).
+- **`use_theme_subnav_fallback: true`**: tras los pasos 1–2, si aún no hay ítems, usar `site.data.subnav` (incluye demo del tema si no lo anulas con tus propios datos).
+- **Omisión o `false`** (recomendado en producción con `_data/<lang>/subnav.yml`): si faltan datos por idioma, el subnav **no** muestra el menú del tema por defecto.
+
+La clave antigua `hide_theme_subnav_fallback` **ya no tiene efecto**; sustituir por `use_theme_subnav_fallback` con la semántica anterior invertida (opt-in para usar el fallback del tema).
 
 Los enlaces internos del menú pasan por `_includes/coderic_i18n_href.html` para convivir con **jekyll-polyglot**.
 
