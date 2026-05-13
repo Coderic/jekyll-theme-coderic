@@ -25,3 +25,18 @@
   {% assign portal_store = portals.store | append: active_lang | append: '/' %}
   {% assign portal_hub_io = portals.hub | append: active_lang | append: '/' %}
 {% endif %}
+
+{% comment %}
+  Políticas comunitarias publicadas en coderic.org: siempre enlaces absolutos al portal Organization.
+  Con polyglot, si el idioma activo no es el default del sitio, se usa /{lang}/… (p. ej. /es/…).
+{% endcomment %}
+{% assign org_policy_host = 'https://coderic.org' %}
+{% if active_lang != default_lang %}
+  {% assign org_policy_base = org_policy_host | append: '/' | append: active_lang %}
+{% else %}
+  {% assign org_policy_base = org_policy_host %}
+{% endif %}
+{% assign org_policy_contributing = org_policy_base | append: '/contributing.html' %}
+{% assign org_policy_code_of_conduct = org_policy_base | append: '/code-of-conduct.html' %}
+{% assign org_policy_security = org_policy_base | append: '/security-policy.html' %}
+{% assign org_policy_contributor_agreement = org_policy_base | append: '/contributor-agreement.html' %}

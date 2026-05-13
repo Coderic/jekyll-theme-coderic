@@ -47,14 +47,10 @@
                     {% else %}
                     <li><a href="{{ portal_coderic_com }}partners/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
                     {% endif %}
-                    {% if site.portal_id == 'organization' and site.github_org_meta %}
-                    <li><a href="{{ site.github_org_meta.contributing }}" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
-                    <li><a href="{{ site.github_org_meta.code_of_conduct }}" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_code_of_conduct | default: 'Code of conduct' }}</a></li>
-                    <li><a href="{{ site.github_org_meta.security }}" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_security | default: 'Security policy' }}</a></li>
-                    <li><a href="{{ site.github_org_meta.contributor_agreement }}" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributor_agreement | default: 'Contributor agreement' }}</a></li>
-                    {% else %}
-                    <li><a href="{{ portal_dev }}community/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
-                    {% endif %}
+                    <li><a href="{{ org_policy_contributing }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
+                    <li><a href="{{ org_policy_code_of_conduct }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_code_of_conduct | default: 'Code of conduct' }}</a></li>
+                    <li><a href="{{ org_policy_security }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_security | default: 'Security policy' }}</a></li>
+                    <li><a href="{{ org_policy_contributor_agreement }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributor_agreement | default: 'Contributor agreement' }}</a></li>
                     <li><a href="{{ portal_org }}expansion/contact.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Sponsors' }}</a></li>
                 </ul>
             </div>
