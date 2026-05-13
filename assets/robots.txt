@@ -1,0 +1,15 @@
+---
+layout: none
+permalink: /robots.txt
+---
+
+{% comment %} Bajo assets/ para ThemeAssetsReader (Jekyll 4); permalink /robots.txt {% endcomment %}
+{% if site.noindex %}
+User-agent: *
+Disallow: /
+{% else %}
+User-agent: *
+Allow: /
+
+Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml
+{% endif %}

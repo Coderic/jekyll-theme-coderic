@@ -7,6 +7,7 @@ sitemap: false
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% comment %}
   jekyll-polyglot: en default_lang, page.url es la ruta sin prefijo (/foo.html).
+  Archivo bajo assets/ para que Jekyll 4 ThemeAssetsReader lo cargue (permalink sigue siendo /sitemap.xml).
   Se emite una entrada por cada idioma en site.languages (alineado con hreflang).
   sitemap.xml esta en exclude_from_localization: solo se genera en la pasada default_lang.
 {% endcomment %}
