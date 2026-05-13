@@ -18,6 +18,14 @@ include:
 portal_name: "Coderic UI"
 portal_id: "business"
 
+# Community policy URLs (Coderic org repo .github). Portals may override in their _config.yml.
+# External sites reusing the theme with another portal_id keep team.coderic.org links for Contributing.
+github_org_meta:
+  contributing: "https://github.com/Coderic/.github/blob/main/CONTRIBUTING.md"
+  code_of_conduct: "https://github.com/Coderic/.github/blob/main/CODE_OF_CONDUCT.md"
+  security: "https://github.com/Coderic/.github/blob/main/SECURITY.md"
+  contributor_agreement: "https://github.com/Coderic/.github/blob/main/CONTRIBUTOR_AGREEMENT.md"
+
 # OAuth2 / OIDC — demo del tema.
 #
 # oauth_demo_sign_in: false → flujo SPA con Auth0 SPA JS SDK (auth0-spa-js).
