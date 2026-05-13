@@ -49,6 +49,7 @@ El conmutador de idioma del subnav usa los tags Liquid **`static_href` / `endsta
 - En producción, fijá **`url`** (y **`baseurl`**) en `_config.yml`.
 - **`robots.txt`**: cada portal Coderic lo mantiene en la **raíz del repo del sitio** (misma plantilla Liquid que antes estaba en el tema): `noindex` → `Disallow: /`; si no, `Allow: /` y línea **`Sitemap:`** con `site.url` + `site.baseurl`. Mantener **`robots.txt`** en **`exclude_from_localization`** del sitio (junto con `sitemap.xml`) para Polyglot.
 - Por defecto **`sitemap: false`** en el front matter de **`callback.html`**, **`profile.html`** y **`hello-world.html`** del tema; en otras páginas usá `sitemap: false` cuando no deban indexarse.
+- **Google Search Console (“No se ha podido obtener”)**: revisá en **Cloudflare** que **Bot Fight Mode** / reglas WAF no bloqueen **Googlebot** en `GET /sitemap.xml`; en **Pages**, el archivo **`_headers`** en el repo (incluido vía `include` en `_config.yml`) fija `Content-Type` correcto. Un sitemap con **`<loc>` vacío** (XML inválido) también puede hacer fallar la lectura: la plantilla del tema omite esas entradas.
 
 Referencias: [Google Search Central](https://developers.google.com/search/docs?hl=es-419).
 

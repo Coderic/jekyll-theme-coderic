@@ -7,9 +7,9 @@ sitemap: false
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% comment %}
   jekyll-polyglot: en default_lang, page.url es la ruta sin prefijo (/foo.html).
-  Archivo bajo assets/ para que Jekyll 4 ThemeAssetsReader lo cargue (permalink sigue siendo /sitemap.xml).
-  Se emite una entrada por cada idioma en site.languages (alineado con hreflang).
-  sitemap.xml esta en exclude_from_localization: solo se genera en la pasada default_lang.
+  Archivo bajo assets/ para ThemeAssetsReader. Omite <url> si <loc> queda vacío (XML inválido).
+  Se emite una entrada por cada idioma en site.languages.
+  sitemap.xml en exclude_from_localization: una sola pasada default_lang.
 {% endcomment %}
 {% assign collections = site.collections | where_exp: 'collection', 'collection.output != false' %}
 {% for collection in collections %}
@@ -18,16 +18,19 @@ sitemap: false
     {% assign purl = doc.url | replace: '/index.html', '/' %}
     {% for lang in site.languages %}
       {% if lang == site.default_lang %}
-        {% assign _loc = purl | absolute_url %}
+        {% assign _loc = purl | absolute_url | strip %}
       {% else %}
         {% capture _loc %}{{ site.url }}{{ site.baseurl }}/{{ lang }}{{ purl }}{% endcapture %}
+        {% assign _loc = _loc | strip %}
       {% endif %}
+    {% if _loc != "" %}
   <url>
     <loc>{{ _loc | xml_escape }}</loc>
       {% if doc.last_modified_at or doc.date %}
     <lastmod>{{ doc.last_modified_at | default: doc.date | date_to_xmlschema }}</lastmod>
       {% endif %}
   </url>
+    {% endif %}
     {% endfor %}
   {% endfor %}
 {% endfor %}
@@ -37,16 +40,19 @@ sitemap: false
   {% assign purl = page.url | replace: '/index.html', '/' %}
   {% for lang in site.languages %}
     {% if lang == site.default_lang %}
-      {% assign _loc = purl | absolute_url %}
+      {% assign _loc = purl | absolute_url | strip %}
     {% else %}
       {% capture _loc %}{{ site.url }}{{ site.baseurl }}/{{ lang }}{{ purl }}{% endcapture %}
+      {% assign _loc = _loc | strip %}
     {% endif %}
+    {% if _loc != "" %}
   <url>
     <loc>{{ _loc | xml_escape }}</loc>
     {% if page.last_modified_at %}
     <lastmod>{{ page.last_modified_at | date_to_xmlschema }}</lastmod>
     {% endif %}
   </url>
+    {% endif %}
   {% endfor %}
 {% endfor %}
 
@@ -56,10 +62,13 @@ sitemap: false
     {% assign ext = file.extname | downcase %}
     {% if html_exts contains ext %}
       {% unless file.name == "404.html" %}
+        {% assign _loc = file.path | replace: '/index.html', '/' | absolute_url | strip %}
+        {% if _loc != "" %}
   <url>
-    <loc>{{ file.path | replace: '/index.html', '/' | absolute_url | xml_escape }}</loc>
+    <loc>{{ _loc | xml_escape }}</loc>
     <lastmod>{{ file.modified_time | date_to_xmlschema }}</lastmod>
   </url>
+        {% endif %}
       {% endunless %}
     {% endif %}
   {% endunless %}
