@@ -1,0 +1,63 @@
+{% comment %}
+  Sets seo_title and seo_description for <title>, meta description, Open Graph and Twitter.
+  Supports: net_page, i18n_source, i18n, pages_data_key / org|impact|governance sections, fallbacks.
+{% endcomment %}
+{% assign pd = nil %}
+{% if page.pages_data_key %}
+  {% case page.pages_data_key %}
+    {% when 'about' %}
+      {% assign pd = site.data[site.active_lang].pages.about %}
+    {% when 'privacy' %}
+      {% assign pd = site.data[site.active_lang].pages.privacy %}
+    {% when 'policies' %}
+      {% assign pd = site.data[site.active_lang].pages.policies %}
+    {% when 'legal' %}
+      {% assign pd = site.data[site.active_lang].pages.legal %}
+    {% when 'tos' %}
+      {% assign pd = site.data[site.active_lang].pages.tos %}
+    {% when 'history' %}
+      {% assign pd = site.data[site.active_lang].pages.history %}
+    {% when 'team' %}
+      {% assign pd = site.data[site.active_lang].pages.team %}
+    {% when 'join' %}
+      {% assign pd = site.data[site.active_lang].pages.join %}
+    {% when 'code_of_conduct' %}
+      {% assign pd = site.data[site.active_lang].pages.code_of_conduct %}
+    {% when 'security_policy' %}
+      {% assign pd = site.data[site.active_lang].pages.security_policy %}
+    {% when 'contributing' %}
+      {% assign pd = site.data[site.active_lang].pages.contributing %}
+    {% when 'contributor_agreement' %}
+      {% assign pd = site.data[site.active_lang].pages.contributor_agreement %}
+    {% when 'anti_spam' %}
+      {% assign pd = site.data[site.active_lang].pages.anti_spam %}
+    {% when 'habeas_data' %}
+      {% assign pd = site.data[site.active_lang].pages.habeas_data %}
+  {% endcase %}
+{% elsif page.org_section %}
+  {% assign pd = site.data[site.active_lang].organization[page.org_section] %}
+{% elsif page.impact_section %}
+  {% assign pd = site.data[site.active_lang].impact[page.impact_section] %}
+{% elsif page.governance_section %}
+  {% assign pd = site.data[site.active_lang].governance[page.governance_section] %}
+{% endif %}
+{% assign _ui = site.data[site.active_lang].ui %}
+{% if page.net_page %}
+  {% assign _np = site.data[site.active_lang].pages[page.net_page] %}
+  {% assign seo_title = _np.meta_title | default: _np.title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = _np.meta_description | default: _np.hero.description | default: page.description | default: site.description %}
+{% elsif page.i18n_source %}
+  {% assign _seo = site.data[site.active_lang][page.i18n_source] %}
+  {% assign seo_title = _seo.meta_title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = _seo.meta_description | default: page.description | default: site.description %}
+{% elsif page.i18n %}
+  {% assign _seo = _ui[page.i18n] %}
+  {% assign seo_title = _seo.meta_title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = _seo.meta_description | default: page.description | default: site.description %}
+{% elsif pd %}
+  {% assign seo_title = pd.title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = pd.description | default: page.description | default: site.description %}
+{% else %}
+  {% assign seo_title = page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = page.description | default: site.description %}
+{% endif %}

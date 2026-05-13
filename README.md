@@ -8,25 +8,9 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your Jekyll site's `Gemfile`:
+Con **`remote_theme: Coderic/jekyll-theme-coderic`**, Jekyll fusiona el `_config.yml` del tema. **No hace falta** `jekyll-sitemap`: el archivo **`sitemap.xml`** del tema (Liquid) lista cada URL **por idioma** (`site.languages`), compatible con **jekyll-polyglot**.
 
-```ruby
-gem "jekyll-theme-coderic"
-```
-
-And add this line to your Jekyll site's `_config.yml`:
-
-```yaml
-theme: jekyll-theme-coderic
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install jekyll-theme-coderic
+Instalación publicando el tema como gema Ruby: añadí `gem "jekyll-theme-coderic"` al `Gemfile` y en `_config.yml` usá `theme: jekyll-theme-coderic`. Luego ejecutá `bundle` (o `gem install jekyll-theme-coderic`).
 
 ## Usage
 
@@ -52,11 +36,21 @@ Los enlaces internos del menú pasan por `_includes/coderic_i18n_href.html` para
 
 El conmutador de idioma del subnav usa los tags Liquid **`static_href` / `endstatic_href`** de Polyglot en los enlaces del menú. Los sitios sin Polyglot deben usar otro include o no incluir este bloque tal cual.
 
-### Cabecera (`head`)
+### Cabecera (`head`) y SEO
 
-`_includes/head.html` define `<title>` y meta description usando `page.i18n_source` / `page.i18n` y `_data/<lang>/…` cuando aplica; si no, cae en `page.title` / `page.description`. Compatible con **jekyll-polyglot** (`site.active_lang`). Opcional: `site.noindex` añade `robots` noindex.
+- **`_includes/seo_resolve.html`**: resuelve `<title>` y meta description para `page.net_page`, `page.i18n_source`, `page.i18n`, datos por `page.pages_data_key` y secciones `organization` / `impact` / `governance`, y fallbacks (`page.title`, `site.portal_name`, etc.).
+- **`_includes/head.html`**: aplica esa resolución, añade **`rel="canonical"`**, alternates **`hreflang`** (más **`x-default`**), meta **Open Graph** (`og:title`, `og:description`, `og:url`, `og:type`, `og:locale`) y **Twitter Card** (`summary`). Con **`site.url`** vacío (demo local), se omiten canonical/OG para no emitir URLs rotas.
+- Compatible con **jekyll-polyglot** (`site.active_lang`). Opcional: **`site.noindex`** añade meta robots noindex y `robots.txt` con `Disallow: /`.
 
-TODO: Describe your available layouts, includes, sass and/or assets beyond subnav.
+### Sitemap y `robots.txt`
+
+- **`sitemap.xml`** (plantilla en la raíz del tema): recorre colecciones, `site.html_pages` y archivos estáticos (`.htm`/`.html`/`.xhtml`/`.pdf`) como el plugin oficial; para **cada** recurso HTML emite una entrada **por idioma** en `site.languages` (idioma por defecto con `absolute_url`; resto `/{lang}{path}`), alineado con las `hreflang` del `head`. Con Polyglot, `page.url` en la pasada `default_lang` no lleva prefijo; sin duplicar por idioma el sitemap omitía `/es/...`.
+- El archivo está en **`exclude_from_localization`**: un solo `/sitemap.xml` en la raíz del sitio generado, como recomienda Polyglot.
+- En producción, fijá **`url`** (y **`baseurl`**) en `_config.yml`.
+- **`robots.txt`** (plantilla Liquid en la raíz del tema): si no es staging (`noindex: false`), incluye **`Allow: /`** y **`Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml`**. `sitemap.xml` y `robots.txt` están en **`exclude_from_localization`** del tema para Polyglot.
+- Por defecto **`sitemap: false`** en el front matter de **`callback.html`**, **`profile.html`** y **`hello-world.html`** del tema; en otras páginas usá `sitemap: false` cuando no deban indexarse.
+
+Referencias: [Google Search Central](https://developers.google.com/search/docs?hl=es-419).
 
 ## Contributing
 
@@ -68,8 +62,7 @@ To set up your environment to develop this theme, run `bundle install`.
 
 Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
 
-When your theme is released, only the files in `_layouts`, `_includes`, `_sass` and `assets` tracked with Git will be bundled.
-To add a custom directory to your theme-gem, please edit the regexp in `jekyll-theme-coderic.gemspec` accordingly.
+When your theme is released, the files tracked in `jekyll-theme-coderic.gemspec` are bundled (layouts, includes such as `seo_resolve.html`, `_config.yml`, `robots.txt`, páginas raíz OAuth, etc.). Edit the regexp in the gemspec if you add new top-level assets to the gem.
 
 ## OAuth 2.0 (ensayo / staging)
 

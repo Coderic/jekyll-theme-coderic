@@ -61,7 +61,7 @@ cta_text: "Deploy Architecture"
 # Avoid loading plugins or themes that conflict with local testing
 # (Empty theme variable causes Gem::MissingSpecError, so we omit it entirely)
 
-# ─── Internationalization (jekyll-polyglot) ───────────────────────────────────
+# ─── Internationalization (jekyll-polyglot); sitemap: sitemap.xml en raíz del tema
 plugins:
   - jekyll-polyglot
 
@@ -76,4 +76,3 @@ exclude_from_localization:
   - "robots.txt"
   - "sitemap.xml"
 parallel_localization: false  # Required on Windows; set to true on Linux/Mac CI
-
