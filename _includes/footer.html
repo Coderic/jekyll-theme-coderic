@@ -23,7 +23,7 @@
                     <li><a href="{{ portal_org }}history" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_history | default: 'History' }}</a></li>
                     <li><a href="{{ portal_org }}team" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_team | default: 'Team' }}</a></li>
                     <li><a href="{{ portal_org }}policies" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_policies | default: 'Policies' }}</a></li>
-                    <li><a href="{{ portal_org }}docs/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
+                    <li><a href="{% if site.docs_url %}{{ site.docs_url }}{% else %}{{ portal_org }}docs/{% endif %}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
                 </ul>
             </div>
 
