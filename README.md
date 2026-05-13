@@ -8,7 +8,7 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Con **`remote_theme: Coderic/jekyll-theme-coderic`**, Jekyll fusiona el `_config.yml` del tema. **No hace falta** `jekyll-sitemap`: el archivo **`assets/sitemap.xml`** del tema (Liquid, `permalink: /sitemap.xml`) lista cada URL **por idioma** (`site.languages`), compatible con **jekyll-polyglot**. En Jekyll 4 solo se cargan como páginas del tema los archivos bajo **`assets/`** (ThemeAssetsReader).
+Con **`remote_theme: Coderic/jekyll-theme-coderic`**, Jekyll fusiona el `_config.yml` del tema. **No hace falta** `jekyll-sitemap`: el archivo **`assets/sitemap.xml`** del tema (Liquid, `permalink: /sitemap.xml`) lista cada URL **por idioma** (`site.languages`), compatible con **jekyll-polyglot**. En Jekyll 4 solo se cargan como páginas del tema los archivos bajo **`assets/`** (ThemeAssetsReader). **`robots.txt`** (misma plantilla Liquid) va en la **raíz de cada portal**, no en la gema del tema.
 
 Instalación publicando el tema como gema Ruby: añadí `gem "jekyll-theme-coderic"` al `Gemfile` y en `_config.yml` usá `theme: jekyll-theme-coderic`. Luego ejecutá `bundle` (o `gem install jekyll-theme-coderic`).
 
@@ -47,7 +47,7 @@ El conmutador de idioma del subnav usa los tags Liquid **`static_href` / `endsta
 - **`assets/sitemap.xml`** (`permalink: /sitemap.xml`): recorre colecciones, `site.html_pages` y archivos estáticos (`.htm`/`.html`/`.xhtml`/`.pdf`) como el plugin oficial; para **cada** recurso HTML emite una entrada **por idioma** en `site.languages` (idioma por defecto con `absolute_url`; resto `/{lang}{path}`), alineado con las `hreflang` del `head`. Con Polyglot, `page.url` en la pasada `default_lang` no lleva prefijo; sin duplicar por idioma el sitemap omitía `/es/...`.
 - El archivo está en **`exclude_from_localization`**: un solo `/sitemap.xml` en la raíz del sitio generado, como recomienda Polyglot.
 - En producción, fijá **`url`** (y **`baseurl`**) en `_config.yml`.
-- **`assets/robots.txt`** (`permalink: /robots.txt`): si no es staging (`noindex: false`), incluye **`Allow: /`** y **`Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml`**. Ambos archivos están en **`exclude_from_localization`** del tema para Polyglot.
+- **`robots.txt`**: cada portal Coderic lo mantiene en la **raíz del repo del sitio** (misma plantilla Liquid que antes estaba en el tema): `noindex` → `Disallow: /`; si no, `Allow: /` y línea **`Sitemap:`** con `site.url` + `site.baseurl`. Mantener **`robots.txt`** en **`exclude_from_localization`** del sitio (junto con `sitemap.xml`) para Polyglot.
 - Por defecto **`sitemap: false`** en el front matter de **`callback.html`**, **`profile.html`** y **`hello-world.html`** del tema; en otras páginas usá `sitemap: false` cuando no deban indexarse.
 
 Referencias: [Google Search Central](https://developers.google.com/search/docs?hl=es-419).
@@ -62,7 +62,7 @@ To set up your environment to develop this theme, run `bundle install`.
 
 Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
 
-When your theme is released, the files tracked in `jekyll-theme-coderic.gemspec` are bundled (layouts, includes such as `seo_resolve.html`, `_config.yml`, `robots.txt`, páginas raíz OAuth, etc.). Edit the regexp in the gemspec if you add new top-level assets to the gem.
+When your theme is released, the files tracked in `jekyll-theme-coderic.gemspec` are bundled (layouts, includes such as `seo_resolve.html`, `_config.yml`, `assets/sitemap.xml`, páginas raíz OAuth, etc.). Cada portal del ecosistema incluye su propio `robots.txt` en la raíz del sitio. Edit the regexp in the gemspec if you add new top-level assets to the gem.
 
 ## OAuth 2.0 (ensayo / staging)
 

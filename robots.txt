@@ -3,7 +3,6 @@ layout: none
 permalink: /robots.txt
 ---
 
-{% comment %} Bajo assets/ para ThemeAssetsReader (Jekyll 4); permalink /robots.txt {% endcomment %}
 {% if site.noindex %}
 User-agent: *
 Disallow: /
