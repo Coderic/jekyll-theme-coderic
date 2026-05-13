@@ -54,6 +54,18 @@
   {% assign _seo = _ui[page.i18n] %}
   {% assign seo_title = _seo.meta_title | default: page.title | default: site.portal_name | default: site.title %}
   {% assign seo_description = _seo.meta_description | default: page.description | default: site.description %}
+{% elsif page.expansion_page == 'hub' %}
+  {% assign _ex = site.data[site.active_lang].expansion %}
+  {% assign seo_title = _ex.meta_title | default: _ex.title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = _ex.meta_description | default: _ex.hero.description | default: page.description | default: site.description %}
+{% elsif page.expansion_page == 'contact' %}
+  {% assign _ex = site.data[site.active_lang].expansion.contact %}
+  {% assign seo_title = _ex.meta_title | default: _ex.hero.title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = _ex.meta_description | default: _ex.hero.description | default: page.description | default: site.description %}
+{% elsif page.expansion_page == 'roadmap' %}
+  {% assign _ex = site.data[site.active_lang].roadmap %}
+  {% assign seo_title = _ex.meta_title | default: _ex.hero.title | default: page.title | default: site.portal_name | default: site.title %}
+  {% assign seo_description = _ex.meta_description | default: _ex.hero.description | default: page.description | default: site.description %}
 {% elsif pd %}
   {% assign seo_title = pd.title | default: page.title | default: site.portal_name | default: site.title %}
   {% assign seo_description = pd.description | default: page.description | default: site.description %}

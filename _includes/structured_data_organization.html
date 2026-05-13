@@ -1,0 +1,51 @@
+{% comment %}
+  JSON-LD Organization + WebSite (schema.org). Enable with site.structured_data on the portal.
+  Disable with site.structured_data.enabled: false.
+{% endcomment %}
+{% assign _sd = site.structured_data | default: nil %}
+{% if _sd and _sd.enabled != false and site.url and site.url != '' %}
+  {% assign _org = _sd.organization | default: nil %}
+  {% if _org %}
+    {% assign root_url = '/' | absolute_url | strip %}
+    {% assign _logo_rel = _org.logo | default: site.og_image %}
+    {% assign logo_url = _logo_rel | absolute_url | strip %}
+    {% assign org_name = _org.name | default: site.title %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ root_url }}#organization",
+      "name": {{ org_name | jsonify }}{% if _org.alternate_name %},
+      "alternateName": {{ _org.alternate_name | jsonify }}{% endif %},
+      "url": {{ root_url | jsonify }},
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ logo_url | jsonify }}
+      }{% if _sd.same_as and _sd.same_as.size > 0 %},
+      "sameAs": [
+{% for u in _sd.same_as %}
+        {{ u | strip | jsonify }}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+      ]{% endif %}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ root_url }}#website",
+      "url": {{ root_url | jsonify }},
+      "name": {{ org_name | jsonify }},
+      "publisher": {
+        "@id": "{{ root_url }}#organization"
+      }{% if site.languages and site.languages.size > 1 %},
+      "inLanguage": [
+{% for lang in site.languages %}
+        {{ lang | jsonify }}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+      ]{% endif %}
+    }
+  ]
+}
+</script>
+  {% endif %}
+{% endif %}

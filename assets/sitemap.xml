@@ -6,10 +6,9 @@ sitemap: false
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% comment %}
-  jekyll-polyglot: en default_lang, page.url es la ruta sin prefijo (/foo.html).
-  Archivo bajo assets/ para ThemeAssetsReader. Omite <url> si <loc> queda vacío (XML inválido).
-  Se emite una entrada por cada idioma en site.languages.
-  sitemap.xml en exclude_from_localization: una sola pasada default_lang.
+  jekyll-polyglot: default_lang pages use paths without a language prefix (/foo.html).
+  Theme file under assets/ for ThemeAssetsReader. Skip empty loc. One entry per site.languages.
+  sitemap.xml in exclude_from_localization: single default_lang pass.
 {% endcomment %}
 {% assign collections = site.collections | where_exp: 'collection', 'collection.output != false' %}
 {% for collection in collections %}

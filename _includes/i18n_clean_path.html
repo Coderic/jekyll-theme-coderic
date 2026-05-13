@@ -1,10 +1,15 @@
 {% comment %}
-  Polyglot: ruta sin prefijo de idioma (misma logica que hreflang en head).
-  Requiere site.languages. Define clean_path y clean_page_url.
+  Polyglot: path without language prefix (same rules as hreflang in head).
+  Use full "/{lang}" prefix stripping. Normalize page.url to start with "/".
 {% endcomment %}
 {% if site.languages %}
-  {% assign url_parts = page.url | split: '/' %}
-  {% assign first_part = url_parts[1] %}
+  {% assign _pu = page.url %}
+  {% assign _slice0 = _pu | slice: 0 %}
+  {% if _slice0 != '/' %}
+    {% assign _pu = '/' | append: _pu %}
+  {% endif %}
+  {% assign url_parts = _pu | split: '/' %}
+  {% assign first_part = url_parts[1] | default: '' %}
   {% assign is_lang_prefixed = false %}
   {% for lang in site.languages %}
     {% if lang == first_part and lang != site.default_lang %}
@@ -12,9 +17,17 @@
     {% endif %}
   {% endfor %}
   {% if is_lang_prefixed %}
-    {% assign clean_path = page.url | remove_first: '/' | remove_first: first_part %}
+    {% capture _lang_prefix %}/{{ first_part }}{% endcapture %}
+    {% assign clean_path = _pu | remove_first: _lang_prefix %}
+    {% if clean_path == '' %}
+      {% assign clean_path = '/' %}
+    {% endif %}
   {% else %}
-    {% assign clean_path = page.url %}
+    {% assign clean_path = _pu %}
   {% endif %}
-  {% assign clean_page_url = clean_path | default: '/' %}
+  {% if clean_path == '' %}
+    {% assign clean_page_url = '/' %}
+  {% else %}
+    {% assign clean_page_url = clean_path %}
+  {% endif %}
 {% endif %}

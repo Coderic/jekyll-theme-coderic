@@ -20,7 +20,6 @@
     {% else %}
       {% capture canonical_href %}{{ site.url }}{{ site.baseurl }}/{{ _al }}{{ clean_page_url | relative_url | replace: '//', '/' }}{% endcapture %}
     {% endif %}
-    {% capture href_xdefault %}{{ site.url }}{{ site.baseurl }}{{ clean_page_url | relative_url }}{% endcapture %}
     {% if site.active_lang == 'es' %}
       {% assign og_locale = 'es_ES' %}
     {% else %}
@@ -28,21 +27,44 @@
     {% endif %}
     <link rel="canonical" href="{{ canonical_href | strip }}" />
     {% if site.languages %}
+      {% assign _coderic_href_default = site.url | append: site.baseurl | append: clean_page_url %}
       {% for lang in site.languages %}
         {% if lang == site.default_lang %}
-          <link rel="alternate" hreflang="{{ lang }}" href="{{ site.url }}{{ site.baseurl }}{{ clean_page_url | relative_url }}" />
+          <link rel="alternate" hreflang="{{ lang }}" href="{{ _coderic_href_default }}" />
         {% else %}
           <link rel="alternate" hreflang="{{ lang }}" href="{{ site.url }}{{ site.baseurl }}/{{ lang }}{{ clean_page_url | relative_url | replace: '//', '/' }}" />
         {% endif %}
       {% endfor %}
-      <link rel="alternate" hreflang="x-default" href="{{ href_xdefault | strip }}" />
+      <link rel="alternate" hreflang="x-default" href="{{ _coderic_href_default }}" />
     {% endif %}
     <meta property="og:title" content="{{ seo_title | xml_escape }}" />
     <meta property="og:description" content="{{ seo_description | xml_escape }}" />
     <meta property="og:url" content="{{ canonical_href | strip }}" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="{{ og_locale }}" />
+    {% if site.languages and site.languages.size > 1 %}
+      {% for lang in site.languages %}
+        {% if lang == 'es' %}
+          {% assign _og_alt_loc = 'es_ES' %}
+        {% else %}
+          {% assign _og_alt_loc = 'en_US' %}
+        {% endif %}
+        {% if _og_alt_loc != og_locale %}
+    <meta property="og:locale:alternate" content="{{ _og_alt_loc }}" />
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if site.og_image and site.og_image != '' %}
+      {% assign _og_image_url = site.og_image | absolute_url | strip %}
+    <meta property="og:image" content="{{ _og_image_url }}" />
+      {% if site.og_image_alt and site.og_image_alt != '' %}
+    <meta property="og:image:alt" content="{{ site.og_image_alt | xml_escape }}" />
+      {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="{{ _og_image_url }}" />
+    {% else %}
     <meta name="twitter:card" content="summary" />
+    {% endif %}
     <meta name="twitter:title" content="{{ seo_title | xml_escape }}" />
     <meta name="twitter:description" content="{{ seo_description | xml_escape }}" />
     {% endif %}
@@ -52,9 +74,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Red+Hat+Display:wght@400;600&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
 
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Auth0 SPA JS SDK (oficial) -->
+    <!-- Phosphor Icons (defer: avoid blocking first paint) -->
+    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Auth0 SPA JS SDK -->
     <script defer src="https://cdn.auth0.com/js/auth0-spa-js/2.4/auth0-spa-js.production.js"></script>
 
     <style id="coderic-theme-variables">
@@ -64,7 +86,7 @@
             --bg-panel: rgba(0, 0, 0, 0.05);
             --border-surface: rgba(0, 0, 0, 0.1);
             --text-base: #0c0a09; /* stone-950 */
-            --text-muted: #292524; /* stone-800 — better contrast on light */
+            --text-muted: #292524; /* stone-800 */
         }
         .dark {
             --bg-surface: #050505;
@@ -72,7 +94,7 @@
             --bg-panel: rgba(255, 255, 255, 0.03);
             --border-surface: rgba(255, 255, 255, 0.08);
             --text-base: #fafaf9; /* stone-50 */
-            --text-muted: #d6d3d1; /* stone-300 — much better contrast on dark */
+            --text-muted: #d6d3d1; /* stone-300 */
         }
 
         /* Brand surfaces: solid colors only (no decorative gradients on content) */
@@ -94,7 +116,7 @@
             vertical-align: middle;
         }
 
-        /* Cabecera: mismo degradé, tamaño acotado al bloque del logo */
+        /* Header: gradient brand text, size clamped to logo block */
         #global-header .brand-coderic {
             font-size: clamp(1.2rem, 2.4vw, 2rem);
             letter-spacing: -1.5px;
@@ -113,4 +135,5 @@
     </script>
 
     <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+    {% include structured_data_organization.html %}
 </head>
