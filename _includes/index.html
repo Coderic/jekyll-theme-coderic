@@ -8,9 +8,10 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-coderic-500 animate-pulse"></span>
                 {{ t.hero.badge | default: 'Theme Preview' }}
             </div>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight mb-8">
-                {{ t.hero.title_part1 | default: 'Uncompromising' }} <span class="text-coderic-500">{{ t.hero.title_part2 | default: 'Enterprise' }}</span> {{ t.hero.title_part3 | default: 'Scale.' }}
-            </h1>
+            {% assign hp1 = t.hero.title_part1 | default: 'Uncompromising' %}
+            {% assign hp2 = t.hero.title_part2 | default: 'Enterprise' %}
+            {% assign hp3 = t.hero.title_part3 | default: 'Scale.' %}
+            {% include coderic-display-title.html size="hero" part1=hp1 part2=hp2 part3=hp3 %}
             <p class="text-lg md:text-2xl text-muted mb-12 max-w-3xl leading-relaxed font-normal">
                 {{ t.hero.description | default: 'This is the local scaffolding environment running directly from the theme folder. The menu and layouts are loading correctly via site.data.subnav and the _layouts/default.html structure.' }}
             </p>

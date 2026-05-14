@@ -1,0 +1,26 @@
+{% comment %}
+  Titulo principal estilo coderic.com: base text-[var(--text-base)] + span opcional (defecto text-coderic-500).
+  Parametros:
+  - size: "hero" | "page" | "page_hero"
+  - part1, part2, part3: fragmentos (part2 vacio = sin acento, solo part1 [+ part3])
+  - accent_class: opcional, por defecto text-coderic-500
+  - extra_h1_class: clases extra en el h1 (p. ej. mb-4 tracking-tighter)
+  - weight: "bold" (defecto) o "black" (font-black)
+{% endcomment %}
+{% assign accent = include.accent_class | default: 'text-coderic-500' %}
+{% assign fw = 'font-bold' %}
+{% if include.weight == 'black' %}
+  {% assign fw = 'font-black' %}
+{% endif %}
+{% if include.size == 'page' %}
+  {% assign sz = 'text-4xl md:text-6xl lg:text-7xl font-display ' | append: fw | append: ' leading-tight mb-8' %}
+{% elsif include.size == 'page_hero' %}
+  {% assign sz = 'text-4xl md:text-7xl font-display ' | append: fw | append: ' leading-tight mb-8' %}
+{% else %}
+  {% assign sz = 'text-5xl md:text-7xl lg:text-8xl font-display ' | append: fw | append: ' leading-tight mb-8' %}
+{% endif %}
+{% assign extra = include.extra_h1_class | default: '' %}
+{% assign p2 = include.part2 | default: '' | strip %}
+{% assign p1 = include.part1 | default: '' | strip %}
+{% assign p3 = include.part3 | default: '' | strip %}
+<h1 class="{{ sz }} text-[var(--text-base)] {{ extra }}">{% if p2 != '' %}{% if p1 != '' %}{{ include.part1 }} {% endif %}<span class="{{ accent }}">{{ include.part2 }}</span>{% if p3 != '' %} {{ include.part3 }}{% endif %}{% else %}{% if p1 != '' %}{{ include.part1 }}{% endif %}{% if p1 != '' and p3 != '' %} {% endif %}{% if p3 != '' %}{{ include.part3 }}{% endif %}{% endif %}</h1>
