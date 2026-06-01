@@ -106,6 +106,8 @@ footer:
   col_legal: "Marco Legal"
   col_involved: "Involúcrate"
   col_ecosystem: "Ecosistema"
+  col_ecosystem_commercial: "Comercial"
+  col_ecosystem_nonprofit: "Nonprofit"
   link_about: "Sobre Nosotros"
   link_history: "Historia"
   link_team: "Equipo"

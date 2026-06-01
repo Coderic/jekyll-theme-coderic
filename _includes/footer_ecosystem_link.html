@@ -1,0 +1,12 @@
+{% comment %}
+  Footer ecosystem link. Params: portal_id, href, label, default (fallback label).
+{% endcomment %}
+{% assign _active = false %}
+{% if include.portal_id == 'hub' %}
+  {% if site.portal_id == 'io' or site.portal_id == 'hub' %}
+    {% assign _active = true %}
+  {% endif %}
+{% elsif site.portal_id == include.portal_id %}
+  {% assign _active = true %}
+{% endif %}
+<li><a href="{{ include.href }}" class="{% if _active %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ include.label | default: include.default }}</a></li>

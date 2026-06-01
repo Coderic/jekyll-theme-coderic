@@ -102,6 +102,8 @@ footer:
   col_legal: "Legal Framework"
   col_involved: "Get Involved"
   col_ecosystem: "Ecosystem"
+  col_ecosystem_commercial: "Commercial"
+  col_ecosystem_nonprofit: "Nonprofit"
   link_about: "About Us"
   link_history: "History"
   link_team: "Team"
