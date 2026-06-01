@@ -6,9 +6,9 @@
             <div class="lg:col-span-2">
                 <a href="{{ site.url | default: '/' }}" class="flex items-center gap-3 group mb-6" itemscope itemtype="https://schema.org/Corporation">
                     <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-12 sm:h-14 transition-transform duration-300 group-hover:scale-105">
-                    <div class="flex flex-col">
-                        <span class="brand-coderic select-none uppercase">CODERIC</span>
-                        <span class="text-[14px] font-bold text-coderic-600 tracking-[0.5px] uppercase leading-none mt-1">{{ t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase }}</span>
+                    <div class="flex min-w-0 flex-col">
+                        {% assign coderic_wordmark_portal = t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase %}
+                        {% include coderic_logo_wordmark.html portal_label=coderic_wordmark_portal gradient_prefix='coderic-footer-logo' svg_class='h-8 sm:h-10 w-auto max-w-full' %}
                     </div>
                 </a>
                 <p class="text-gray-300 text-sm leading-relaxed max-w-sm">
@@ -60,7 +60,7 @@
                 <ul class="space-y-4">
                     <li><a href="{{ portal_coderic_com }}" class="{% if site.portal_id == 'business' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_business | default: 'Coderic Business' }}</a></li>
                     <li><a href="{{ portal_network }}" class="{% if site.portal_id == 'network' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_network | default: 'Coderic Network' }}</a></li>
-                    <li><a href="{{ portal_org }}" class="{% if site.portal_id == 'organization' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_org | default: 'Coderic Organization' }}</a></li>
+                    <li><a href="{{ portal_org }}" class="{% if site.portal_id == 'organization' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_org | default: 'Coderic Corporate' }}</a></li>
                     <li><a href="{{ portal_hub_io }}" class="{% if site.portal_id == 'hub' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_hub | default: 'Coderic Hub' }}</a></li>
                     <li><a href="{{ portal_financial }}" class="{% if site.portal_id == 'financial' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_financial | default: 'Coderic Financial' }}</a></li>
                     <li><a href="{{ portal_cloud }}" class="{% if site.portal_id == 'cloud' %}text-coderic-500 font-medium{% else %}text-gray-300 hover:text-white transition-colors{% endif %} text-sm">{{ t.footer.link_cloud | default: 'Coderic Cloud' }}</a></li>

@@ -1,0 +1,48 @@
+{% comment %}
+  Wordmark SVG Coderic (compartido cabecera y pie). Paridad magento2-theme-coderic logo/wordmark.phtml.
+
+  Parametros:
+    portal_label (requerido) - etiqueta del portal, p. ej. BUSINESS
+    gradient_prefix (opcional, default coderic-header-logo) - prefijo unico para ids de gradiente
+    svg_class (opcional) - clases Tailwind del <svg>
+{% endcomment %}
+{% assign wl_portal = include.portal_label | default: 'PORTAL' %}
+{% assign wl_prefix = include.gradient_prefix | default: 'coderic-header-logo' %}
+{% assign wl_metal_id = wl_prefix | append: '-metal' %}
+{% assign wl_brand_id = wl_prefix | append: '-brand' %}
+{% assign wl_svg_class = include.svg_class | default: 'h-8 sm:h-10 w-auto max-w-full' %}
+<svg
+    class="{{ wl_svg_class }}"
+    viewBox="0 0 220 60"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMinYMid meet"
+    overflow="visible"
+    role="img"
+    aria-hidden="true"
+>
+    <defs>
+        <linearGradient id="{{ wl_metal_id }}" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="hsl(0,0%,58%)" />
+            <stop offset="47%" stop-color="hsl(0,0%,80%)" />
+            <stop offset="53%" stop-color="hsl(0,0%,38%)" />
+            <stop offset="100%" stop-color="hsl(0,0%,58%)" />
+        </linearGradient>
+        <linearGradient id="{{ wl_brand_id }}" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#fec963" />
+            <stop offset="50%" stop-color="#fea032" />
+            <stop offset="100%" stop-color="#ff5c0a" />
+        </linearGradient>
+    </defs>
+    <text
+        x="0"
+        y="35"
+        fill="url(#{{ wl_metal_id }})"
+        style="font-size:32px;font-weight:600;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:-1.5px;"
+    >CODERIC</text>
+    <text
+        x="0"
+        y="52"
+        fill="url(#{{ wl_brand_id }})"
+        style="font-size:16px;font-weight:600;font-family:'Outfit','Red Hat Display',sans-serif;letter-spacing:0.5px;text-transform:uppercase;"
+    >{{ wl_portal }}</text>
+</svg>

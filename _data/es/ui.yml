@@ -8,7 +8,7 @@ nav:
   network: "Network"
   io: "Hub"
   development: "Desarrollo"
-  organization: "Organización"
+  organization: "Corporación"
   store: "Tienda"
 
 # ── Sección Hero ─────────────────────────────────────────────────────────────
@@ -124,7 +124,7 @@ footer:
   link_tos: "Términos y Condiciones"
   link_business: "Coderic Negocios"
   link_network: "Coderic Network"
-  link_org: "Coderic Organización"
+  link_org: "Corporación Coderic"
   link_hub: "Coderic Hub"
   link_financial: "Coderic Financiero"
   link_cloud: "Coderic Cloud"
