@@ -2,6 +2,8 @@
 
 # ── Navegación del Cabezal ───────────────────────────────────────────────────
 nav:
+  commercial_group: "Compañía"
+  corporation_group: "Corporación"
   business: "Negocios"
   financial: "Financiero"
   cloud: "Cloud"

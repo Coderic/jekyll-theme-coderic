@@ -3,27 +3,29 @@
 {% endcomment %}
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
-{% assign portals = site.data.portals.portals %}
-{% if active_lang == default_lang %}
-  {% assign portal_coderic_com = portals.business %}
-  {% assign portal_financial = portals.financial %}
-  {% assign portal_cloud = portals.cloud %}
-  {% assign portal_network = portals.network %}
-  {% assign portal_io = portals.hub %}
-  {% assign portal_dev = portals.development %}
-  {% assign portal_org = portals.organization %}
-  {% assign portal_store = portals.store %}
-  {% assign portal_hub_io = portals.hub %}
-{% else %}
-  {% assign portal_coderic_com = portals.business | append: active_lang | append: '/' %}
-  {% assign portal_financial = portals.financial | append: active_lang | append: '/' %}
-  {% assign portal_cloud = portals.cloud | append: active_lang | append: '/' %}
-  {% assign portal_network = portals.network | append: active_lang | append: '/' %}
-  {% assign portal_io = portals.hub | append: active_lang | append: '/' %}
-  {% assign portal_dev = portals.development | append: active_lang | append: '/' %}
-  {% assign portal_org = portals.organization | append: active_lang | append: '/' %}
-  {% assign portal_store = portals.store | append: active_lang | append: '/' %}
-  {% assign portal_hub_io = portals.hub | append: active_lang | append: '/' %}
+{% assign portal_defs = site.data.portals.portals %}
+
+{% comment %}Compatibilidad: variables nombradas usadas en footer y enlaces legacy{% endcomment %}
+{% assign portal_coderic_com = portal_defs.business.url %}
+{% assign portal_financial = portal_defs.financial.url %}
+{% assign portal_cloud = portal_defs.cloud.url %}
+{% assign portal_network = portal_defs.network.url %}
+{% assign portal_io = portal_defs.io.url %}
+{% assign portal_dev = portal_defs.development.url %}
+{% assign portal_org = portal_defs.organization.url %}
+{% assign portal_store = portal_defs.store.url %}
+{% assign portal_hub_io = portal_defs.io.url %}
+
+{% if active_lang != default_lang %}
+  {% assign portal_coderic_com = portal_defs.business.url | append: active_lang | append: '/' %}
+  {% assign portal_financial = portal_defs.financial.url | append: active_lang | append: '/' %}
+  {% assign portal_cloud = portal_defs.cloud.url | append: active_lang | append: '/' %}
+  {% assign portal_network = portal_defs.network.url | append: active_lang | append: '/' %}
+  {% assign portal_io = portal_defs.io.url | append: active_lang | append: '/' %}
+  {% assign portal_dev = portal_defs.development.url | append: active_lang | append: '/' %}
+  {% assign portal_org = portal_defs.organization.url | append: active_lang | append: '/' %}
+  {% assign portal_store = portal_defs.store.url | append: active_lang | append: '/' %}
+  {% assign portal_hub_io = portal_defs.io.url | append: active_lang | append: '/' %}
 {% endif %}
 
 {% comment %}

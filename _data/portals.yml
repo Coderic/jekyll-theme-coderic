@@ -1,10 +1,41 @@
-portals:
-  business: "https://coderic.com/"
-  financial: "https://financial.coderic.com/"
-  cloud: "https://coderic.cloud/"
-  network: "https://coderic.net/"
-  hub: "https://io.coderic.net/"
-  development: "https://coderic.dev/"
-  organization: "https://coderic.org/"
-  store: "https://coderic.store/"
+# Metadatos de portales del ecosistema Coderic.
+# Cada entrada agrupa url + brazo institucional (arm).
+# navigation define orden y agrupación del menú global.
 
+navigation:
+  commercial:
+    - business
+    - financial
+    - cloud
+    - store
+  nonprofit:
+    - organization
+    - development
+    - network
+    - io
+
+portals:
+  business:
+    url: "https://coderic.com/"
+    arm: commercial
+  financial:
+    url: "https://financial.coderic.com/"
+    arm: commercial
+  cloud:
+    url: "https://coderic.cloud/"
+    arm: commercial
+  store:
+    url: "https://coderic.store/"
+    arm: commercial
+  organization:
+    url: "https://coderic.org/"
+    arm: nonprofit
+  development:
+    url: "https://coderic.dev/"
+    arm: nonprofit
+  network:
+    url: "https://coderic.net/"
+    arm: nonprofit
+  io:
+    url: "https://io.coderic.net/"
+    arm: nonprofit
