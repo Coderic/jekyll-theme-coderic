@@ -18,29 +18,17 @@
             </a>
         </div>
 
-        {% comment %}Navegación desde portals.yml: navigation + portals[].url/arm{% endcomment %}
-        {% assign nav_groups = site.data.portals.navigation %}
-        {% assign portal_defs = site.data.portals.portals %}
+        {% comment %}Orden: comercial (4) · separador · corporación (4). Sin etiquetas de grupo en pantalla.{% endcomment %}
         <nav class="flex min-w-0 flex-1 items-center justify-start gap-3 sm:gap-4 md:gap-5 lg:gap-6 overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-1" aria-label="Portales Coderic">
-            <span class="sr-only">{{ t.nav.commercial_group | default: 'Commercial' }}</span>
-            {% for portal_key in nav_groups.commercial %}
-              {% assign portal_entry = portal_defs[portal_key] %}
-              {% assign portal_href = portal_entry.url %}
-              {% if active_lang != default_lang %}
-                {% assign portal_href = portal_entry.url | append: active_lang | append: '/' %}
-              {% endif %}
-              <a href="{{ portal_href }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == portal_key %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav[portal_key] | default: portal_key }}</a>
-            {% endfor %}
-            <span class="hidden sm:block shrink-0 w-px h-6 bg-surface-border mx-0.5" aria-hidden="true"></span>
-            <span class="sr-only">{{ t.nav.corporation_group | default: 'Corporation' }}</span>
-            {% for portal_key in nav_groups.nonprofit %}
-              {% assign portal_entry = portal_defs[portal_key] %}
-              {% assign portal_href = portal_entry.url %}
-              {% if active_lang != default_lang %}
-                {% assign portal_href = portal_entry.url | append: active_lang | append: '/' %}
-              {% endif %}
-              <a href="{{ portal_href }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == portal_key %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav[portal_key] | default: portal_key }}</a>
-            {% endfor %}
+            <a href="{{ portal_coderic_com }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'business' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.business | default: 'Business' }}</a>
+            <a href="{{ portal_financial }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'financial' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.financial | default: 'Financial' }}</a>
+            <a href="{{ portal_cloud }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'cloud' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.cloud | default: 'Cloud' }}</a>
+            <a href="{{ portal_store }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'store' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.store | default: 'Store' }}</a>
+            <span class="hidden sm:block shrink-0 w-px h-5 bg-surface-border/80 mx-0.5" aria-hidden="true"></span>
+            <a href="{{ portal_network }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'network' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.network | default: 'Network' }}</a>
+            <a href="{{ portal_io }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'io' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.io | default: 'Hub' }}</a>
+            <a href="{{ portal_dev }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'development' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.development | default: 'Development' }}</a>
+            <a href="{{ portal_org }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if site.portal_id == 'organization' %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ t.nav.organization | default: 'Organization' }}</a>
         </nav>
 
         <!-- Acciones: ancho natural (evita robar ~320px fijos al nav en viewports justos) -->

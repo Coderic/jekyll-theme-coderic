@@ -9,10 +9,10 @@ navigation:
     - cloud
     - store
   nonprofit:
-    - organization
-    - development
     - network
     - io
+    - development
+    - organization
 
 portals:
   business:

@@ -2,8 +2,6 @@
 
 # ── Header Navigation ─────────────────────────────────────────────────────────
 nav:
-  commercial_group: "Company"
-  corporation_group: "Corporate"
   business: "Business"
   financial: "Financial"
   cloud: "Cloud"
