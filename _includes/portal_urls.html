@@ -1,9 +1,16 @@
 {% comment %}
   Portal roots for Polyglot: unprefixed when active_lang == default_lang, else /{lang}/
+  Políticas e institucional: ancla del brazo activo (company → coderic.com, corporation → coderic.org).
 {% endcomment %}
 {% assign default_lang = site.default_lang | default: 'en' %}
 {% assign active_lang = site.active_lang | default: default_lang %}
 {% assign portal_defs = site.data.portals.portals %}
+{% assign legal_hosts = site.data.portals.legal_anchor %}
+
+{% assign portal_arm = site.portal_arm %}
+{% if portal_arm == nil or portal_arm == '' %}
+  {% assign portal_arm = portal_defs[site.portal_id].arm | default: 'corporation' %}
+{% endif %}
 
 {% comment %}Compatibilidad: variables nombradas usadas en footer y enlaces legacy{% endcomment %}
 {% assign portal_coderic_com = portal_defs.business.url %}
@@ -28,17 +35,46 @@
   {% assign portal_hub_io = portal_defs.io.url | append: active_lang | append: '/' %}
 {% endif %}
 
-{% comment %}
-  Políticas comunitarias publicadas en coderic.org: siempre enlaces absolutos al portal Organization.
-  Con polyglot, si el idioma activo no es el default del sitio, se usa /{lang}/… (p. ej. /es/…).
-{% endcomment %}
-{% assign org_policy_host = 'https://coderic.org' %}
-{% if active_lang != default_lang %}
-  {% assign org_policy_base = org_policy_host | append: '/' | append: active_lang %}
+{% comment %}Ancla legal del brazo activo{% endcomment %}
+{% if portal_arm == 'company' %}
+  {% assign legal_anchor_host = legal_hosts.company %}
 {% else %}
-  {% assign org_policy_base = org_policy_host %}
+  {% assign legal_anchor_host = legal_hosts.corporation %}
 {% endif %}
-{% assign org_policy_contributing = org_policy_base | append: '/contributing.html' %}
-{% assign org_policy_code_of_conduct = org_policy_base | append: '/code-of-conduct.html' %}
-{% assign org_policy_security = org_policy_base | append: '/security-policy.html' %}
-{% assign org_policy_contributor_agreement = org_policy_base | append: '/contributor-agreement.html' %}
+{% if active_lang != default_lang %}
+  {% assign legal_anchor_base = legal_anchor_host | append: '/' | append: active_lang %}
+{% else %}
+  {% assign legal_anchor_base = legal_anchor_host %}
+{% endif %}
+{% assign policy_contributing = legal_anchor_base | append: '/contributing.html' %}
+{% assign policy_code_of_conduct = legal_anchor_base | append: '/code-of-conduct.html' %}
+{% assign policy_security = legal_anchor_base | append: '/security-policy.html' %}
+{% assign policy_contributor_agreement = legal_anchor_base | append: '/contributor-agreement.html' %}
+{% assign policy_privacy = legal_anchor_base | append: '/privacy.html' %}
+{% assign policy_legal = legal_anchor_base | append: '/legal.html' %}
+{% assign policy_tos = legal_anchor_base | append: '/tos.html' %}
+{% assign policy_policies = legal_anchor_base | append: '/policies.html' %}
+{% assign policy_about = legal_anchor_base | append: '/about.html' %}
+
+{% comment %}Bases por brazo (referencia explícita si hace falta){% endcomment %}
+{% if active_lang != default_lang %}
+  {% assign company_policy_base = legal_hosts.company | append: '/' | append: active_lang %}
+  {% assign corp_policy_base = legal_hosts.corporation | append: '/' | append: active_lang %}
+{% else %}
+  {% assign company_policy_base = legal_hosts.company %}
+  {% assign corp_policy_base = legal_hosts.corporation %}
+{% endif %}
+{% assign company_policy_contributing = company_policy_base | append: '/contributing.html' %}
+{% assign company_policy_code_of_conduct = company_policy_base | append: '/code-of-conduct.html' %}
+{% assign company_policy_security = company_policy_base | append: '/security-policy.html' %}
+{% assign company_policy_contributor_agreement = company_policy_base | append: '/contributor-agreement.html' %}
+{% assign corp_policy_contributing = corp_policy_base | append: '/contributing.html' %}
+{% assign corp_policy_code_of_conduct = corp_policy_base | append: '/code-of-conduct.html' %}
+{% assign corp_policy_security = corp_policy_base | append: '/security-policy.html' %}
+{% assign corp_policy_contributor_agreement = corp_policy_base | append: '/contributor-agreement.html' %}
+
+{% comment %}Alias legacy (deprecado: usar policy_* del brazo activo){% endcomment %}
+{% assign org_policy_contributing = corp_policy_contributing %}
+{% assign org_policy_code_of_conduct = corp_policy_code_of_conduct %}
+{% assign org_policy_security = corp_policy_security %}
+{% assign org_policy_contributor_agreement = corp_policy_contributor_agreement %}

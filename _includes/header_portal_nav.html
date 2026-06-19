@@ -1,0 +1,44 @@
+{% comment %}
+  Portal nav for active arm (4 links). Requires portal_urls.html included first.
+{% endcomment %}
+{% assign portal_arm = site.portal_arm %}
+{% if portal_arm == nil or portal_arm == '' %}
+  {% assign portal_arm = portal_defs[site.portal_id].arm | default: 'corporation' %}
+{% endif %}
+{% assign nav_portal_ids = site.data.portals.navigation[portal_arm] %}
+{% for pid in nav_portal_ids %}
+  {% case pid %}
+    {% when 'business' %}
+      {% assign nav_href = portal_coderic_com %}
+      {% assign nav_label = t.nav.business | default: 'Business' %}
+    {% when 'financial' %}
+      {% assign nav_href = portal_financial %}
+      {% assign nav_label = t.nav.financial | default: 'Financial' %}
+    {% when 'cloud' %}
+      {% assign nav_href = portal_cloud %}
+      {% assign nav_label = t.nav.cloud | default: 'Cloud' %}
+    {% when 'store' %}
+      {% assign nav_href = portal_store %}
+      {% assign nav_label = t.nav.store | default: 'Store' %}
+    {% when 'network' %}
+      {% assign nav_href = portal_network %}
+      {% assign nav_label = t.nav.network | default: 'Network' %}
+    {% when 'io' %}
+      {% assign nav_href = portal_io %}
+      {% assign nav_label = t.nav.io | default: 'Hub' %}
+    {% when 'development' %}
+      {% assign nav_href = portal_dev %}
+      {% assign nav_label = t.nav.development | default: 'Development' %}
+    {% when 'organization' %}
+      {% assign nav_href = portal_org %}
+      {% assign nav_label = t.nav.organization | default: 'Corporate' %}
+    {% else %}
+      {% assign nav_href = '#' %}
+      {% assign nav_label = pid %}
+  {% endcase %}
+  {% assign nav_active = false %}
+  {% if site.portal_id == pid %}
+    {% assign nav_active = true %}
+  {% endif %}
+  <a href="{{ nav_href }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if nav_active %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ nav_label }}</a>
+{% endfor %}

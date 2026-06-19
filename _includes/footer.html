@@ -2,7 +2,7 @@
 {% assign t = site.data[active_lang].ui %}
 <footer class="border-t border-surface-border bg-black pt-20 pb-10 text-white" id="global-footer">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
             <div class="lg:col-span-2">
                 <a href="{{ site.url | default: '/' }}" class="flex items-center gap-3 group mb-6" itemscope itemtype="https://schema.org/Corporation">
                     <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-12 sm:h-14 transition-transform duration-300 group-hover:scale-105">
@@ -15,64 +15,86 @@
                     {{ t.footer.company_description | default: 'Corporation Oriented to the Development of Engineering Resources and Information for Commerce, the future of LATAM Software Engineering since 2004.' }}
                 </p>
             </div>
-            
+
             <div>
                 <h4 class="font-medium text-lg mb-6 text-white">{{ t.footer.col_organization | default: 'Corporate' }}</h4>
                 <ul class="space-y-4">
-                    <li><a href="{{ portal_org }}about" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_about | default: 'About Us' }}</a></li>
-                    <li><a href="{{ portal_org }}history" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_history | default: 'History' }}</a></li>
-                    <li><a href="{{ portal_org }}team" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_team | default: 'Team' }}</a></li>
-                    <li><a href="{{ portal_org }}policies" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_policies | default: 'Policies' }}</a></li>
-                    <li><a href="{% if site.docs_url %}{{ site.docs_url }}{% else %}{{ portal_org }}docs/{% endif %}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
+                    <li><a href="{{ policy_about }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_about | default: 'About Us' }}</a></li>
+                    {% if portal_arm == 'corporation' %}
+                    <li><a href="{{ legal_anchor_base }}/history.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_history | default: 'History' }}</a></li>
+                    <li><a href="{{ legal_anchor_base }}/team.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_team | default: 'Team' }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ policy_policies }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_policies | default: 'Policies' }}</a></li>
+                    {% if site.docs_url %}
+                    <li><a href="{{ site.docs_url }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
+                    {% elsif portal_arm == 'corporation' %}
+                    <li><a href="{{ portal_org }}docs/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_docs | default: 'Documentation' }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
             <div>
                 <h4 class="font-medium text-lg mb-6 text-white">{{ t.footer.col_legal | default: 'Legal Framework' }}</h4>
                 <ul class="space-y-4">
-                    <li><a href="{{ portal_org }}privacy" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_privacy | default: 'Privacy Policy' }}</a></li>
-                    <li><a href="{{ portal_org }}legal" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_legal | default: 'Legal Information' }}</a></li>
-                    <li><a href="{{ portal_org }}tos" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_tos | default: 'Terms and Conditions' }}</a></li>
+                    <li><a href="{{ policy_privacy }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_privacy | default: 'Privacy Policy' }}</a></li>
+                    <li><a href="{{ policy_legal }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_legal | default: 'Legal Information' }}</a></li>
+                    <li><a href="{{ policy_tos }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_tos | default: 'Terms and Conditions' }}</a></li>
                 </ul>
 
                 <h4 class="font-medium text-lg mt-8 mb-6 text-white">{{ t.footer.col_involved | default: 'Get Involved' }}</h4>
                 <ul class="space-y-4">
                     {% if site.portal_id == 'organization' %}
                     <li><a href="{{ '/join' | relative_url }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_join_alt | default: 'Join Coderic' }}</a></li>
-                    {% else %}
+                    {% elsif portal_arm == 'corporation' %}
                     <li><a href="{{ portal_dev }}freelancers/join-network.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_join_alt | default: 'Join Coderic' }}</a></li>
+                    {% else %}
+                    <li><a href="{{ portal_coderic_com }}partners/certification.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_join_alt | default: 'Join Coderic' }}</a></li>
                     {% endif %}
                     {% if site.portal_id == 'financial' %}
                     <li><a href="{{ '/socios/' | relative_url }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
-                    {% else %}
+                    {% elsif portal_arm == 'company' %}
                     <li><a href="{{ portal_coderic_com }}partners/" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_partner | default: 'Become a partner' }}</a></li>
                     {% endif %}
-                    <li><a href="{{ org_policy_contributing }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
-                    <li><a href="{{ org_policy_code_of_conduct }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_code_of_conduct | default: 'Code of conduct' }}</a></li>
-                    <li><a href="{{ org_policy_security }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_security | default: 'Security policy' }}</a></li>
-                    <li><a href="{{ org_policy_contributor_agreement }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributor_agreement | default: 'Contributor agreement' }}</a></li>
-                    <li><a href="{{ portal_org }}expansion/contact.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Sponsors' }}</a></li>
+                    <li><a href="{{ policy_contributing }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributing | default: 'Contributing' }}</a></li>
+                    <li><a href="{{ policy_code_of_conduct }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_code_of_conduct | default: 'Code of conduct' }}</a></li>
+                    <li><a href="{{ policy_security }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_security | default: 'Security policy' }}</a></li>
+                    <li><a href="{{ policy_contributor_agreement }}" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_contributor_agreement | default: 'Contributor agreement' }}</a></li>
+                    {% if portal_arm == 'corporation' %}
+                    <li><a href="{{ legal_anchor_base }}/expansion/contact.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Sponsors' }}</a></li>
+                    {% else %}
+                    <li><a href="{{ portal_coderic_com }}partners/certification.html" class="text-gray-300 hover:text-white transition-colors text-sm">{{ t.footer.link_sponsors | default: 'Contact' }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
             <div>
-                <h4 class="font-medium text-lg mb-4 text-white">{{ t.footer.col_ecosystem_commercial | default: 'Commercial' }}</h4>
+                <h4 class="font-medium text-lg mb-4 text-white">{{ t.footer.col_ecosystem | default: 'Portals' }}</h4>
                 <ul class="space-y-4">
-                    {% include footer_ecosystem_link.html portal_id='business' href=portal_coderic_com label=t.footer.link_business default='Coderic Business' %}
-                    {% include footer_ecosystem_link.html portal_id='financial' href=portal_financial label=t.footer.link_financial default='Coderic Financial' %}
-                    {% include footer_ecosystem_link.html portal_id='cloud' href=portal_cloud label=t.footer.link_cloud default='Coderic Cloud' %}
-                    {% include footer_ecosystem_link.html portal_id='store' href=portal_store label=t.footer.link_store default='Coderic Store' %}
-                </ul>
-                <h4 class="font-medium text-lg mt-8 mb-4 text-white">{{ t.footer.col_ecosystem_nonprofit | default: 'Nonprofit' }}</h4>
-                <ul class="space-y-4">
-                    {% include footer_ecosystem_link.html portal_id='network' href=portal_network label=t.footer.link_network default='Coderic Network' %}
-                    {% include footer_ecosystem_link.html portal_id='hub' href=portal_hub_io label=t.footer.link_hub default='Coderic Hub' %}
-                    {% include footer_ecosystem_link.html portal_id='development' href=portal_dev label=t.footer.link_dev default='Coderic Development' %}
-                    {% include footer_ecosystem_link.html portal_id='organization' href=portal_org label=t.footer.link_org default='Coderic Corporate' %}
+                    {% assign nav_portal_ids = site.data.portals.navigation[portal_arm] %}
+                    {% for pid in nav_portal_ids %}
+                      {% case pid %}
+                        {% when 'business' %}
+                          {% include footer_ecosystem_link.html portal_id='business' href=portal_coderic_com label=t.footer.link_business default='Coderic Business' %}
+                        {% when 'financial' %}
+                          {% include footer_ecosystem_link.html portal_id='financial' href=portal_financial label=t.footer.link_financial default='Coderic Financial' %}
+                        {% when 'cloud' %}
+                          {% include footer_ecosystem_link.html portal_id='cloud' href=portal_cloud label=t.footer.link_cloud default='Coderic Cloud' %}
+                        {% when 'store' %}
+                          {% include footer_ecosystem_link.html portal_id='store' href=portal_store label=t.footer.link_store default='Coderic Store' %}
+                        {% when 'network' %}
+                          {% include footer_ecosystem_link.html portal_id='network' href=portal_network label=t.footer.link_network default='Coderic Network' %}
+                        {% when 'io' %}
+                          {% include footer_ecosystem_link.html portal_id='hub' href=portal_hub_io label=t.footer.link_hub default='Coderic Hub' %}
+                        {% when 'development' %}
+                          {% include footer_ecosystem_link.html portal_id='development' href=portal_dev label=t.footer.link_dev default='Coderic Development' %}
+                        {% when 'organization' %}
+                          {% include footer_ecosystem_link.html portal_id='organization' href=portal_org label=t.footer.link_org default='Coderic Corporate' %}
+                      {% endcase %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
-        
+
         <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
             <p class="text-gray-400 text-sm">
                 &copy; 2004 - {{ 'now' | date: '%Y' }} Coderic
