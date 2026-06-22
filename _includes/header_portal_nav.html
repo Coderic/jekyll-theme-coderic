@@ -16,34 +16,46 @@
     {% when 'business' %}
       {% assign nav_href = portal_coderic_com %}
       {% assign nav_label = t.nav.business | default: 'Business' %}
+      {% assign nav_icon = 'ph-briefcase' %}
     {% when 'financial' %}
       {% assign nav_href = portal_financial %}
       {% assign nav_label = t.nav.financial | default: 'Financial' %}
+      {% assign nav_icon = 'ph-bank' %}
     {% when 'cloud' %}
       {% assign nav_href = portal_cloud %}
       {% assign nav_label = t.nav.cloud | default: 'Cloud' %}
+      {% assign nav_icon = 'ph-cloud' %}
     {% when 'store' %}
       {% assign nav_href = portal_store %}
       {% assign nav_label = t.nav.store | default: 'Store' %}
+      {% assign nav_icon = 'ph-storefront' %}
     {% when 'network' %}
       {% assign nav_href = portal_network %}
       {% assign nav_label = t.nav.network | default: 'Network' %}
+      {% assign nav_icon = 'ph-share-network' %}
     {% when 'io' %}
       {% assign nav_href = portal_io %}
       {% assign nav_label = t.nav.io | default: 'Hub' %}
+      {% assign nav_icon = 'ph-plugs-connected' %}
     {% when 'development' %}
       {% assign nav_href = portal_dev %}
       {% assign nav_label = t.nav.development | default: 'Development' %}
+      {% assign nav_icon = 'ph-code' %}
     {% when 'organization' %}
       {% assign nav_href = portal_org %}
       {% assign nav_label = t.nav.organization | default: 'Organization' %}
+      {% assign nav_icon = 'ph-buildings' %}
     {% else %}
       {% assign nav_href = '#' %}
       {% assign nav_label = pid %}
+      {% assign nav_icon = 'ph-squares-four' %}
   {% endcase %}
   {% assign nav_active = false %}
   {% if site.portal_id == pid %}
     {% assign nav_active = true %}
   {% endif %}
-  <a href="{{ nav_href }}" class="shrink-0 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if nav_active %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">{{ nav_label }}</a>
+  <a href="{{ nav_href }}" class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-[9px] py-1.5 text-sm transition-colors {% if nav_active %}font-semibold text-[var(--text-base)] bg-surface-panel{% else %}font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel{% endif %}">
+    <i class="ph {{ nav_icon }} text-base leading-none {% if nav_active %}text-coderic-500{% else %}opacity-80{% endif %}" aria-hidden="true"></i>
+    <span>{{ nav_label }}</span>
+  </a>
 {% endfor %}
