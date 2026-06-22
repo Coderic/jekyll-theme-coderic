@@ -4,7 +4,12 @@
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16">
             <div class="lg:col-span-2">
-                <a href="{{ site.url | default: '/' }}" class="flex items-center gap-3 group mb-6" itemscope itemtype="https://schema.org/Corporation">
+                {% if portal_arm == 'foundation' %}
+                  {% assign footer_schema_type = 'https://schema.org/Organization' %}
+                {% else %}
+                  {% assign footer_schema_type = 'https://schema.org/Corporation' %}
+                {% endif %}
+                <a href="{{ site.url | default: '/' }}" class="flex items-center gap-3 group mb-6" itemscope itemtype="{{ footer_schema_type }}">
                     <img src="{{ '/assets/img/coderic-isotipo.svg' | relative_url }}" itemprop="logo" alt="Coderic logo" class="h-12 sm:h-14 transition-transform duration-300 group-hover:scale-105">
                     <div class="flex min-w-0 flex-col">
                         {% assign coderic_wordmark_portal = t.nav[site.portal_id] | default: site.portal_name | default: 'PORTAL' | upcase %}
