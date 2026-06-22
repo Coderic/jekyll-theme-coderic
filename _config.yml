@@ -1,5 +1,5 @@
 title: Coderic Demo Theme
-email: demo@coderic.org
+email: coderic@coderic.org
 description: Scaffolding local environment to test the Jekyll theme.
 url: ""
 baseurl: ""
@@ -19,7 +19,7 @@ portal_name: "Coderic UI"
 portal_id: "business"
 
 # Páginas de política comunitaria en coderic.org (el pie del tema usa URLs absolutas vía
-# _includes/portal_urls.html: org_policy_* según idioma activo). Opcional: definir aquí solo si
+# _includes/portal_urls.html: corporate_policy_* | foundation_policy_* según idioma activo). Opcional: definir aquí solo si
 # un fork necesita otros destinos.
 # github_org_meta:
 #   contributing: "https://coderic.org/contributing.html"
@@ -42,8 +42,8 @@ portal_id: "business"
 # oauth.com playground: útil para flujos guiados; Implicit allí no usa /callback/ de este tema.
 oauth_demo_sign_in: false
 # Cliente SPA de desarrollo del repo del tema (localhost / demo). Producción por brazo:
-# Compañía (com, financial, cloud, store): 1WtUStGO3B4jrpeGCRTcoA2SwcNN93Q0
-# Corporación (org, dev, net, io): In43D8hfptI5B17Xo7XZX4aBkhfMuH56
+# Corporate (com, financial, cloud, store): 1WtUStGO3B4jrpeGCRTcoA2SwcNN93Q0
+# Foundation (org, dev, net, io): In43D8hfptI5B17Xo7XZX4aBkhfMuH56
 oidc_client_id: "GZ0eS1P9Y7C8p6kt8d4LIdojgHvkB5Sg"
 # Auth0 custom domain (sin esquema).
 oidc_domain: "auth.coderic.org"

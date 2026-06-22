@@ -3,7 +3,12 @@
 {% endcomment %}
 {% assign portal_arm = site.portal_arm %}
 {% if portal_arm == nil or portal_arm == '' %}
-  {% assign portal_arm = portal_defs[site.portal_id].arm | default: 'corporation' %}
+  {% assign portal_arm = portal_defs[site.portal_id].arm | default: 'foundation' %}
+{% endif %}
+{% if portal_arm == 'company' %}
+  {% assign portal_arm = 'corporate' %}
+{% elsif portal_arm == 'corporation' %}
+  {% assign portal_arm = 'foundation' %}
 {% endif %}
 {% assign nav_portal_ids = site.data.portals.navigation[portal_arm] %}
 {% for pid in nav_portal_ids %}
@@ -31,7 +36,7 @@
       {% assign nav_label = t.nav.development | default: 'Development' %}
     {% when 'organization' %}
       {% assign nav_href = portal_org %}
-      {% assign nav_label = t.nav.organization | default: 'Corporate' %}
+      {% assign nav_label = t.nav.organization | default: 'Organization' %}
     {% else %}
       {% assign nav_href = '#' %}
       {% assign nav_label = pid %}

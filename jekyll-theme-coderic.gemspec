@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-coderic"
   spec.version       = "0.2.5"
   spec.authors       = ["Neftali Yagua"]
-  spec.email         = ["neftali.yagua@coderic.org"]
+  spec.email         = ["coderic@coderic.org"]
 
   spec.summary       = "A premium, accessible Jekyll theme for enterprise portals and documentation."
   spec.homepage      = "https://github.com/Coderic/jekyll-theme-coderic"

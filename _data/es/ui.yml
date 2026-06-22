@@ -8,7 +8,7 @@ nav:
   network: "Network"
   io: "Hub"
   development: "Desarrollo"
-  organization: "Corporación"
+  organization: "Organización"
   store: "Tienda"
 
 # ── Sección Hero ─────────────────────────────────────────────────────────────
@@ -102,7 +102,8 @@ footer:
   company_description: >
     Corporación Orientada al Desarrollo Estratégico de Recursos de Ingeniería Comercial,
     el futuro de la Ingeniería de Software en LATAM desde 2004.
-  col_organization: "Corporación"
+  col_corporate: "Corporate"
+  col_foundation: "Fundación"
   col_legal: "Marco Legal"
   col_involved: "Involúcrate"
   col_ecosystem: "Ecosistema"
@@ -126,7 +127,7 @@ footer:
   link_tos: "Términos y Condiciones"
   link_business: "Coderic Negocios"
   link_network: "Coderic Network"
-  link_org: "Coderic Corporación"
+  link_org: "Organización"
   link_hub: "Coderic Hub"
   link_financial: "Coderic Financiero"
   link_cloud: "Coderic Cloud"

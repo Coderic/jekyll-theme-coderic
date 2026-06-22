@@ -1,18 +1,18 @@
 # Metadatos de portales del ecosistema Coderic.
-# navigation: menú global por brazo (4 portales cada uno).
-# legal_anchor: ancla de contenido jurídico e institucional por brazo.
+# navigation: menu global por brazo (4 portales cada uno).
+# legal_anchor: ancla de contenido juridico e institucional por brazo.
 
 legal_anchor:
-  company: "https://coderic.com"
-  corporation: "https://coderic.org"
+  corporate: "https://coderic.com"
+  foundation: "https://coderic.org"
 
 navigation:
-  company:
+  corporate:
     - business
     - financial
     - cloud
     - store
-  corporation:
+  foundation:
     - network
     - io
     - development
@@ -21,25 +21,25 @@ navigation:
 portals:
   business:
     url: "https://coderic.com/"
-    arm: company
+    arm: corporate
   financial:
     url: "https://financial.coderic.com/"
-    arm: company
+    arm: corporate
   cloud:
     url: "https://coderic.cloud/"
-    arm: company
+    arm: corporate
   store:
     url: "https://coderic.store/"
-    arm: company
+    arm: corporate
   organization:
     url: "https://coderic.org/"
-    arm: corporation
+    arm: foundation
   development:
     url: "https://coderic.dev/"
-    arm: corporation
+    arm: foundation
   network:
     url: "https://coderic.net/"
-    arm: corporation
+    arm: foundation
   io:
     url: "https://io.coderic.net/"
-    arm: corporation
+    arm: foundation
