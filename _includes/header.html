@@ -29,36 +29,36 @@
             <!-- Auth Dynamic Interface Wrapper -->
             <div id="auth-state-wrapper" class="flex w-full min-h-[40px] items-center justify-end gap-2">
                 <!-- Logged In State (Hidden by default until proven authenticated) -->
-                <div id="auth-authenticated" class="hidden relative group items-center">
-                    <button id="btn-auth-menu" class="flex items-center gap-2 px-1.5 py-1.5 pr-3 rounded-full border border-surface-border hover:bg-surface-panel transition-colors" aria-haspopup="true" aria-expanded="false">
+                <div id="auth-authenticated" class="hidden relative items-center">
+                    <button id="btn-auth-menu" type="button" class="flex items-center gap-2 px-1.5 py-1.5 pr-3 rounded-full border border-surface-border hover:bg-surface-panel transition-colors" aria-haspopup="menu" aria-expanded="false" aria-controls="auth-menu-dropdown">
                         <div class="w-7 h-7 rounded-full bg-coderic-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">
                             <i class="ph-fill ph-user"></i>
                         </div>
                         <div class="flex flex-col items-start hidden sm:flex">
                             <span id="auth-user-name" class="text-xs font-bold text-[var(--text-base)] leading-none truncate max-w-[120px]">...</span>
                         </div>
-                        <i class="ph ph-caret-down text-muted text-xs ml-1 transition-transform group-hover:rotate-180"></i>
+                        <i id="auth-menu-caret" class="ph ph-caret-down text-muted text-xs ml-1 transition-transform"></i>
                     </button>
 
-                    <ul id="auth-menu-dropdown" class="absolute right-0 top-full w-56 rounded-xl bg-surface border border-surface-border shadow-2xl py-2 hidden group-hover:block z-[200]" role="menu">
-                        <li class="border-b border-surface-border mb-1">
-                            <a href="/profile/" class="block px-4 py-2 hover:bg-surface-panel transition-colors rounded-t-xl">
+                    <ul id="auth-menu-dropdown" class="absolute right-0 top-full mt-1 w-56 rounded-xl bg-surface border border-surface-border shadow-2xl py-2 hidden z-[200]" role="menu" hidden>
+                        <li class="border-b border-surface-border mb-1" role="none">
+                            <a href="/profile/" class="block px-4 py-2 hover:bg-surface-panel transition-colors rounded-t-xl" role="menuitem">
                                 <p class="text-[10px] font-bold text-muted tracking-wider uppercase mb-0.5">Coderic ID</p>
                                 <p id="auth-user-email" class="text-sm font-medium text-[var(--text-base)] truncate">Conectando...</p>
                             </a>
                         </li>
-                        <li role="menuitem">
-                            <a href="/dashboard/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
+                        <li role="none">
+                            <a href="/dashboard/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors" role="menuitem">
                                 <i class="ph ph-squares-four text-lg text-coderic-500"></i> {{ t.header.dashboard | default: 'Dashboard' }}
                             </a>
                         </li>
-                        <li role="menuitem">
-                            <a href="/hello-world/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors">
+                        <li role="none">
+                            <a href="/hello-world/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors" role="menuitem">
                                 <i class="ph ph-plugs-connected text-lg text-coderic-500"></i> {{ t.header.hello_world | default: 'Hello World' }}
                             </a>
                         </li>
-                        <li class="border-t border-surface-border mt-1 pt-1" role="menuitem">
-                            <button onclick="codericSignOut()" class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left">
+                        <li class="border-t border-surface-border mt-1 pt-1" role="none">
+                            <button type="button" onclick="codericSignOut()" class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left" role="menuitem">
                                 <i class="ph ph-sign-out text-lg"></i> {{ t.header.signout | default: 'Cerrar sesión' }}
                             </button>
                         </li>
@@ -164,9 +164,43 @@ function showLoggedOutState() {
   document.getElementById('auth-authenticated')?.classList.remove('flex');
   document.getElementById('auth-unauthenticated')?.classList.remove('hidden');
   document.getElementById('auth-unauthenticated')?.classList.add('flex');
+  setAuthMenuOpen(false);
+}
+
+function setAuthMenuOpen(open) {
+  const btn = document.getElementById('btn-auth-menu');
+  const menu = document.getElementById('auth-menu-dropdown');
+  const caret = document.getElementById('auth-menu-caret');
+  if (!btn || !menu) return;
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menu.classList.toggle('hidden', !open);
+  if (open) menu.removeAttribute('hidden');
+  else menu.setAttribute('hidden', '');
+  if (caret) caret.classList.toggle('rotate-180', open);
+}
+
+function initAuthMenu() {
+  const btn = document.getElementById('btn-auth-menu');
+  const menu = document.getElementById('auth-menu-dropdown');
+  const root = document.getElementById('auth-authenticated');
+  if (!btn || !menu || !root || btn.dataset.codericMenuBound === '1') return;
+  btn.dataset.codericMenuBound = '1';
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    setAuthMenuOpen(!open);
+  });
+  document.addEventListener('click', function (e) {
+    if (!root.contains(e.target)) setAuthMenuOpen(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setAuthMenuOpen(false);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  initAuthMenu();
   try {
     const client = await codericGetAuth0Client();
     try {
