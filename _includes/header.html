@@ -25,6 +25,9 @@
 
         <!-- Acciones: ancho natural (evita robar ~320px fijos al nav en viewports justos) -->
         <div class="flex shrink-0 items-center justify-end gap-2 min-w-0 lg:max-w-[min(100%,18rem)] xl:max-w-none">
+            {% if site.portal_id == 'store' %}
+            {% include mini-cart.html %}
+            {% endif %}
 
             <!-- Auth Dynamic Interface Wrapper -->
             <div id="auth-state-wrapper" class="flex w-full min-h-[40px] items-center justify-end gap-2">
@@ -48,15 +51,23 @@
                             </a>
                         </li>
                         <li role="none">
+                            {% if site.portal_id == 'store' %}
+                            <a href="/customer/account/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors" role="menuitem">
+                                <i class="ph ph-user-circle text-lg text-coderic-500"></i> {{ t.header.my_account | default: 'My Account' }}
+                            </a>
+                            {% else %}
                             <a href="/dashboard/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors" role="menuitem">
                                 <i class="ph ph-squares-four text-lg text-coderic-500"></i> {{ t.header.dashboard | default: 'Dashboard' }}
                             </a>
+                            {% endif %}
                         </li>
+                        {% unless site.portal_id == 'store' %}
                         <li role="none">
                             <a href="/hello-world/" class="flex items-center gap-3 px-4 py-2 text-sm font-medium text-muted hover:text-[var(--text-base)] hover:bg-surface-panel transition-colors" role="menuitem">
                                 <i class="ph ph-plugs-connected text-lg text-coderic-500"></i> {{ t.header.hello_world | default: 'Hello World' }}
                             </a>
                         </li>
+                        {% endunless %}
                         <li class="border-t border-surface-border mt-1 pt-1" role="none">
                             <button type="button" onclick="codericSignOut()" class="w-full flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left" role="menuitem">
                                 <i class="ph ph-sign-out text-lg"></i> {{ t.header.signout | default: 'Cerrar sesión' }}
