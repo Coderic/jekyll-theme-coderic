@@ -23,7 +23,7 @@ portals:
     url: "https://coderic.com/"
     arm: corporate
   financial:
-    url: "https://financial.coderic.com/"
+    url: "https://coderic.financial/"
     arm: corporate
   cloud:
     url: "https://coderic.cloud/"
@@ -41,5 +41,5 @@ portals:
     url: "https://coderic.net/"
     arm: foundation
   io:
-    url: "https://io.coderic.net/"
+    url: "https://coderic.io/"
     arm: foundation
